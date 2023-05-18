@@ -1,0 +1,21 @@
+version: '3'
+
+silent: true
+
+env:
+    USER_ID: 0
+    GROUP_ID: 0
+    compose_codestyle: "USER_ID=0 GROUP_ID=0 docker compose -f ../../docker-compose.codestyle.yml"
+
+tasks:
+    install:
+        desc: Install php-cs-fixer
+        cmds:
+            - "{{.compose_codestyle}} run --rm phpcodestyle composer require --dev --working-dir=tools/php-cs-fixer friendsofphp/php-cs-fixer"
+        status:
+            - test -f ./vendor/bin/php-cs-fixer
+    exec:
+        desc: Execute php-cs-fixer
+        cmds:
+            - task: install
+            - "{{.compose_codestyle}} run --rm phpcodestyle tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --config tools/php-cs-fixer/.php-cs-fixer.dist.php"

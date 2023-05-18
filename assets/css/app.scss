@@ -1,0 +1,62 @@
+:root {
+    --main: #FF7F51;
+    --secondary: #52D1FF;
+    --green: #40916C;
+    --blue: #457B9D;
+    --red: #E63946;
+    --yellow: #FFD166;
+    --black: #001A24;
+    --white: #FFFFFF;
+    --white-blue: #F5FCFF;
+    --grey: #DAE3E7;
+    --grey-blue: #7C939C;
+    --grey-stroke: #D5D4DF;
+    --modal-background: rgba(15, 18, 42, 0.5);
+
+    --space: 8px;
+    --gap: calc(3 * var(--space));
+
+    --navbar-width: 250px;
+}
+
+@import 'tools/reset';
+
+@import 'functions';
+
+* {
+    font-family: Inter, Regular, sans-serif;
+}
+
+body {
+    height: 100vh;
+}
+
+.page-wrapper {
+    height: 100%;
+    display: flex;
+}
+
+main {
+    width: calc(100% - var(--navbar-width));
+}
+
+.container {
+    width: 100%;
+    padding: space(10);
+    height: 100%;
+}
+
+.container .title {
+    h1 {
+        font-size: 1.4em;
+    }
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10%;
+}
+
+.hidden {
+    display: none;
+}

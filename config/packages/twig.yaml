@@ -1,0 +1,6 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    paths:
+        '%kernel.project_dir%/src/Infra/Maker/templates': maker
+    form_themes:
+        - 'form/layout.html.twig'

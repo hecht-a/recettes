@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Recettes{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/favicons/icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicons/icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/favicons/icon-152x152.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicons/icon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="128x128" href="/favicons/icon-128x128.png" />
+    <link rel="icon" type="image/png" sizes="196x196" href="/favicons/icon-196x196.png" />
+    <link rel="icon" type="image/png" sizes="310x310" href="/favicons/icon-310x310.png" />
+    <meta name="application-name" content="Recettes"/>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+<div class="page-wrapper">
+    <header>
+        <nav>
+            <div class="navbar-icon">
+                <svg>
+                    <use href="/logo.svg#logo"></use>
+                </svg>
+            </div>
+            <ul>
+                <li>
+                    <a href="">
+                        <svg>
+                            <use href="/icons.svg#home"></use>
+                        </svg>
+                        Accueil
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {{ include('partials/flash.html.twig') }}
+        {% block body %}{% endblock %}
+    </main>
+    <footer></footer>
+</div>
+</body>
+</html>
