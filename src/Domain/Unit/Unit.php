@@ -27,6 +27,15 @@ class Unit
     #[Assert\Unique]
     private string $shortLabel;
 
+    /** @var ArrayCollection<int, Ingredient> */
+    #[ORM\OneToMany(mappedBy: 'unit', targetEntity: Ingredient::class)]
+    private Collection $ingredients;
+
+    public function __construct()
+    {
+        $this->ingredients = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
