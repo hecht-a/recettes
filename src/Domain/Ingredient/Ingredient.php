@@ -20,6 +20,7 @@ class Ingredient
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: false)]
     #[Assert\NotBlank]
+    #[Assert\Unique]
     private string $name;
 
     #[ORM\Column(type: Types::TEXT, nullable: false)]
