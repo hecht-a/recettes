@@ -26,11 +26,6 @@ class Ingredient
     #[Assert\NotBlank]
     private string $description;
 
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: false)]
-    #[Assert\NotBlank]
-    #[Assert\DateTime]
-    private \DateTimeImmutable $createdAt;
-
     /** @var ArrayCollection<int, Recipe> */
     #[ORM\ManyToMany(targetEntity: Recipe::class, inversedBy: 'ingredients')]
     private Collection $recipes;
@@ -40,7 +35,6 @@ class Ingredient
 
     public function __construct()
     {
-        $this->createdAt = new \DateTimeImmutable();
         $this->recipes = new ArrayCollection();
     }
 
@@ -69,18 +63,6 @@ class Ingredient
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): \DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
-    {
-        $this->createdAt = $createdAt;
 
         return $this;
     }
