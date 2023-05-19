@@ -2,6 +2,9 @@
 
 namespace App\Domain\Unit;
 
+use App\Domain\Ingredient\Ingredient;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -49,6 +52,32 @@ class Unit
     public function setShortLabel(string $shortLabel): self
     {
         $this->shortLabel = $shortLabel;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection<int, Ingredient>
+     */
+    public function getIngredients(): Collection
+    {
+        return $this->ingredients;
+    }
+
+    public function addIngredient(Ingredient $ingredient): self
+    {
+        if (!$this->ingredients->contains($ingredient)) {
+            $this->ingredients[] = $ingredient;
+        }
+
+        return $this;
+    }
+
+    public function removeIngredient(Ingredient $ingredient): self
+    {
+        if ($this->ingredients->contains($ingredient)) {
+            $this->ingredients->removeElement($ingredient);
+        }
 
         return $this;
     }
