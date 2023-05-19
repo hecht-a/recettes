@@ -3,6 +3,7 @@
 namespace App\Domain\Recipe;
 
 use App\Domain\Allergen\Allergen;
+use App\Domain\Auth\User;
 use App\Domain\Category\Category;
 use App\Domain\Ingredient\Ingredient;
 use App\Domain\Utensil\Utensil;
@@ -58,6 +59,9 @@ class Recipe
     /** @var ArrayCollection<int, Allergen> */
     #[ORM\ManyToMany(targetEntity: Allergen::class, mappedBy: 'recipes')]
     private Collection $allergens;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'recipes')]
+    private ?User $user;
 
     public function __construct()
     {
@@ -232,6 +236,18 @@ class Recipe
         if ($this->allergens->contains($allergen)) {
             $this->allergens->removeElement($allergen);
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
