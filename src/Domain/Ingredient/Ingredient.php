@@ -28,7 +28,7 @@ class Ingredient
     private string $description;
 
     /** @var ArrayCollection<int, IngredientRecipe> */
-    #[ORM\OneToMany(mappedBy: 'ingredients', targetEntity: IngredientRecipe::class)]
+    #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: IngredientRecipe::class)]
     private Collection $recipes;
 
     #[Orm\ManyToOne(targetEntity: Unit::class, inversedBy: 'ingredients')]

@@ -31,7 +31,7 @@ class Category
     private string $color;
 
     /** @var ArrayCollection<int, Recipe> */
-    #[ORM\ManyToMany(targetEntity: Recipe::class, mappedBy: 'unit')]
+    #[ORM\ManyToMany(targetEntity: Recipe::class, inversedBy: 'categories')]
     private Collection $recipes;
 
     public function __construct()

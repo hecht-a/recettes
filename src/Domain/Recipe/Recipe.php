@@ -45,7 +45,7 @@ class Recipe
     private int $cookingTime;
 
     /** @var ArrayCollection<int, IngredientRecipe> */
-    #[ORM\OneToMany(mappedBy: 'recipes', targetEntity: IngredientRecipe::class)]
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: IngredientRecipe::class)]
     private Collection $ingredients;
 
     /** @var ArrayCollection<int, Category> */

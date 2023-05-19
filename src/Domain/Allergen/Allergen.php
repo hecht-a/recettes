@@ -27,7 +27,7 @@ class Allergen
     private string $description;
 
     /** @var ArrayCollection<int, Recipe> */
-    #[ORM\ManyToMany(targetEntity: Recipe::class, inversedBy: 'ingredients')]
+    #[ORM\ManyToMany(targetEntity: Recipe::class, inversedBy: 'allergens')]
     private Collection $recipes;
 
     public function __construct()
