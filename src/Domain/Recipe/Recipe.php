@@ -5,7 +5,6 @@ namespace App\Domain\Recipe;
 use App\Domain\Allergen\Allergen;
 use App\Domain\Auth\User;
 use App\Domain\Category\Category;
-use App\Domain\Ingredient\Ingredient;
 use App\Domain\IngredientRecipe\IngredientRecipe;
 use App\Domain\Utensil\Utensil;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -138,14 +137,14 @@ class Recipe
     }
 
     /**
-     * @return ArrayCollection<int, Ingredient>
+     * @return ArrayCollection<int, IngredientRecipe>
      */
     public function getIngredients(): Collection
     {
         return $this->ingredients;
     }
 
-    public function addIngredient(Ingredient $ingredient): self
+    public function addIngredient(IngredientRecipe $ingredient): self
     {
         if (!$this->ingredients->contains($ingredient)) {
             $this->ingredients[] = $ingredient;
@@ -154,7 +153,7 @@ class Recipe
         return $this;
     }
 
-    public function removeIngredient(Ingredient $ingredient): self
+    public function removeIngredient(IngredientRecipe $ingredient): self
     {
         if ($this->ingredients->contains($ingredient)) {
             $this->ingredients->removeElement($ingredient);

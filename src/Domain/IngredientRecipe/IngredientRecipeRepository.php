@@ -6,7 +6,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Unit>
+ * @extends ServiceEntityRepository<IngredientRecipe>
  *
  * @method IngredientRecipe|null find($id, $lockMode = null, $lockVersion = null)
  * @method IngredientRecipe|null findOneBy(array $criteria, array $orderBy = null)

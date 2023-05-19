@@ -3,7 +3,6 @@
 namespace App\Domain\Ingredient;
 
 use App\Domain\IngredientRecipe\IngredientRecipe;
-use App\Domain\Recipe\Recipe;
 use App\Domain\Unit\Unit;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -70,14 +69,14 @@ class Ingredient
     }
 
     /**
-     * @return ArrayCollection<int, Recipe>
+     * @return ArrayCollection<int, IngredientRecipe>
      */
     public function getRecipes(): Collection
     {
         return $this->recipes;
     }
 
-    public function addRecipe(Recipe $recipe): self
+    public function addRecipe(IngredientRecipe $recipe): self
     {
         if (!$this->recipes->contains($recipe)) {
             $this->recipes[] = $recipe;
@@ -86,7 +85,7 @@ class Ingredient
         return $this;
     }
 
-    public function removeRecipe(Recipe $recipe): self
+    public function removeRecipe(IngredientRecipe $recipe): self
     {
         if ($this->recipes->contains($recipe)) {
             $this->recipes->removeElement($recipe);
