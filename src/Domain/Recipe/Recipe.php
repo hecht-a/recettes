@@ -6,6 +6,7 @@ use App\Domain\Allergen\Allergen;
 use App\Domain\Auth\User;
 use App\Domain\Category\Category;
 use App\Domain\Ingredient\Ingredient;
+use App\Domain\IngredientRecipe\IngredientRecipe;
 use App\Domain\Utensil\Utensil;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -44,8 +45,8 @@ class Recipe
     #[Assert\Positive]
     private int $cookingTime;
 
-    /** @var ArrayCollection<int, Ingredient> */
-    #[ORM\ManyToMany(targetEntity: Ingredient::class, mappedBy: 'recipes')]
+    /** @var ArrayCollection<int, IngredientRecipe> */
+    #[ORM\OneToMany(mappedBy: 'recipes', targetEntity: IngredientRecipe::class)]
     private Collection $ingredients;
 
     /** @var ArrayCollection<int, Category> */

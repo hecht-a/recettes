@@ -2,6 +2,7 @@
 
 namespace App\Domain\Ingredient;
 
+use App\Domain\IngredientRecipe\IngredientRecipe;
 use App\Domain\Recipe\Recipe;
 use App\Domain\Unit\Unit;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -27,8 +28,8 @@ class Ingredient
     #[Assert\NotBlank]
     private string $description;
 
-    /** @var ArrayCollection<int, Recipe> */
-    #[ORM\ManyToMany(targetEntity: Recipe::class, inversedBy: 'ingredients')]
+    /** @var ArrayCollection<int, IngredientRecipe> */
+    #[ORM\OneToMany(mappedBy: 'ingredients', targetEntity: IngredientRecipe::class)]
     private Collection $recipes;
 
     #[Orm\ManyToOne(targetEntity: Unit::class, inversedBy: 'ingredients')]
