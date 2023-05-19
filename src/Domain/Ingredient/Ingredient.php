@@ -2,7 +2,10 @@
 
 namespace App\Domain\Ingredient;
 
+use App\Domain\Recipe\Recipe;
 use App\Domain\Unit\Unit;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -28,12 +31,17 @@ class Ingredient
     #[Assert\DateTime]
     private \DateTimeImmutable $createdAt;
 
+    /** @var ArrayCollection<int, Recipe> */
+    #[ORM\ManyToMany(targetEntity: Recipe::class, inversedBy: 'ingredients')]
+    private Collection $recipes;
+
     #[Orm\ManyToOne(targetEntity: Unit::class, inversedBy: 'ingredients')]
     private ?Unit $unit;
 
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->recipes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -73,6 +81,32 @@ class Ingredient
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection<int, Recipe>
+     */
+    public function getRecipes(): Collection
+    {
+        return $this->recipes;
+    }
+
+    public function addRecipe(Recipe $recipe): self
+    {
+        if (!$this->recipes->contains($recipe)) {
+            $this->recipes[] = $recipe;
+        }
+
+        return $this;
+    }
+
+    public function removeRecipe(Recipe $recipe): self
+    {
+        if ($this->recipes->contains($recipe)) {
+            $this->recipes->removeElement($recipe);
+        }
 
         return $this;
     }
