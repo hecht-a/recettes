@@ -2,6 +2,7 @@
 
 namespace App\Domain\Recipe;
 
+use App\Domain\Allergen\Allergen;
 use App\Domain\Category\Category;
 use App\Domain\Ingredient\Ingredient;
 use App\Domain\Utensil\Utensil;
@@ -54,11 +55,16 @@ class Recipe
     #[ORM\ManyToMany(targetEntity: Utensil::class, mappedBy: 'recipes')]
     private Collection $utensils;
 
+    /** @var ArrayCollection<int, Allergen> */
+    #[ORM\ManyToMany(targetEntity: Allergen::class, mappedBy: 'recipes')]
+    private Collection $allergens;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->ingredients = new ArrayCollection();
         $this->utensils = new ArrayCollection();
+        $this->allergens = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -199,6 +205,32 @@ class Recipe
     {
         if ($this->utensils->contains($utensil)) {
             $this->utensils->removeElement($utensil);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection<int, Allergen>
+     */
+    public function getAllergens(): Collection
+    {
+        return $this->allergens;
+    }
+
+    public function addAllergen(Allergen $allergen): self
+    {
+        if (!$this->allergens->contains($allergen)) {
+            $this->allergens[] = $allergen;
+        }
+
+        return $this;
+    }
+
+    public function removeAllergen(Allergen $allergen): self
+    {
+        if ($this->allergens->contains($allergen)) {
+            $this->allergens->removeElement($allergen);
         }
 
         return $this;
