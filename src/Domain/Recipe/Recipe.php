@@ -4,6 +4,7 @@ namespace App\Domain\Recipe;
 
 use App\Domain\Category\Category;
 use App\Domain\Ingredient\Ingredient;
+use App\Domain\Utensil\Utensil;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -49,10 +50,15 @@ class Recipe
     #[Orm\ManyToMany(targetEntity: Category::class, mappedBy: 'recipes')]
     private Collection $categories;
 
+    /** @var ArrayCollection<int, Utensil> */
+    #[ORM\ManyToMany(targetEntity: Utensil::class, mappedBy: 'recipes')]
+    private Collection $utensils;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->ingredients = new ArrayCollection();
+        $this->utensils = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -167,6 +173,32 @@ class Recipe
     {
         if ($this->categories->contains($category)) {
             $this->categories->removeElement($category);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection<int, Utensil>
+     */
+    public function getUtensils(): Collection
+    {
+        return $this->utensils;
+    }
+
+    public function addUtensil(Utensil $utensil): self
+    {
+        if (!$this->utensils->contains($utensil)) {
+            $this->utensils[] = $utensil;
+        }
+
+        return $this;
+    }
+
+    public function removeUtensil(Utensil $utensil): self
+    {
+        if ($this->utensils->contains($utensil)) {
+            $this->utensils->removeElement($utensil);
         }
 
         return $this;
