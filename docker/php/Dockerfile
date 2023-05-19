@@ -64,7 +64,15 @@ RUN set -eux; \
     composer install --prefer-dist --no-dev --no-scripts --no-progress; \
     composer clear-cache
 
-COPY . ./
+COPY .env ./
+
+COPY bin bin/
+COPY config config/
+COPY public public/
+COPY src src/
+COPY templates templates/
+COPY translations translations/
+COPY tools tools/
 
 RUN set -eux; \
 	mkdir -p var/cache var/log; \
