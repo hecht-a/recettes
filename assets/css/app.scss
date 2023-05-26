@@ -7,21 +7,26 @@
     --red: #E63946;
     --yellow: #FFD166;
     --black: #0A221B;
-    --white: #FDFFFC;
+    --white: #f6fff5;
     --grey: #6C757D;
-    --grey-blue: #7c9c82;
+    --grey-green: #7c9c82;
     --grey-stroke: #d4dfd5;
     --modal-background: rgba(15, 42, 19, 0.5);
+    --border: var(--grey-green);
 
     --space: 8px;
     --gap: calc(3 * var(--space));
-
-    --navbar-width: 250px;
 }
 
 @import 'tools/reset';
+@import 'tools/layout';
 
 @import 'functions';
+@import 'base';
+
+@import 'pages/home';
+
+@import 'modules/header';
 
 * {
     font-family: Inter, Regular, sans-serif;
@@ -29,21 +34,16 @@
 
 body {
     height: 100vh;
+    background: var(--white);
+    color: var(--black);
 }
 
 .page-wrapper {
     height: 100%;
-    display: flex;
 }
 
 main {
-    width: calc(100% - var(--navbar-width));
-}
-
-.container {
     width: 100%;
-    padding: space(10);
-    height: 100%;
 }
 
 .hidden {
