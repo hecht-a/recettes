@@ -2,6 +2,14 @@
 
 {% block body %}
     <div class="homepage container">
-        HOME
+        <div class="recipes">
+            <div class="recipe-hero">
+                <h1>Toutes les recettes</h1>
+                <p>Voir toutes les recettes disponibles...</p>
+            </div>
+            {% for recipe in recipes %}
+                {{ include('recipes/card.html.twig') }}
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

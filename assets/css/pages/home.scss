@@ -1,2 +1,36 @@
 .homepage {
 }
+
+.recipe-hero {
+    @extend %hero-text;
+    grid-column: 1/-1;
+    max-width: 500px;
+    margin-top: space(6);
+
+    @include up(840) {
+        grid-column: 1 / 3;
+    }
+}
+
+.recipe-hero > * + * {
+    margin-top: calc(4 * var(--space));
+}
+
+.recipe-hero h1 {
+    @extend %hero-title;
+}
+
+.recipes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: calc(4 * var(--space));
+    grid-auto-flow: dense;
+}
+
+.homepage .categories .category-label {
+    background: red;
+    color: var(--white);
+    width: max-content;
+    padding: space(.5) space(1);
+    border-radius: 12px;
+}
