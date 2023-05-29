@@ -18,11 +18,13 @@
     --gap: calc(3 * var(--space));
 }
 
-@import 'tools/reset';
-@import 'tools/layout';
-
 @import 'functions';
 @import 'base';
+
+@import 'tools/reset';
+@import 'tools/layout';
+@import 'tools/mixins';
+@import 'tools/typography';
 
 @import 'pages/home';
 
@@ -36,10 +38,6 @@ body {
     height: 100vh;
     background: var(--white);
     color: var(--black);
-}
-
-.page-wrapper {
-    height: 100%;
 }
 
 main {
