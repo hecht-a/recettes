@@ -8,6 +8,6 @@ final class HexColorProvider extends BaseProvider
 {
     public function password(string $plainPassword): string
     {
-        return substr(uniqid(),-6);
+        return substr(uniqid(), -6);
     }
 }

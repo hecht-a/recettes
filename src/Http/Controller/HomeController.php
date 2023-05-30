@@ -6,7 +6,6 @@ use App\Domain\Recipe\Recipe;
 use App\Helper\Paginator\PaginatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,6 +14,7 @@ class HomeController extends AbstractController
     public function __construct(EntityManagerInterface $em, private readonly PaginatorInterface $paginator)
     {
         parent::__construct($em);
+    }
 
     #[Route(path: '/', name: 'home')]
     public function index(Request $request): Response
