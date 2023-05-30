@@ -1,0 +1,50 @@
+App\Domain\Auth\User:
+    user (template):
+        email: user<current()>\@ahecht.fr
+        password: <password('0000')>
+        name: user<current()>
+
+App\Domain\Allergen\Allergen:
+    allergen (template):
+        name: <sentence(2, true)>
+        description: <sentence(5, true)>
+
+App\Domain\Category\Category:
+    category (template):
+        name: <sentence(2, true)>
+        description: <sentence(5, true)>
+        color: <hexcolor()>
+
+App\Domain\Unit\Unit:
+    unit (template):
+        label: <randomElement(['millilitre','litre','gramme','kilogramme'])>
+        shortLabel: <randomElement(['ml','l','gr','kg'])>
+
+App\Domain\Ingredient\Ingredient:
+    ingredient (template):
+        name: <sentence(2, true)>
+        description: <sentence(5, true)>
+        unit: '@unit*'
+
+App\Domain\Utensil\Utensil:
+    utensil (template):
+        name: <sentence(2, true)>
+        description: <sentence(5, true)>
+
+App\Domain\Recipe\Recipe:
+    recipe (template):
+        name: <sentence(2, true)>
+        description: <sentence(5, true)>
+        createdAt: <dateTimeImmutableThisYear()>
+        preparationTime: <numberBetween(10, 120)>
+        cookingTime: <numberBetween(10, 120)>
+        categories: '<numberBetween(1, 3)>x @category*'
+        utensils: '<numberBetween(1, 3)>x @utensil*'
+        allergens: '<numberBetween(1, 3)>x @allergen*'
+        user: '@user*'
+
+App\Domain\IngredientRecipe\IngredientRecipe:
+    ingredientrecipe (template):
+        ingredient: '@ingredient*'
+        recipe: '@recipe*'
+        quantity: '<numberBetween(1, 15)>'
