@@ -21,5 +21,6 @@ services:
         exclude: '../src/{DependencyInjection,Entity,Infra/Migrations,Tests,Kernel.php}'
     App\Infra\Faker\PasswordProvider:
         tags: [{ name: nelmio_alice.faker.provider }]
+    Knp\Bundle\PaginatorBundle\Helper\Processor: ~
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

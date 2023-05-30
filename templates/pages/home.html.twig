@@ -3,13 +3,18 @@
 {% block body %}
     <div class="homepage container">
         <div class="recipes">
-            <div class="recipe-hero">
+            <div class="recipe-hero ">
                 <h1>Toutes les recettes</h1>
-                <p>Voir toutes les recettes disponibles...</p>
+                {% if page > 1 %}
+                    <p>page {{ page }}</p>
+                {% else %}
+                    <p>Voir toutes les recettes disponibles...</p>
+                {% endif %}
             </div>
             {% for recipe in recipes %}
                 {{ include('recipes/card.html.twig') }}
             {% endfor %}
         </div>
+        {{ paginate(recipes) }}
     </div>
 {% endblock %}
