@@ -3,7 +3,6 @@
 namespace App\Http\Controller;
 
 use App\Domain\Recipe\Recipe;
-use App\Helper\Paginator\Paginator;
 use App\Helper\Paginator\PaginatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,7 +26,7 @@ class HomeController extends AbstractController
 
         return $this->render('pages/home.html.twig', [
             'recipes' => $recipes,
-            'page' => $page
+            'page' => $page,
         ]);
     }
 }

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class Paginator implements PaginatorInterface
 {
+    /** @var string[] */
     private array $sortableFields = [];
 
     public function __construct(
@@ -19,6 +20,9 @@ class Paginator implements PaginatorInterface
     ) {
     }
 
+    /**
+     * @return PaginationInterface<mixed>
+     */
     public function paginate(Query $query): PaginationInterface
     {
         $request = $this->requestStack->getCurrentRequest();

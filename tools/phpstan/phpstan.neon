@@ -13,3 +13,4 @@ parameters:
     - ../../src/Infra/Migrations/*
   doctrine:
     objectManagerLoader: ../../tests/object-manager.php
+  checkGenericClassInNonGenericObjectType: false

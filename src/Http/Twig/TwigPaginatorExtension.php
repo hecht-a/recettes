@@ -21,6 +21,10 @@ class TwigPaginatorExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * @param mixed[] $queryParams
+     * @param mixed[] $viewParams
+     */
     public function paginate(
         Environment $env,
         SlidingPagination $pagination,
