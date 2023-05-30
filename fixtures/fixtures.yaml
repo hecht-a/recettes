@@ -42,3 +42,14 @@ App\Domain\IngredientRecipe\IngredientRecipe:
     ingredientrecipe5 (extends ingredientrecipe):
         ingredient: '@ingredient5'
         recipe: '@recipe4'
+
+App\Domain\Step\Step:
+    steprecipe1{1..3} (extends step):
+        recipe: '@recipe1'
+    steprecipe2{1..3} (extends step):
+        recipe: '@recipe2'
+    steprecipe3{1..3} (extends step):
+        recipe: '@recipe3'
+    steprecipe4{1..3} (extends step):
+        recipe: '@recipe4'
+        

@@ -6,6 +6,7 @@ use App\Domain\Allergen\Allergen;
 use App\Domain\Auth\User;
 use App\Domain\Category\Category;
 use App\Domain\IngredientRecipe\IngredientRecipe;
+use App\Domain\Step\Step;
 use App\Domain\Utensil\Utensil;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -71,6 +72,10 @@ class Recipe
     #[ORM\Column(nullable: true)]
     private ?string $imageName = null;
 
+    /** @var ArrayCollection<int, Step> */
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class)]
+    private Collection $steps;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -78,6 +83,7 @@ class Recipe
         $this->categories = new ArrayCollection();
         $this->utensils = new ArrayCollection();
         $this->allergens = new ArrayCollection();
+        $this->steps = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -283,5 +289,31 @@ class Recipe
     public function getImageName(): ?string
     {
         return $this->imageName;
+    }
+
+    /**
+     * @return ArrayCollection<int, Step>
+     */
+    public function getSteps(): Collection
+    {
+        return $this->steps;
+    }
+
+    public function addStep(Step $step): self
+    {
+        if (!$this->steps->contains($step)) {
+            $this->steps[] = $step;
+        }
+
+        return $this;
+    }
+
+    public function removeStep(Step $step): self
+    {
+        if ($this->steps->contains($step)) {
+            $this->steps->removeElement($step);
+        }
+
+        return $this;
     }
 }
