@@ -27,6 +27,12 @@
     grid-auto-flow: dense;
 }
 
+.homepage .categories {
+    display: flex;
+    gap: space(1);
+    flex-wrap: wrap;
+}
+
 .homepage .categories .category-label {
     background: red;
     color: var(--white-green);

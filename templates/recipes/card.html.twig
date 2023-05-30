@@ -13,13 +13,13 @@
         </div>
 
         <div class="card-footer">
-{#            {% for category in recipe.categories %}#}
-{#                {{ category.name }}#}
-{#            {% endfor %}#}
+
             <div class="categories">
-                <p class="category-label">
-                    test
-                </p>
+                {% for category in recipe.categories %}
+                    <p style="background: {{ category.color }}" class="category-label">
+                        {{ category.name }}
+                    </p>
+                {% endfor %}
             </div>
         </div>
     </div>
