@@ -24,6 +24,6 @@
     @extend %card;
 }
 .pagination a:hover {
-    background: var(--secondary);
+    background: var(--main);
     color: var(--white);
 }
