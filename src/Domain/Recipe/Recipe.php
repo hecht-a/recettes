@@ -75,6 +75,7 @@ class Recipe
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->ingredients = new ArrayCollection();
+        $this->categories = new ArrayCollection();
         $this->utensils = new ArrayCollection();
         $this->allergens = new ArrayCollection();
     }
