@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 class Recipe
@@ -75,6 +76,10 @@ class Recipe
     /** @var ArrayCollection<int, Step> */
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class)]
     private Collection $steps;
+
+    #[ORM\Column(type: Types::STRING, length: 128, unique: true)]
+    #[Gedmo\Slug(fields: ['name'])]
+    private string $slug;
 
     public function __construct()
     {
@@ -315,5 +320,10 @@ class Recipe
         }
 
         return $this;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
     }
 }
