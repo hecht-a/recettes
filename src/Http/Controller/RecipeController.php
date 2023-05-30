@@ -15,12 +15,12 @@ class RecipeController extends AbstractController
         if ($recipe->getSlug() !== $slug) {
             return $this->redirectToRoute('recipes_show', [
                 'id' => $recipe->getId(),
-                'slug' => $recipe->getSlug()
+                'slug' => $recipe->getSlug(),
             ], 301);
         }
 
         return $this->render('recipes/show.html.twig', [
-            'recipe' => $recipe
+            'recipe' => $recipe,
         ]);
     }
 }
