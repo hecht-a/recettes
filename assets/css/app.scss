@@ -7,7 +7,8 @@
     --red: #E63946;
     --yellow: #FFD166;
     --black: #0A221B;
-    --white: #f6fff5;
+    --white-green: #f6fff5;
+    --white: #fdfffd;
     --grey: #6C757D;
     --grey-green: #7c9c82;
     --grey-stroke: #d4dfd5;
@@ -39,7 +40,7 @@
 
 body {
     height: 100vh;
-    background: var(--white);
+    background: var(--white-green);
     color: var(--black);
 }
 
