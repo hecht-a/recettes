@@ -1,0 +1,19 @@
+.step {
+    @extend %card;
+
+    display: flex;
+    gap: space(4);
+    height: 100%;
+    padding: space(2);
+}
+
+.step .step__position p {
+    background: var(--main);
+    color: var(--white);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

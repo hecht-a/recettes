@@ -29,10 +29,12 @@
 @import 'tools/typography';
 
 @import 'pages/home';
+@import 'pages/recipe';
 
 @import 'modules/header';
 @import 'modules/card';
 @import 'modules/pagination';
+@import 'modules/step';
 
 * {
     font-family: Inter, Regular, sans-serif;
