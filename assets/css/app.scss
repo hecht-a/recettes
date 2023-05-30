@@ -1,27 +1,38 @@
 :root {
-    --main: #FF7F51;
-    --secondary: #52D1FF;
+    --main: #08A045;
+    --light-main: #3FC700;
+    --secondary: #A00863;
     --green: #40916C;
     --blue: #457B9D;
     --red: #E63946;
     --yellow: #FFD166;
-    --black: #001A24;
-    --white: #FFFFFF;
-    --white-blue: #F5FCFF;
-    --grey: #DAE3E7;
-    --grey-blue: #7C939C;
-    --grey-stroke: #D5D4DF;
-    --modal-background: rgba(15, 18, 42, 0.5);
+    --black: #0A221B;
+    --white-green: #f6fff5;
+    --white: #fdfffd;
+    --grey: #6C757D;
+    --grey-green: #7c9c82;
+    --grey-stroke: #d4dfd5;
+    --modal-background: rgba(15, 42, 19, 0.5);
+    --border: var(--grey-green);
+    --shadow: rgba(0, 0, 0, 0.2);
 
     --space: 8px;
     --gap: calc(3 * var(--space));
-
-    --navbar-width: 250px;
 }
 
-@import 'tools/reset';
-
 @import 'functions';
+@import 'base';
+
+@import 'tools/reset';
+@import 'tools/layout';
+@import 'tools/mixins';
+@import 'tools/typography';
+
+@import 'pages/home';
+
+@import 'modules/header';
+@import 'modules/card';
+@import 'modules/pagination';
 
 * {
     font-family: Inter, Regular, sans-serif;
@@ -29,32 +40,12 @@
 
 body {
     height: 100vh;
-}
-
-.page-wrapper {
-    height: 100%;
-    display: flex;
+    background: var(--white-green);
+    color: var(--black);
 }
 
 main {
-    width: calc(100% - var(--navbar-width));
-}
-
-.container {
     width: 100%;
-    padding: space(10);
-    height: 100%;
-}
-
-.container .title {
-    h1 {
-        font-size: 1.4em;
-    }
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 10%;
 }
 
 .hidden {

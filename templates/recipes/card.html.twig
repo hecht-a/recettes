@@ -1,0 +1,26 @@
+{% set image = "https://place-hold.it/400x250/0000FF/00000&text=" ~ recipe.name|replace({" ": "_"}) ~ "&fontsize=40" %}
+
+<article class="card">
+    <div class="card-image">
+        <img src="{{ image }}" alt="{{ recipe.name }}">
+    </div>
+    <div class="card-content">
+        <div class="card-body">
+            <h2 class="card-title">
+                <a href="" class="card-link">{{ recipe.name }}</a>
+            </h2>
+            <div class="card-description">{{ recipe.description | excerpt(100) }}</div>
+        </div>
+
+        <div class="card-footer">
+
+            <div class="categories">
+                {% for category in recipe.categories %}
+                    <p style="background: {{ category.color }}" class="category-label">
+                        {{ category.name }}
+                    </p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</article>

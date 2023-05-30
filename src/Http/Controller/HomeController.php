@@ -3,24 +3,30 @@
 namespace App\Http\Controller;
 
 use App\Domain\Recipe\Recipe;
+use App\Helper\Paginator\PaginatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    public function __construct(private readonly EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, private readonly PaginatorInterface $paginator)
     {
+        parent::__construct($em);
     }
 
     #[Route(path: '/', name: 'home')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $recipes = $this->em->getRepository(Recipe::class)->findAll();
-        dd($recipes);
+        $page = $request->query->getInt('page', 1);
+        $query = $this->em->getRepository(Recipe::class)->findAllQuery();
+
+        $recipes = $this->paginator->paginate($query->setMaxResults(10)->getQuery());
 
         return $this->render('pages/home.html.twig', [
-            'recipes' => $recipes
+            'recipes' => $recipes,
+            'page' => $page,
         ]);
     }
 }
