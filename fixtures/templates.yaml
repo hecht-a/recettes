@@ -48,3 +48,9 @@ App\Domain\IngredientRecipe\IngredientRecipe:
         ingredient: '@ingredient*'
         recipe: '@recipe*'
         quantity: '<numberBetween(1, 15)>'
+
+App\Domain\Step\Step:
+    step (template):
+        recipe: '@recipe*'
+        position: <current()>
+        description: <sentence(5, true)>
