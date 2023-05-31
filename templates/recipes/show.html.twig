@@ -41,9 +41,11 @@
 
                 <div class="utensils">
                     <div class="ingredients_utensils__title">Ustensiles</div>
-                    {% for utensil in recipe.utensils %}
-                        {{ include('recipes/_ingredient.html.twig') }}
-                    {% endfor %}
+                    <ul>
+                        {% for utensil in recipe.utensils %}
+                            {{ include('recipes/_utensil.html.twig') }}
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>

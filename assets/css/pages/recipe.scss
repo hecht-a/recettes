@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: space(4);
+    gap: space(3);
 }
 
 .recipe .titles {
@@ -16,6 +16,16 @@
 .recipe .titles .recipe__description {
     @extend %hero-text;
     font-weight: normal;
+}
+
+.recipe .recipe__thumbnail {
+    width: 650px;
+    height: 350px;
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
 }
 
 .recipe .times {
@@ -35,16 +45,6 @@
         .label {
             font-weight: bold;
         }
-    }
-}
-
-.recipe .recipe__thumbnail {
-    width: 650px;
-    height: 350px;
-
-    img {
-        width: 100%;
-        height: 100%;
     }
 }
 
