@@ -1,0 +1,13 @@
+.ingredient {
+    display: flex;
+    justify-content: space-between;
+}
+
+.utensil {
+    margin-left: space(3);
+    list-style-type: disc;
+}
+
+.allergen {
+    display: inline-block;
+}

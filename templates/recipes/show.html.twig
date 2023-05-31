@@ -1,0 +1,62 @@
+{% set image = "https://place-hold.it/400x250/0000FF/00000&text=" ~ recipe.name|replace({" ": "_"}) ~ "&fontsize=40" %}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="recipe container">
+        <div class="titles">
+            <h1 class="recipe__name">{{ recipe.name }}</h1>
+            <h2 class="recipe__description">{{ recipe.description }}</h2>
+        </div>
+
+        <div class="recipe__thumbnail">
+            <img src="{{ image }}" alt="">
+        </div>
+
+        <div class="meta">
+            <div class="times">
+                <div>
+                    <p class="label">Temps de préparation:</p>
+                    <p>{{ format_time(recipe.preparationTime) }}</p>
+                </div>
+                <div>
+                    <p class="label">Temps de cuisson:</p>
+                    <p>{{ format_time(recipe.cookingTime) }}</p>
+                </div>
+            </div>
+
+            <div class="allergens">
+                <span class="label">Allergènes:</span>
+                {% for i, allergen in recipe.allergens %}
+                    {{ include('recipes/_allergen.html.twig') }}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="steps">
+                {% for step in recipe.steps %}
+                    {{ include('recipes/_step.html.twig') }}
+                {% endfor %}
+            </div>
+
+            <div class="ingredients_utensils">
+                <div class="ingredients">
+                    <div class="ingredients_utensils__title">Ingredients</div>
+                    {% for ingredient in recipe.ingredients %}
+                        {{ include('recipes/_ingredient.html.twig') }}
+                    {% endfor %}
+                </div>
+
+                <div class="utensils">
+                    <div class="ingredients_utensils__title">Ustensiles</div>
+                    <ul>
+                        {% for utensil in recipe.utensils %}
+                            {{ include('recipes/_utensil.html.twig') }}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
