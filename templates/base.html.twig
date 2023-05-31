@@ -71,16 +71,31 @@
                 </a>
             </li>
             <li class="header-side__auth">
-                <a href="">
-                    <svg>
-                        <use href="/icons.svg#user"></use>
-                    </svg>
-                    S'inscrire
-                </a>
-                <span>·</span>
-                <a href="">
-                    Se connecter
-                </a>
+                {% if app.user %}
+                    <a href="#">
+                        <svg>
+                            <use href="/icons.svg#user"></use>
+                        </svg>
+                        {{ app.user.name }}
+                    </a>
+                    <span>·</span>
+                    <a href="{{ path('auth_logout') }}">
+                        <svg>
+                            <use href="/icons.svg#logout"></use>
+                        </svg>
+                    </a>
+                {% else %}
+                    <a href="{{ path('auth_register') }}">
+                        <svg>
+                            <use href="/icons.svg#user"></use>
+                        </svg>
+                        S'inscrire
+                    </a>
+                    <span>·</span>
+                    <a href="{{ path('auth_login') }}">
+                        Se connecter
+                    </a>
+                {% endif %}
             </li>
         </ul>
     </nav>

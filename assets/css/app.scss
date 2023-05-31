@@ -1,6 +1,7 @@
 :root {
     --main: #08A045;
-    --light-main: #3FC700;
+    --light-main: #38ac00;
+    --dark-main: #058d3c;
     --secondary: #A00863;
     --green: #40916C;
     --blue: #457B9D;
@@ -30,12 +31,15 @@
 
 @import 'pages/home';
 @import 'pages/recipe';
+@import 'pages/auth';
 
 @import 'modules/header';
 @import 'modules/card';
 @import 'modules/pagination';
 @import 'modules/step';
 @import 'modules/ingredient_utensil';
+@import 'modules/form';
+@import 'modules/alert';
 
 * {
     font-family: Inter, Regular, sans-serif;

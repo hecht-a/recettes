@@ -3,31 +3,40 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <div class="container login">
-        <div class="title">
-            <h1>S'inscrire</h1>
-        </div>
-        <div class="form">
-            {{ form_start(form) }}
-            {{ form_row(form.name, ) }}
+    <div class="container auth">
+        <div class="card-auth">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h1>S'inscrire</h1>
+                    </div>
+                    {{ form_start(form) }}
+                    {{ form_row(form.name) }}
 
-            {{ form_row(form.email) }}
+                    {{ form_row(form.email) }}
 
-            {{ form_row(form.password) }}
+                    {{ form_row(form.password) }}
 
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <div>
+                        <button type="submit">Inscription</button>
+                    </div>
+                    {{ form_end(form) }}
 
-            <div class="form-group">
-            <span>
-                <a href="{{ path('auth_login') }}">
-                    Se connecter
-                </a>
-            </span>
+                    <span class="separator">
+                        <span class="separator-text">ou</span>
+                    </span>
+
+                    <div class="already-user">
+                        <span>
+                            Déjà utilisateur?
+                            <a href="{{ path('auth_login') }}" class="link">
+                                Se connecter
+                            </a>
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div>
-                {{ include('components/button.html.twig', {label: "S'inscrire", type: 'submit'}) }}
-            </div>
-            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}

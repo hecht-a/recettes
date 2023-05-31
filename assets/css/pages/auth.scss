@@ -1,0 +1,62 @@
+.auth {
+    display: flex;
+    justify-content: center;
+}
+
+.card-auth {
+    @extend %card;
+
+    min-width: 40%;
+}
+
+.card-auth .card-content {
+    height: 100%;
+}
+
+.card-auth .card-content .card-body form {
+    display: flex;
+    flex-direction: column;
+    gap: space(2);
+    margin-top: space(2);
+}
+
+.card-auth .card-content .card-body .link {
+    text-decoration: underline;
+
+    &:hover {
+        color: var(--secondary);
+    }
+}
+
+.card-auth .card-content .card-body .separator {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: space(4) 0;
+
+    &:before, &:after {
+        content: '';
+        position: absolute;
+        height: 1px;
+        width: 45%;
+        background: var(--grey-green);
+    }
+
+    &:before {
+        left: 0;
+    }
+
+    &:after {
+        right: 0;
+    }
+}
+
+.card-auth .card-content .card-body .separator .separator-text {
+    background: var(--white);
+}
+
+.card-auth .card-content .card-body .already-user {
+    text-align: center;
+    font-size: 1.1em;
+}
