@@ -13,22 +13,24 @@
             <img src="{{ image }}" alt="">
         </div>
 
-        <div class="times">
-            <div>
-                <p class="label">Temps de préparation:</p>
-                <p>{{ format_time(recipe.preparationTime) }}</p>
+        <div class="meta">
+            <div class="times">
+                <div>
+                    <p class="label">Temps de préparation:</p>
+                    <p>{{ format_time(recipe.preparationTime) }}</p>
+                </div>
+                <div>
+                    <p class="label">Temps de cuisson:</p>
+                    <p>{{ format_time(recipe.cookingTime) }}</p>
+                </div>
             </div>
-            <div>
-                <p class="label">Temps de cuisson:</p>
-                <p>{{ format_time(recipe.cookingTime) }}</p>
-            </div>
-        </div>
 
-        <div class="allergens">
-            <span class="label">Allergènes:</span>
-            {% for i, allergen in recipe.allergens %}
-                {{ include('recipes/_allergen.html.twig') }}
-            {% endfor %}
+            <div class="allergens">
+                <span class="label">Allergènes:</span>
+                {% for i, allergen in recipe.allergens %}
+                    {{ include('recipes/_allergen.html.twig') }}
+                {% endfor %}
+            </div>
         </div>
 
         <div class="content">
