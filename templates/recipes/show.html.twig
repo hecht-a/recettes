@@ -24,6 +24,13 @@
             </div>
         </div>
 
+        <div class="allergens">
+            <span class="label">Allergènes:</span>
+            {% for i, allergen in recipe.allergens %}
+                {{ include('recipes/_allergen.html.twig') }}
+            {% endfor %}
+        </div>
+
         <div class="content">
             <div class="steps">
                 {% for step in recipe.steps %}
