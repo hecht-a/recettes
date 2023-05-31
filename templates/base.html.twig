@@ -37,6 +37,16 @@
                     Accueil
                 </a>
             </li>
+            {% if is_granted('ROLE_ADMIN') %}
+                <li>
+                    <a href="">
+                        <svg>
+                            <use href="/icons.svg#home"></use>
+                        </svg>
+                        Admin
+                    </a>
+                </li>
+            {% endif %}
         </ul>
         <ul class="header-side">
             <li class="header-side__search">
