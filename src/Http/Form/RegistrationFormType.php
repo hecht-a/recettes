@@ -17,19 +17,18 @@ class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-
         $builder
             ->add('name', TextType::class, [
                 'label' => "Nom d'utilisateur",
                 'attr' => [
-                    'placeholder' => "Nom d'utilisateur"
-                ]
+                    'placeholder' => "Nom d'utilisateur",
+                ],
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Email',
                 'attr' => [
-                    'placeholder' => 'Email'
-                ]
+                    'placeholder' => 'Email',
+                ],
             ])
             ->add('password', RepeatedType::class, [
                 'mapped' => false,
@@ -42,15 +41,15 @@ class RegistrationFormType extends AbstractType
                     'label' => 'Mot de passe',
                     'attr' => [
                         'minlength' => 6,
-                        'placeholder' => 'Mot de passe'
-                    ]
+                        'placeholder' => 'Mot de passe',
+                    ],
                 ],
                 'second_options' => [
                     'label' => 'Confirmer le mot de passe',
                     'attr' => [
                         'minlength' => 6,
-                        'placeholder' => 'Confirmer le mot de passe'
-                    ]
+                        'placeholder' => 'Confirmer le mot de passe',
+                    ],
                 ],
             ]);
     }
