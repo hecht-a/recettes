@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Recettes{% endblock %}</title>
+    <title>{% block title %}Administration{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/favicons/icon-72x72.png"/>
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicons/icon-144x144.png"/>
@@ -23,9 +23,18 @@
     {% endblock %}
 </head>
 <body class="admin">
-<div class="page-wrapper">
-    <aside class="sidebar">
-
+<div class="dashboard-wrapper">
+    <aside class="dashboard-sidebar">
+        <div class="dashboard-sidebar__wrapper">
+            <ul class="dashboard-sidebar__main">
+                <li>
+                    <a href="">Accueil</a>
+                </li>
+                <li>
+                    <a href="">Recettes</a>
+                </li>
+            </ul>
+        </div>
     </aside>
     <main>
         {{ include('partials/flash.html.twig') }}
