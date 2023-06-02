@@ -27,11 +27,11 @@ class Recipe
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: false)]
     #[Assert\NotBlank]
-    private string $name;
+    private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: false)]
     #[Assert\NotBlank]
-    private string $description;
+    private ?string $description = null;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: false)]
     #[Assert\NotBlank]
@@ -41,12 +41,12 @@ class Recipe
     #[ORM\Column(type: Types::INTEGER, nullable: false)]
     #[Assert\NotBlank]
     #[Assert\Positive]
-    private int $preparationTime;
+    private int $preparationTime = 0;
 
     #[ORM\Column(type: Types::INTEGER, nullable: false)]
     #[Assert\NotBlank]
     #[Assert\Positive]
-    private int $cookingTime;
+    private int $cookingTime = 0;
 
     /** @var ArrayCollection<int, IngredientRecipe> */
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: IngredientRecipe::class)]
@@ -190,10 +190,22 @@ class Recipe
         return $this->categories;
     }
 
+    /**
+     * @param Collection $categories
+     * @return $this
+     */
+    public function setCategories(Collection $categories): self
+    {
+        $this->categories = $categories;
+
+        return $this;
+    }
+
     public function addCategory(Category $category): self
     {
         if (!$this->categories->contains($category)) {
             $this->categories[] = $category;
+            $category->addRecipe($this);
         }
 
         return $this;
@@ -203,6 +215,7 @@ class Recipe
     {
         if ($this->categories->contains($category)) {
             $this->categories->removeElement($category);
+            $category->removeRecipe($this);
         }
 
         return $this;

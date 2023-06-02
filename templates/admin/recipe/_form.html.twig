@@ -1,0 +1,58 @@
+{{ form_start(form, {attr: {class: 'stacked'}}) }}
+
+<section class="stack-large">
+
+  <section>
+    <div class="section-title">
+      Informations générales
+    </div>
+    <div class="grid2">
+        {{ form_row(form.name) }}
+        {{ form_row(form.categories) }}
+        <div class="grid">
+            {{ form_row(form.preparationTime) }}
+            {{ form_row(form.cookingTime) }}
+        </div>
+    </div>
+  </section>
+
+{#  <section>#}
+{#    <div class="section-title">#}
+{#      Contenus#}
+{#    </div>#}
+{#    <button type="submit" style="visibility: hidden"></button>#}
+{#    <div class="grid">#}
+{#      {{ form_row(form.videoPath, {label: 'Video'}) }}#}
+{#      {{ form_row(form.demo) }}#}
+{#      <div class="relative">#}
+{#        {{ form_row(form.youtube) }}#}
+{#        <button class="sync-icon" type="submit" name="upload" value="1">#}
+{#          {{ icon('sync') }}#}
+{#        </button>#}
+{#      </div>#}
+{#      {{ form_row(form.duration) }}#}
+{#      {{ form_row(form.deprecatedBy, {label: 'Déprécié par'}) }}#}
+{#      {{ form_row(form.sourceFile) }}#}
+{#      {{ form_row(form.youtubeThumbnail, {row_attr: {class: 'form-attachment', style:'grid-row-start:1; align-self:stretch;'}}) }}#}
+{#      <div class="full grid" style="--col: 400px;">#}
+{#        {{ form_row(form.mainTechnologies) }}#}
+{#        {{ form_row(form.secondaryTechnologies) }}#}
+{#        {{ form_row(form.level) }}#}
+{#      </div>#}
+{#    </div>#}
+{#  </section>#}
+
+  <section>
+    <div class="section-title">
+      Description
+    </div>
+    {{ form_row(form.description, {label: false}) }}
+  </section>
+
+  <section>
+    <button type="submit" class="btn-gradient">Sauvegarder</button>
+  </section>
+
+</section>
+
+{{ form_end(form) }}

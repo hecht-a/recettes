@@ -1,4 +1,57 @@
-{% extends 'admin/base.html.twig' %}
+{% extends 'admin/card.html.twig' %}
 
-{% block body %}
+{% block title %}
+    Gestion des recettes
+{% endblock %}
+
+{% block actions %}
+    <a href="new" class="btn-primary">Ajouter une recette</a>
+{% endblock %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Nom</th>
+            <th>Publication</th>
+            <th>Auteur</th>
+            <th class="text-right">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in rows %}
+            {% set link = path(prefix ~ '_edit', {id: row.id}) %}
+            <tr>
+                <td>
+                    <a href="{{ link }}">{{ row.id }}</a>
+                </td>
+                <td>
+                    <a href="{{ link }}">{{ row.name }}</a>
+                </td>
+                <td>
+                    {{ row.createdAt | date("d M Y") }}
+                </td>
+                <td>
+                    {{ row.user.name }}
+                </td>
+                <td>
+                    <div class="dashboard-actions">
+                        <a href="{{ link }}">edit</a>
+                        {# La suppresion d'un tutoriel n'est pas prévue pour le moment
+              <form action="{{ path(prefix ~ '_edit', {id: row.id}) }}" method="post" onsubmit="return confirm('Voulez vous vraiment supprimer ce contenu')">
+                <input type="hidden" name="_method" value="DELETE" />
+                <button type="submit">
+                  {{ icon('delete') }}
+                </button>
+              </form>
+                        #}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ paginate(rows) }}
 {% endblock %}

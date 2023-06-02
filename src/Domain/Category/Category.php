@@ -92,6 +92,7 @@ class Category
     {
         if (!$this->recipes->contains($recipe)) {
             $this->recipes[] = $recipe;
+            $recipe->addCategory($this);
         }
 
         return $this;
@@ -101,6 +102,7 @@ class Category
     {
         if ($this->recipes->contains($recipe)) {
             $this->recipes->removeElement($recipe);
+            $recipe->removeCategory($this);
         }
 
         return $this;

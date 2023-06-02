@@ -31,12 +31,30 @@
                     <a href="">Accueil</a>
                 </li>
                 <li>
-                    <a href="">Recettes</a>
+                    <a href="{{ path('admin_recipe_index') }}">Recettes</a>
                 </li>
             </ul>
         </div>
     </aside>
-    <main>
+    <aside class="dashboard-topbar">
+        <div class="dashboard-topbar__search">
+            {% if searchable is defined and searchable %}
+                <form>
+                    <input name="q" type="text" placeholder="Rechercher" value="{{ app.request.get('q') }}">
+                </form>
+            {% endif %}
+        </div>
+        <ul class="dashboard-topbar__nav">
+            <li class="header__logout">
+                <a href="/">
+                    <svg>
+                        <use href="/icons.svg#logout"></use>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </aside>
+    <main class="dashboard-body">
         {{ include('partials/flash.html.twig') }}
         {% block body %}{% endblock %}
     </main>

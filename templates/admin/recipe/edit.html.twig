@@ -1,0 +1,14 @@
+{% extends 'admin/card.html.twig' %}
+
+{% block actions %}
+  <a href="{{ path('recipes_show', {slug: entity.slug, id: entity.id}) }}" target="_blank" class="btn-secondary btn-small">Voir le tutoriel</a>
+{% endblock %}
+
+{% block title %}
+  Editer la recette
+{% endblock %}
+
+{% block content %}
+  {% include 'admin/recipe/_form.html.twig' %}
+{% endblock %}
+
