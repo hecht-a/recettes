@@ -190,17 +190,6 @@ class Recipe
         return $this->categories;
     }
 
-    /**
-     * @param Collection $categories
-     * @return $this
-     */
-    public function setCategories(Collection $categories): self
-    {
-        $this->categories = $categories;
-
-        return $this;
-    }
-
     public function addCategory(Category $category): self
     {
         if (!$this->categories->contains($category)) {

@@ -122,8 +122,5 @@
     --gap: 2;
     gap: calc(var(--gap) * var(--space));
     grid-template-columns: 1fr;
-
-    @include up(1100) {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    grid-template-rows: 1fr;
 }

@@ -24,10 +24,10 @@ class RecipeCrudData implements CrudDataInterface
     public \DateTimeInterface $createdAt;
 
     #[Assert\GreaterThan(0)]
-    public int $preparationTime;
+    public ?int $preparationTime = 0;
 
     #[Assert\GreaterThan(0)]
-    public int $cookingTime;
+    public ?int $cookingTime = 0;
 
     /** @var Category[] */
     public array $categories = [];
@@ -59,8 +59,18 @@ class RecipeCrudData implements CrudDataInterface
             $this->entity->removeCategory($category);
         }
 
-        // TODO: fix
-        $this->entity->setCategories($categories);
+
+        //TODO: check if the next code can be refactored and simplified to remove a foreach
+        /** @var Category[] $oldCategories */
+        $oldCategories = $this->entity->getCategories()->toArray();
+        $newCategories = $this->categories;
+
+        foreach ($oldCategories as $oldCategory) {
+            $this->entity->removeCategory($oldCategory);
+        }
+        foreach ($newCategories as $newCategory) {
+            $this->entity->addCategory($newCategory);
+        }
     }
 
     public function getEntity(): Recipe

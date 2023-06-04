@@ -29,6 +29,8 @@ abstract class CrudController extends AbstractController
     protected string $templatePath = 'recipe';
     protected string $routePrefix = '';
     protected bool $indexOnSave = true;
+
+    /** @var array{'update': ?string, 'delete': ?string, 'create': ?string}  */
     protected array $events = [
         'update' => null,
         'delete' => null,
@@ -45,6 +47,11 @@ abstract class CrudController extends AbstractController
         parent::__construct($em);
     }
 
+    /**
+     * @param QueryBuilder|null $query
+     * @param string[] $extraParams
+     * @return Response
+     */
     public function crudIndex(QueryBuilder $query = null, array $extraParams = []): Response
     {
         /** @var Request $request */
@@ -140,9 +147,12 @@ abstract class CrudController extends AbstractController
         return $this->redirectToRoute($redirectRoute ?: ($this->routePrefix.'_index'));
     }
 
+    /**
+     * @return EntityRepository<E>
+     */
     public function getRepository(): EntityRepository
     {
-        return $this->em->getRepository($this->entity);
+        return $this->em->getRepository($this->entity); /* @phpstan-ignore-line */
     }
 
     protected function applySearch(string $search, QueryBuilder $query): QueryBuilder

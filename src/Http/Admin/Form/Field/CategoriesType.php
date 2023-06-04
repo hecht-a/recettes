@@ -57,7 +57,7 @@ class CategoriesType extends TextType implements DataTransformerInterface
         return implode(
             ',',
             array_map(
-                fn (Category $category): ?string => "{$category->getName()}:{$category->getId()}",
+                fn (Category $category): string => "{$category->getName()}:{$category->getId()}",
                 $value
             )
         );
@@ -65,6 +65,7 @@ class CategoriesType extends TextType implements DataTransformerInterface
 
     /**
      * @param ?string $value
+     * @return Category[]
      */
     public function reverseTransform($value): array
     {

@@ -14,10 +14,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class RecipeForm extends AbstractType
 {
-    public function __construct(private readonly UrlGeneratorInterface $urlGenerator)
-    {
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
