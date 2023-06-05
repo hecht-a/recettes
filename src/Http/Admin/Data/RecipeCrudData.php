@@ -5,10 +5,10 @@ namespace App\Http\Admin\Data;
 use App\Domain\Allergen\Allergen;
 use App\Domain\Auth\User;
 use App\Domain\Category\Category;
+use App\Domain\IngredientRecipe\IngredientRecipe;
 use App\Domain\Recipe\Recipe;
-use App\Domain\Step\Step;
+use App\Domain\Utensil\Utensil;
 use App\Http\Admin\Form\RecipeForm;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -36,6 +36,9 @@ class RecipeCrudData implements CrudDataInterface
     /** @var Allergen[] */
     public array $allergens = [];
 
+    /** @var Utensil[] */
+    public array $utensils = [];
+
     private EntityManagerInterface $em;
 
     public function __construct(private readonly Recipe $entity)
@@ -48,6 +51,7 @@ class RecipeCrudData implements CrudDataInterface
         $this->cookingTime = $entity->getCookingTime();
         $this->categories = $entity->getCategories()->toArray();
         $this->allergens = $entity->getAllergens()->toArray();
+        $this->utensils = $entity->getUtensils()->toArray();
     }
 
     public function hydrate(): void
@@ -80,6 +84,17 @@ class RecipeCrudData implements CrudDataInterface
         }
         foreach ($newAllergens as $newAllergen) {
             $this->entity->addAllergen($newAllergen);
+        }
+
+        /** @var Utensil[] $oldUtensils */
+        $oldUtensils = $this->entity->getUtensils()->toArray();
+        $newUtensils = $this->utensils;
+
+        foreach ($oldUtensils as $oldUtensil) {
+            $this->entity->removeUtensil($oldUtensil);
+        }
+        foreach ($newUtensils as $newUtensil) {
+            $this->entity->addUtensil($newUtensil);
         }
     }
 

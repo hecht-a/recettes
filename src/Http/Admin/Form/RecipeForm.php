@@ -5,6 +5,7 @@ namespace App\Http\Admin\Form;
 use App\Http\Admin\Data\RecipeCrudData;
 use App\Http\Admin\Form\Field\AllergensType;
 use App\Http\Admin\Form\Field\CategoriesType;
+use App\Http\Admin\Form\Field\UtensilsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;

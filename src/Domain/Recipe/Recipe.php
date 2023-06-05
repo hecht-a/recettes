@@ -222,6 +222,7 @@ class Recipe
     {
         if (!$this->utensils->contains($utensil)) {
             $this->utensils[] = $utensil;
+            $utensil->addRecipe($this);
         }
 
         return $this;
@@ -231,6 +232,7 @@ class Recipe
     {
         if ($this->utensils->contains($utensil)) {
             $this->utensils->removeElement($utensil);
+            $utensil->removeRecipe($this);
         }
 
         return $this;
