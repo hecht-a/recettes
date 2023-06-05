@@ -25,6 +25,14 @@
         {{ form_row(form.description, {label: false}) }}
     </section>
 
+    {% dump(form_widget(form.ingredients.vars.prototype)) %}
+    <section class="ingredients">
+        <div class="section-title">
+            Ingrédients
+        </div>
+        {{ form_row(form.ingredients, {label: false}) }}
+    </section>
+
     <section>
         <button type="submit" class="btn-gradient">Sauvegarder</button>
     </section>

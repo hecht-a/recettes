@@ -95,3 +95,12 @@ button[type=submit] {
         background-color: var(--dark-main);
     }
 }
+
+.form-error {
+    color: var(--red);
+}
+
+fieldset > div fieldset > div {
+    @extend %grid;
+    align-items: flex-end;
+}

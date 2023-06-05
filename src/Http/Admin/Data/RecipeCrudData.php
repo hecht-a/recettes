@@ -39,6 +39,9 @@ class RecipeCrudData implements CrudDataInterface
     /** @var Utensil[] */
     public array $utensils = [];
 
+    /** @var IngredientRecipe[] */
+    public array $ingredients = [];
+
     private EntityManagerInterface $em;
 
     public function __construct(private readonly Recipe $entity)
@@ -52,6 +55,7 @@ class RecipeCrudData implements CrudDataInterface
         $this->categories = $entity->getCategories()->toArray();
         $this->allergens = $entity->getAllergens()->toArray();
         $this->utensils = $entity->getUtensils()->toArray();
+        $this->ingredients = $entity->getIngredients()->toArray();
     }
 
     public function hydrate(): void
