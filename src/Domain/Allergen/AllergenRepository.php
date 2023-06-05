@@ -38,28 +38,31 @@ class AllergenRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Recipe[] Returns an array of Recipe objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @param string $q
+     * @return Allergen[]
+     */
+    public function searchByName(string $q): array
+    {
+        return $this->createQueryBuilder('a')
+            ->where('LOWER(a.name) LIKE :q')
+            ->orderBy('LENGTH(a.name)', 'ASC')
+            ->setMaxResults(3)
+            ->setParameter('q', strtolower($q).'%')
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?Recipe
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * @param string[] $names
+     * @return Allergen[]
+     */
+    public function findByNames(array $names): array
+    {
+        return $this->createQueryBuilder('a')
+            ->where('LOWER(a.name) IN (:name)')
+            ->setParameter('name', array_map(fn (string $name) => strtolower($name), $names))
+            ->getQuery()
+            ->getResult();
+    }
 }

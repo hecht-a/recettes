@@ -2,8 +2,8 @@
 
 namespace App\Http\Admin\Form\Field;
 
-use App\Domain\Category\Category;
-use App\Domain\Category\CategoryRepository;
+use App\Domain\Allergen\Allergen;
+use App\Domain\Allergen\AllergenRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,9 +12,9 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class CategoriesType extends TextType implements DataTransformerInterface
+class AllergensType extends TextType implements DataTransformerInterface
 {
-    public function __construct(private readonly CategoryRepository $repository, private readonly UrlGeneratorInterface $urlGenerator)
+    public function __construct(private readonly AllergenRepository $repository, private readonly UrlGeneratorInterface $urlGenerator)
     {
     }
 
@@ -35,7 +35,7 @@ class CategoriesType extends TextType implements DataTransformerInterface
             'required' => false,
             'attr' => [
                 'is' => 'input-choices',
-                'data-remote' => $this->urlGenerator->generate('api_category_search'),
+                'data-remote' => $this->urlGenerator->generate('api_allergen_search'),
                 'data-value' => 'name',
                 'data-label' => 'name',
             ],
@@ -44,7 +44,7 @@ class CategoriesType extends TextType implements DataTransformerInterface
     }
 
     /**
-     * @param string|Category[] $value
+     * @param string|Allergen[] $value
      */
     public function transform($value): ?string
     {
@@ -55,7 +55,7 @@ class CategoriesType extends TextType implements DataTransformerInterface
         return implode(
             ',',
             array_map(
-                fn (Category $category): string => "{$category->getName()}:{$category->getId()}",
+                fn (Allergen $allergen): string => "{$allergen->getName()}:{$allergen->getId()}",
                 $value
             )
         );
@@ -63,7 +63,7 @@ class CategoriesType extends TextType implements DataTransformerInterface
 
     /**
      * @param ?string $value
-     * @return Category[]
+     * @return Allergen[]
      */
     public function reverseTransform($value): array
     {
@@ -72,24 +72,24 @@ class CategoriesType extends TextType implements DataTransformerInterface
         }
 
         $ids = [];
-        $categories = explode(',', $value);
-        foreach ($categories as $category) {
-            $parts = explode(':', trim($category));
+        $allergens = explode(',', $value);
+        foreach ($allergens as $allergen) {
+            $parts = explode(':', trim($allergen));
             if (!empty($parts[0])) {
                 $ids[$parts[0]] = $parts[1] ?? null;
             }
         }
 
-        $categories = $this->repository->findByNames(array_keys($ids));
-        $categoriesByName = collect($categories)->keyBy(fn ($category) => $category->getName())->toArray();
+        $allergens = $this->repository->findByNames(array_keys($ids));
+        $allergensByName = collect($allergens)->keyBy(fn ($allergen) => $allergen->getName())->toArray();
 
         foreach ($ids as $name => $version) {
-            if (!isset($categoriesByName[$name])) {
-                $categories[] = (new Category())
+            if (!isset($allergensByName[$name])) {
+                $allergens[] = (new Allergen())
                     ->setName($name);
             }
         }
 
-        return $categories;
+        return $allergens;
     }
 }

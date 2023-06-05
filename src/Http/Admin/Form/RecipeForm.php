@@ -3,6 +3,7 @@
 namespace App\Http\Admin\Form;
 
 use App\Http\Admin\Data\RecipeCrudData;
+use App\Http\Admin\Form\Field\AllergensType;
 use App\Http\Admin\Form\Field\CategoriesType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -22,6 +23,9 @@ class RecipeForm extends AbstractType
             ->add('preparationTime', IntegerType::class)
             ->add('cookingTime', IntegerType::class)
             ->add('categories', CategoriesType::class, [
+                'required' => false,
+            ])
+            ->add('allergens', AllergensType::class, [
                 'required' => false,
             ])
         ;

@@ -18,11 +18,11 @@ class CategoryController extends AbstractController
         if (null === $search) {
             return $this->json([]);
         }
-        $technologies = $categoryRepository->searchByName($search);
+        $categories = $categoryRepository->searchByName($search);
 
-        return $this->json(array_map(fn (Category $category) => [
+        return $this->json(array_map(fn(Category $category) => [
             'name' => $category->getName(),
             'id' => $category->getId(),
-        ], $technologies));
+        ], $categories));
     }
 }

@@ -248,6 +248,7 @@ class Recipe
     {
         if (!$this->allergens->contains($allergen)) {
             $this->allergens[] = $allergen;
+            $allergen->addRecipe($this);
         }
 
         return $this;
@@ -257,6 +258,7 @@ class Recipe
     {
         if ($this->allergens->contains($allergen)) {
             $this->allergens->removeElement($allergen);
+            $allergen->removeRecipe($this);
         }
 
         return $this;

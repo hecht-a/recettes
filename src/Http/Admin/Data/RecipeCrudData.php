@@ -2,6 +2,7 @@
 
 namespace App\Http\Admin\Data;
 
+use App\Domain\Allergen\Allergen;
 use App\Domain\Auth\User;
 use App\Domain\Category\Category;
 use App\Domain\Recipe\Recipe;
@@ -32,6 +33,9 @@ class RecipeCrudData implements CrudDataInterface
     /** @var Category[] */
     public array $categories = [];
 
+    /** @var Allergen[] */
+    public array $allergens = [];
+
     private EntityManagerInterface $em;
 
     public function __construct(private readonly Recipe $entity)
@@ -43,6 +47,7 @@ class RecipeCrudData implements CrudDataInterface
         $this->preparationTime = $entity->getPreparationTime();
         $this->cookingTime = $entity->getCookingTime();
         $this->categories = $entity->getCategories()->toArray();
+        $this->allergens = $entity->getAllergens()->toArray();
     }
 
     public function hydrate(): void
@@ -54,12 +59,6 @@ class RecipeCrudData implements CrudDataInterface
         $this->entity->setPreparationTime($this->preparationTime);
         $this->entity->setCookingTime($this->cookingTime);
 
-        $categories = $this->entity->getCategories()->filter(fn(Category $category) => in_array($category, $this->categories));
-        foreach ($this->entity->getCategories() as $category) {
-            $this->entity->removeCategory($category);
-        }
-
-
         //TODO: check if the next code can be refactored and simplified to remove a foreach
         /** @var Category[] $oldCategories */
         $oldCategories = $this->entity->getCategories()->toArray();
@@ -70,6 +69,17 @@ class RecipeCrudData implements CrudDataInterface
         }
         foreach ($newCategories as $newCategory) {
             $this->entity->addCategory($newCategory);
+        }
+
+        /** @var Allergen[] $oldAllergens */
+        $oldAllergens = $this->entity->getAllergens()->toArray();
+        $newAllergens = $this->allergens;
+
+        foreach ($oldAllergens as $oldAllergen) {
+            $this->entity->removeAllergen($oldAllergen);
+        }
+        foreach ($newAllergens as $newAllergen) {
+            $this->entity->addAllergen($newAllergen);
         }
     }
 
