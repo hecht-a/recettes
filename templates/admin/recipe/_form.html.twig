@@ -25,8 +25,7 @@
         {{ form_row(form.description, {label: false}) }}
     </section>
 
-    {% dump(form_widget(form.ingredients.vars.prototype)) %}
-    <section class="ingredients">
+    <section class="ingredients" data-prototype="{{ form_widget(form.ingredients.vars.prototype)|e }}">
         <div class="section-title">
             Ingrédients
         </div>

@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class IngredientRecipeType extends AbstractType
@@ -22,8 +24,8 @@ class IngredientRecipeType extends AbstractType
                 'class' => Ingredient::class,
                 'choice_label' => 'name',
                 'attr' => [
-                    'is' => 'select-choices',
-                ]
+                    'is' => 'select-choices'
+                ],
             ])
             ->add('quantity', NumberType::class);
     }
@@ -33,7 +35,10 @@ class IngredientRecipeType extends AbstractType
         $resolver
             ->setDefaults([
                 'data_class' => IngredientRecipe::class,
-                'label' => false
+                'label' => false,
+//                'row_attr' => [
+//                    'is' => 'ingredient-field'
+//                ]
             ]);
     }
 }

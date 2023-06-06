@@ -40,8 +40,9 @@ class RecipeForm extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'row_attr' => [
-                    'label' => false
-                ]
+                    'label' => false,
+                    'class' => 'ingredients'
+                ],
             ])
         ;
     }
@@ -51,5 +52,7 @@ class RecipeForm extends AbstractType
         $resolver->setDefaults([
             'data_class' => RecipeCrudData::class,
         ]);
+
+        parent::configureOptions($resolver);
     }
 }

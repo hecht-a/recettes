@@ -1,12 +1,12 @@
 import TomSelect from 'tom-select'
 import {RecursivePartial, TomLoadCallback} from "tom-select/src/types";
 import {TomSettings} from "tom-select/dist/types/types";
+import {escape_html} from "tom-select/src/utils";
+import {TomOption} from "tom-select/src/types/core";
 
 export class InputChoices extends HTMLInputElement {
   widget!: TomSelect
-  connectedCallback() {
-    console.log(this.widget)
-  }
+  connectedCallback() {}
   disconnectedCallback() {}
 }
 
@@ -32,11 +32,15 @@ function bindBehaviour (cls: typeof InputChoices|typeof SelectChoices) {
       hideSelected: true,
       persist: false,
       plugins: {},
-      closeAfterSelect: true
+      closeAfterSelect: true,
+      render: {
+        no_results: ({input}: TomOption, escape: typeof escape_html)=> {
+          return `<div class="no-results">Aucun résultat pour <em>"${escape(input)}"</em></div>`;
+        }
+      }
     }
-    console.log(this.tagName)
+
     if (this.tagName === 'SELECT') {
-      console.log('ok')
       options.allowEmptyOption = true
       if(options.plugins) {
         options.plugins.no_backspace_delete = {}
