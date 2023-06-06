@@ -7,6 +7,7 @@ use App\Domain\IngredientRecipe\IngredientRecipe;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -27,7 +28,12 @@ class IngredientRecipeType extends AbstractType
                     'is' => 'select-choices'
                 ],
             ])
-            ->add('quantity', NumberType::class);
+            ->add('quantity', NumberType::class)
+            ->add('delete', ButtonType::class, [
+                'row_attr' => [
+                    'class' => 'delete_row'
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -35,10 +41,7 @@ class IngredientRecipeType extends AbstractType
         $resolver
             ->setDefaults([
                 'data_class' => IngredientRecipe::class,
-                'label' => false,
-//                'row_attr' => [
-//                    'is' => 'ingredient-field'
-//                ]
+                'label' => false
             ]);
     }
 }

@@ -64,7 +64,8 @@ label {
 }
 
 .form-group .ts-wrapper ~ label {
-    position: unset;
+    position: absolute;
+    top: -5px;
     color: var(--black);
     font-weight: 700;
     transform: scale(0.75);

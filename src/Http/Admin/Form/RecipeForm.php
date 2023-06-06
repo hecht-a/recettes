@@ -41,7 +41,8 @@ class RecipeForm extends AbstractType
                 'by_reference' => false,
                 'row_attr' => [
                     'label' => false,
-                    'class' => 'ingredients'
+                    'class' => 'ingredients',
+                    'is' => 'ingredients-wrapper'
                 ],
             ])
         ;

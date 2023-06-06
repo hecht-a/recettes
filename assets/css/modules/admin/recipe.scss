@@ -1,5 +1,47 @@
+.form-group.ingredients {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: space(3);
+}
+
+.form-group.ingredients div fieldset > div {
+    grid-template-columns: 1fr 1fr auto;
+}
+
+.delete_row {
+    color: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.delete_row button, .delete_row button svg {
+    width: 32px;
+    height: 32px;
+}
+
+.delete_row button {
+    transition: filter 0.3s, background 0.3s, color 0.3s;
+
+    &:hover {
+        filter: brightness(90%);
+    }
+
+    &:active {
+        filter: brightness(50%);
+    }
+}
+
 .form-group.ingredients > div {
     display: flex;
     flex-direction: column;
     gap: space(2);
+}
+
+.add-more {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }

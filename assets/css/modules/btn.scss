@@ -39,7 +39,7 @@
 // Bouton avec un effet de profondeur "Web 2.0"
 .btn-gradient {
     @extend %btn;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%) var(--secondary);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%) var(--black);
 }
 
 .btn-primary {
