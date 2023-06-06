@@ -5,6 +5,7 @@ namespace App\Http\Admin\Data;
 use App\Domain\Allergen\Allergen;
 use App\Domain\Auth\User;
 use App\Domain\Category\Category;
+use App\Domain\Ingredient\Ingredient;
 use App\Domain\IngredientRecipe\IngredientRecipe;
 use App\Domain\Recipe\Recipe;
 use App\Domain\Utensil\Utensil;
@@ -100,6 +101,18 @@ class RecipeCrudData implements CrudDataInterface
         foreach ($newUtensils as $newUtensil) {
             $this->entity->addUtensil($newUtensil);
         }
+
+        /** @var IngredientRecipe[] $oldIngredients */
+        $oldIngredients = $this->entity->getIngredients()->toArray();
+        $newIngredients = $this->ingredients;
+
+        foreach ($oldIngredients as $oldIngredient) {
+            $this->em->remove($oldIngredient);
+        }
+        foreach ($newIngredients as $newIngredient) {
+            $this->entity->addIngredient($newIngredient->setRecipe($this->entity));
+        }
+
     }
 
     public function getEntity(): Recipe

@@ -49,7 +49,7 @@ class Recipe
     private int $cookingTime = 0;
 
     /** @var ArrayCollection<int, IngredientRecipe> */
-    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: IngredientRecipe::class)]
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: IngredientRecipe::class, cascade: ['persist'])]
     private Collection $ingredients;
 
     /** @var ArrayCollection<int, Category> */
