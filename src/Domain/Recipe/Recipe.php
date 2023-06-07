@@ -67,7 +67,7 @@ class Recipe
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'recipes')]
     private ?User $user;
 
-    #[Vich\UploadableField(mapping: 'utensil', fileNameProperty: 'imageName')]
+    #[Vich\UploadableField(mapping: 'recipe', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
@@ -281,6 +281,12 @@ class Recipe
     public function setImageFile(?File $imageFile = null): self
     {
         $this->imageFile = $imageFile;
+
+        if ($imageFile !== null) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->createdAt = new \DateTimeImmutable();
+        }
 
         return $this;
     }

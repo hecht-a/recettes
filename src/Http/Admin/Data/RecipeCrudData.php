@@ -12,8 +12,11 @@ use App\Domain\Step\Step;
 use App\Domain\Utensil\Utensil;
 use App\Http\Admin\Form\RecipeForm;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+#[Vich\Uploadable]
 class RecipeCrudData implements CrudDataInterface
 {
     public ?User $user;
@@ -47,6 +50,11 @@ class RecipeCrudData implements CrudDataInterface
     /** @var Step[] */
     public array $steps = [];
 
+    #[Vich\UploadableField(mapping: 'recipe', fileNameProperty: 'imageName')]
+    public ?File $image = null;
+
+    public ?string $imageName = null;
+
     private EntityManagerInterface $em;
 
     public function __construct(private readonly Recipe $entity)
@@ -62,6 +70,7 @@ class RecipeCrudData implements CrudDataInterface
         $this->utensils = $entity->getUtensils()->toArray();
         $this->ingredients = $entity->getIngredients()->toArray();
         $this->steps = $entity->getSteps()->toArray();
+        $this->image = $this->entity->getImageFile();
     }
 
     public function hydrate(): void
@@ -72,6 +81,7 @@ class RecipeCrudData implements CrudDataInterface
         $this->entity->setCreatedAt($this->createdAt);
         $this->entity->setPreparationTime($this->preparationTime);
         $this->entity->setCookingTime($this->cookingTime);
+        $this->entity->setImageFile($this->image);
 
         //TODO: check if the next code can be refactored and simplified to remove a foreach
         /** @var Category[] $oldCategories */
