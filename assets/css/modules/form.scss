@@ -48,7 +48,9 @@ label {
 }
 
 .form-group input:not(:placeholder-shown) ~ .float-label,
-.form-group:focus-within input ~ .float-label {
+.form-group:focus-within input ~ .float-label,
+.form-group textarea:not(:placeholder-shown) ~ .float-label,
+.form-group:focus-within textarea ~ .float-label {
     color: var(--black);
     font-weight: 700;
     z-index: 0;

@@ -32,6 +32,13 @@
         {{ form_row(form.ingredients, {label: false}) }}
     </section>
 
+    <section class="steps" data-prototype="{{ form_widget(form.steps.vars.prototype)|e }}">
+        <div class="section-title">
+            Etapes
+        </div>
+        {{ form_row(form.steps, {label: false}) }}
+    </section>
+
     <section>
         <button type="submit" class="btn-gradient">Sauvegarder</button>
     </section>

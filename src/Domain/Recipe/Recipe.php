@@ -74,7 +74,7 @@ class Recipe
     private ?string $imageName = null;
 
     /** @var ArrayCollection<int, Step> */
-    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class)]
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, cascade: ['persist'])]
     private Collection $steps;
 
     #[ORM\Column(type: Types::STRING, length: 128, unique: true)]

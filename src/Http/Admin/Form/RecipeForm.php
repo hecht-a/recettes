@@ -6,6 +6,7 @@ use App\Http\Admin\Data\RecipeCrudData;
 use App\Http\Admin\Form\Field\AllergensType;
 use App\Http\Admin\Form\Field\CategoriesType;
 use App\Http\Admin\Form\Field\IngredientRecipeType;
+use App\Http\Admin\Form\Field\StepsType;
 use App\Http\Admin\Form\Field\UtensilsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -43,6 +44,17 @@ class RecipeForm extends AbstractType
                     'label' => false,
                     'class' => 'ingredients',
                     'is' => 'ingredients-wrapper'
+                ],
+            ])
+            ->add('steps', CollectionType::class, [
+                'entry_type' => StepsType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'row_attr' => [
+                    'label' => false,
+                    'class' => 'steps',
+                    'is' => 'steps-wrapper'
                 ],
             ])
         ;

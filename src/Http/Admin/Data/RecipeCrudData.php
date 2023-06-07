@@ -8,6 +8,7 @@ use App\Domain\Category\Category;
 use App\Domain\Ingredient\Ingredient;
 use App\Domain\IngredientRecipe\IngredientRecipe;
 use App\Domain\Recipe\Recipe;
+use App\Domain\Step\Step;
 use App\Domain\Utensil\Utensil;
 use App\Http\Admin\Form\RecipeForm;
 use Doctrine\ORM\EntityManagerInterface;
@@ -43,6 +44,9 @@ class RecipeCrudData implements CrudDataInterface
     /** @var IngredientRecipe[] */
     public array $ingredients = [];
 
+    /** @var Step[] */
+    public array $steps = [];
+
     private EntityManagerInterface $em;
 
     public function __construct(private readonly Recipe $entity)
@@ -57,6 +61,7 @@ class RecipeCrudData implements CrudDataInterface
         $this->allergens = $entity->getAllergens()->toArray();
         $this->utensils = $entity->getUtensils()->toArray();
         $this->ingredients = $entity->getIngredients()->toArray();
+        $this->steps = $entity->getSteps()->toArray();
     }
 
     public function hydrate(): void
@@ -114,6 +119,22 @@ class RecipeCrudData implements CrudDataInterface
 
         foreach ($newIngredients as $newIngredient) {
             $this->entity->addIngredient($newIngredient->setRecipe($this->entity));
+        }
+
+        /** @var Step[] $oldSteps */
+        $oldSteps = $this->entity->getSteps()->toArray();
+        /** @var Step[] $newSteps */
+        $newSteps = [...$this->steps];
+
+        foreach ($oldSteps as $oldStep) {
+            if(!in_array($oldStep, $newSteps)) {
+                $this->em->remove($oldStep);
+            }
+        }
+
+        // TODO: fix step order when editing the order
+        foreach ($newSteps as $key => $newStep) {
+            $this->entity->addStep($newStep->setRecipe($this->entity)->setPosition($key + 1));
         }
     }
 
