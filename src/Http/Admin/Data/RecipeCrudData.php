@@ -107,12 +107,14 @@ class RecipeCrudData implements CrudDataInterface
         $newIngredients = $this->ingredients;
 
         foreach ($oldIngredients as $oldIngredient) {
-            $this->em->remove($oldIngredient);
+            if(!in_array($oldIngredient, $newIngredients)) {
+                $this->em->remove($oldIngredient);
+            }
         }
+
         foreach ($newIngredients as $newIngredient) {
             $this->entity->addIngredient($newIngredient->setRecipe($this->entity));
         }
-
     }
 
     public function getEntity(): Recipe
