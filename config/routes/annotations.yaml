@@ -6,9 +6,8 @@ api_controllers:
     resource: ../../src/Http/Api/Controller/
     name_prefix: api_
     type: attribute
-#admin_controllers:
-#  name_prefix: admin_
-#  prefix: '%admin_prefix%'
-#  resource: ../../src/Http/Admin/Controller/
-#  type: attribute
-#  type: attribute
+admin_controllers:
+    name_prefix: admin_
+    prefix: /admin
+    resource: ../../src/Http/Admin/Controller/
+    type: attribute

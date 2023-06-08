@@ -34,3 +34,4 @@ yarn-error.log
 ###< symfony/phpunit-bridge ###
 
 docker/db
+public/images

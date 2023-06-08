@@ -12,6 +12,15 @@
     }
 }
 
+%section-title,
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: space(.5);
+    margin-bottom: space(2);
+}
+
 %h1 {
     font-weight: 700;
     font-style: normal;

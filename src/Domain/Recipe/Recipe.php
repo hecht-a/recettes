@@ -8,6 +8,7 @@ use App\Domain\Category\Category;
 use App\Domain\IngredientRecipe\IngredientRecipe;
 use App\Domain\Step\Step;
 use App\Domain\Utensil\Utensil;
+use App\Infra\Interfaces\IdentifiableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -18,7 +19,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
-class Recipe
+#[Vich\Uploadable]
+class Recipe implements IdentifiableInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -35,21 +37,24 @@ class Recipe
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: false)]
     #[Assert\NotBlank]
-    #[Assert\DateTime]
     private \DateTimeImmutable $createdAt;
 
-    #[ORM\Column(type: Types::INTEGER, nullable: false)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: false)]
     #[Assert\NotBlank]
-    #[Assert\Positive]
-    private int $preparationTime;
+    private \DateTimeImmutable $updatedAt;
 
     #[ORM\Column(type: Types::INTEGER, nullable: false)]
     #[Assert\NotBlank]
     #[Assert\Positive]
-    private int $cookingTime;
+    private int $preparationTime = 0;
+
+    #[ORM\Column(type: Types::INTEGER, nullable: false)]
+    #[Assert\NotBlank]
+    #[Assert\Positive]
+    private int $cookingTime = 0;
 
     /** @var ArrayCollection<int, IngredientRecipe> */
-    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: IngredientRecipe::class)]
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: IngredientRecipe::class, cascade: ['persist', 'remove'])]
     private Collection $ingredients;
 
     /** @var ArrayCollection<int, Category> */
@@ -67,14 +72,14 @@ class Recipe
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'recipes')]
     private ?User $user;
 
-    #[Vich\UploadableField(mapping: 'utensil', fileNameProperty: 'imageName')]
+    #[Vich\UploadableField(mapping: 'recipe', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
     private ?string $imageName = null;
 
     /** @var ArrayCollection<int, Step> */
-    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class)]
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, cascade: ['persist', 'remove'])]
     private Collection $steps;
 
     #[ORM\Column(type: Types::STRING, length: 128, unique: true)]
@@ -84,6 +89,7 @@ class Recipe
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
         $this->ingredients = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->utensils = new ArrayCollection();
@@ -128,6 +134,18 @@ class Recipe
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): \DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
@@ -194,6 +212,7 @@ class Recipe
     {
         if (!$this->categories->contains($category)) {
             $this->categories[] = $category;
+            $category->addRecipe($this);
         }
 
         return $this;
@@ -203,6 +222,7 @@ class Recipe
     {
         if ($this->categories->contains($category)) {
             $this->categories->removeElement($category);
+            $category->removeRecipe($this);
         }
 
         return $this;
@@ -220,6 +240,7 @@ class Recipe
     {
         if (!$this->utensils->contains($utensil)) {
             $this->utensils[] = $utensil;
+            $utensil->addRecipe($this);
         }
 
         return $this;
@@ -229,6 +250,7 @@ class Recipe
     {
         if ($this->utensils->contains($utensil)) {
             $this->utensils->removeElement($utensil);
+            $utensil->removeRecipe($this);
         }
 
         return $this;
@@ -246,6 +268,7 @@ class Recipe
     {
         if (!$this->allergens->contains($allergen)) {
             $this->allergens[] = $allergen;
+            $allergen->addRecipe($this);
         }
 
         return $this;
@@ -255,6 +278,7 @@ class Recipe
     {
         if ($this->allergens->contains($allergen)) {
             $this->allergens->removeElement($allergen);
+            $allergen->removeRecipe($this);
         }
 
         return $this;
@@ -275,6 +299,10 @@ class Recipe
     public function setImageFile(?File $imageFile = null): self
     {
         $this->imageFile = $imageFile;
+
+        if ($imageFile !== null) {
+            $this->createdAt = new \DateTimeImmutable();
+        }
 
         return $this;
     }

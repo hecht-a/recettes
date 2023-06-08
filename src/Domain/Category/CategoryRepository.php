@@ -38,28 +38,31 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Unit[] Returns an array of Unit objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Category[]
+     */
+    public function searchByName(string $q): array
+    {
+        return $this->createQueryBuilder('t')
+            ->where('LOWER(t.name) LIKE :q')
+            ->orderBy('LENGTH(t.name)', 'ASC')
+            ->setMaxResults(3)
+            ->setParameter('q', strtolower($q).'%')
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?Unit
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * @param string[] $names
+     *
+     * @return Category[]
+     */
+    public function findByNames(array $names): array
+    {
+        return $this->createQueryBuilder('c')
+            ->where('LOWER(c.name) IN (:name)')
+            ->setParameter('name', array_map(fn (string $name) => strtolower($name), $names))
+            ->getQuery()
+            ->getResult();
+    }
 }

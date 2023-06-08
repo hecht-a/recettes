@@ -41,7 +41,8 @@ class RecipeRepository extends ServiceEntityRepository
 
     public function findAllQuery(): QueryBuilder
     {
-        $qb = $this->createQueryBuilder('r');
+        $qb = $this->createQueryBuilder('r')
+        ->orderBy('r.id');
 
         return $qb->select('r');
     }

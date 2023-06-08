@@ -1,0 +1,55 @@
+{{ form_start(form, {attr: {class: 'stacked'}}) }}
+
+<section class="stack-large">
+
+    <section>
+        <div class="section-title">
+            Informations générales
+        </div>
+        <div class="grid2">
+            {{ form_row(form.name) }}
+            {{ form_row(form.categories) }}
+            {{ form_row(form.allergens) }}
+            {{ form_row(form.utensils) }}
+            <div class="grid">
+                {{ form_row(form.preparationTime) }}
+                {{ form_row(form.cookingTime) }}
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-title">
+            Description
+        </div>
+        {{ form_row(form.description, {label: false}) }}
+    </section>
+
+    <section>
+        <div class="section-title">
+            Image
+        </div>
+        {{ form_row(form.imageFile, {label: false}) }}
+    </section>
+
+    <section class="ingredients" data-prototype="{{ form_widget(form.ingredients.vars.prototype)|e }}">
+        <div class="section-title">
+            Ingrédients
+        </div>
+        {{ form_row(form.ingredients, {label: false}) }}
+    </section>
+
+    <section class="steps" data-prototype="{{ form_widget(form.steps.vars.prototype)|e }}">
+        <div class="section-title">
+            Etapes
+        </div>
+        {{ form_row(form.steps, {label: false}) }}
+    </section>
+
+    <section>
+        <button type="submit" class="btn-gradient">Sauvegarder</button>
+    </section>
+
+</section>
+
+{{ form_end(form) }}

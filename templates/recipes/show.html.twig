@@ -1,4 +1,8 @@
-{% set image = "https://place-hold.it/400x250/0000FF/00000&text=" ~ recipe.name|replace({" ": "_"}) ~ "&fontsize=40" %}
+{% if recipe.imageName %}
+    {% set image = vich_uploader_asset(recipe) %}
+{% else %}
+    {% set image = "https://place-hold.it/400x250/0000FF/00000&text=" ~ recipe.name|replace({" ": "_"}) ~ "&fontsize=40" %}
+{% endif %}
 
 {% extends 'base.html.twig' %}
 

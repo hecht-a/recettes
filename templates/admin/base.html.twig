@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Administration{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/favicons/icon-72x72.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicons/icon-144x144.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/favicons/icon-152x152.png"/>
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicons/icon-96x96.png"/>
+    <link rel="icon" type="image/png" sizes="128x128" href="/favicons/icon-128x128.png"/>
+    <link rel="icon" type="image/png" sizes="196x196" href="/favicons/icon-196x196.png"/>
+    <link rel="icon" type="image/png" sizes="310x310" href="/favicons/icon-310x310.png"/>
+    <meta name="application-name" content="Recettes"/>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        {{ encore_entry_link_tags('admin') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        {{ encore_entry_script_tags('admin') }}
+    {% endblock %}
+</head>
+<body class="admin">
+<div class="dashboard-wrapper">
+    <aside class="dashboard-sidebar">
+        <div class="dashboard-sidebar__wrapper">
+            <ul class="dashboard-sidebar__main">
+                <li>
+                    <a href="">Accueil</a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_recipe_index') }}">Recettes</a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <aside class="dashboard-topbar">
+        <div class="dashboard-topbar__search">
+            {% if searchable is defined and searchable %}
+                <form>
+                    <input name="q" type="text" placeholder="Rechercher" value="{{ app.request.get('q') }}">
+                </form>
+            {% endif %}
+        </div>
+        <ul class="dashboard-topbar__nav">
+            <li class="header__logout">
+                <a href="/">
+                    <svg>
+                        <use href="/icons.svg#logout"></use>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </aside>
+    <main class="dashboard-body">
+        {{ include('partials/flash.html.twig') }}
+        {% block body %}{% endblock %}
+    </main>
+    <footer></footer>
+</div>
+</body>
+</html>
