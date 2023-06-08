@@ -33,10 +33,11 @@ class Ingredient
     #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: IngredientRecipe::class)]
     private Collection $recipes;
 
-    #[Orm\ManyToOne(targetEntity: Unit::class, inversedBy: 'ingredients')]
+    #[Orm\ManyToOne(targetEntity: Unit::class, inversedBy: 'ingredients', )]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Unit $unit;
 
-    #[Vich\UploadableField(mapping: 'utensil', fileNameProperty: 'imageName')]
+    #[Vich\UploadableField(mapping: 'ingredient', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]

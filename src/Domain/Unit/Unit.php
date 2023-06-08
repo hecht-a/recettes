@@ -3,14 +3,17 @@
 namespace App\Domain\Unit;
 
 use App\Domain\Ingredient\Ingredient;
+use App\Infra\Interfaces\IdentifiableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UnitRepository::class)]
-class Unit
+#[UniqueEntity(['label', 'shortLabel'])]
+class Unit implements IdentifiableInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,12 +22,10 @@ class Unit
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: false)]
     #[Assert\NotBlank]
-    #[Assert\Unique]
     private string $label;
 
     #[ORM\Column(type: Types::STRING, length: 3, nullable: false)]
     #[Assert\NotBlank]
-    #[Assert\Unique]
     private string $shortLabel;
 
     /** @var ArrayCollection<int, Ingredient> */
