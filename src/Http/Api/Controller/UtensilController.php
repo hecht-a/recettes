@@ -20,7 +20,7 @@ class UtensilController extends AbstractController
         }
         $utensils = $utensilRepository->searchByName($search);
 
-        return $this->json(array_map(fn(Utensil $utensil) => [
+        return $this->json(array_map(fn (Utensil $utensil) => [
             'name' => $utensil->getName(),
             'id' => $utensil->getId(),
         ], $utensils));

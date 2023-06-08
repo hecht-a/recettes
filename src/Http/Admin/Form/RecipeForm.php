@@ -8,7 +8,6 @@ use App\Http\Admin\Form\Field\CategoriesType;
 use App\Http\Admin\Form\Field\IngredientRecipeType;
 use App\Http\Admin\Form\Field\StepsType;
 use App\Http\Admin\Form\Field\UtensilsType;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -44,7 +43,7 @@ class RecipeForm extends AbstractType
                 'row_attr' => [
                     'label' => false,
                     'class' => 'ingredients',
-                    'is' => 'ingredients-wrapper'
+                    'is' => 'ingredients-wrapper',
                 ],
             ])
             ->add('steps', CollectionType::class, [
@@ -55,12 +54,12 @@ class RecipeForm extends AbstractType
                 'row_attr' => [
                     'label' => false,
                     'class' => 'steps',
-                    'is' => 'steps-wrapper'
+                    'is' => 'steps-wrapper',
                 ],
             ])
             ->add('imageFile', VichImageType::class, [
                 'allow_delete' => false,
-                'download_uri' => false
+                'download_uri' => false,
             ]);
     }
 

@@ -63,6 +63,7 @@ class AllergensType extends TextType implements DataTransformerInterface
 
     /**
      * @param ?string $value
+     *
      * @return Allergen[]
      */
     public function reverseTransform($value): array

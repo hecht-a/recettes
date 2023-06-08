@@ -39,7 +39,6 @@ class UtensilRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $q
      * @return Utensil[]
      */
     public function searchByName(string $q): array
@@ -48,20 +47,21 @@ class UtensilRepository extends ServiceEntityRepository
             ->where('LOWER(a.name) LIKE :q')
             ->orderBy('LENGTH(a.name)', 'ASC')
             ->setMaxResults(3)
-            ->setParameter('q', strtolower($q) . '%')
+            ->setParameter('q', strtolower($q).'%')
             ->getQuery()
             ->getResult();
     }
 
     /**
      * @param string[] $names
+     *
      * @return Utensil[]
      */
     public function findByNames(array $names): array
     {
         return $this->createQueryBuilder('a')
             ->where('LOWER(a.name) IN (:name)')
-            ->setParameter('name', array_map(fn(string $name) => strtolower($name), $names))
+            ->setParameter('name', array_map(fn (string $name) => strtolower($name), $names))
             ->getQuery()
             ->getResult();
     }

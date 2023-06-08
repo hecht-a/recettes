@@ -2,8 +2,6 @@
 
 namespace App\Http\Admin\Form\Field;
 
-use App\Domain\Allergen\Allergen;
-use App\Domain\Allergen\AllergenRepository;
 use App\Domain\Utensil\Utensil;
 use App\Domain\Utensil\UtensilRepository;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -65,6 +63,7 @@ class UtensilsType extends TextType implements DataTransformerInterface
 
     /**
      * @param ?string $value
+     *
      * @return Utensil[]
      */
     public function reverseTransform($value): array

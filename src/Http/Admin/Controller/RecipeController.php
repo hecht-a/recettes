@@ -33,7 +33,7 @@ class RecipeController extends AbstractController
             ->orderBy('row.createdAt', 'DESC');
 
         if ($request->get('q')) {
-            $query = $this->applySearch(trim((string)$request->get('q')), $query);
+            $query = $this->applySearch(trim((string) $request->get('q')), $query);
         }
 
         $rows = $this->paginator->paginate($query->getQuery());
@@ -60,7 +60,7 @@ class RecipeController extends AbstractController
             }
             $this->addFlash('success', [
                 'title' => 'Succès',
-                'description' => 'Le contenu a bien été créé'
+                'description' => 'Le contenu a bien été créé',
             ]);
 
             return $this->redirectAfterSave($entity);
@@ -68,7 +68,7 @@ class RecipeController extends AbstractController
 
         return $this->render("admin/{$this->templatePath}/new.html.twig", [
             'form' => $form->createView(),
-            'entity' => $entity
+            'entity' => $entity,
         ]);
     }
 
@@ -86,7 +86,7 @@ class RecipeController extends AbstractController
             }
             $this->addFlash('success', [
                 'title' => 'Succès',
-                'description' => 'Le contenu a bien été modifié'
+                'description' => 'Le contenu a bien été modifié',
             ]);
 
             return $this->redirectAfterSave($recipe);
@@ -94,7 +94,7 @@ class RecipeController extends AbstractController
 
         return $this->render("admin/{$this->templatePath}/edit.html.twig", [
             'form' => $form->createView(),
-            'entity' => $recipe
+            'entity' => $recipe,
         ]);
     }
 
@@ -108,9 +108,9 @@ class RecipeController extends AbstractController
         $this->em->flush();
         $this->addFlash('success', [
             'title' => 'Succès',
-            'description' => 'Le contenu a bien été supprimé'
+            'description' => 'Le contenu a bien été supprimé',
         ]);
 
-        return $this->redirectToRoute($this->routePrefix . '_index');
+        return $this->redirectToRoute($this->routePrefix.'_index');
     }
 }

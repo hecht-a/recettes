@@ -63,6 +63,7 @@ class CategoriesType extends TextType implements DataTransformerInterface
 
     /**
      * @param ?string $value
+     *
      * @return Category[]
      */
     public function reverseTransform($value): array

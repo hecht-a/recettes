@@ -39,7 +39,6 @@ class CategoryRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $q
      * @return Category[]
      */
     public function searchByName(string $q): array
@@ -55,6 +54,7 @@ class CategoryRepository extends ServiceEntityRepository
 
     /**
      * @param string[] $names
+     *
      * @return Category[]
      */
     public function findByNames(array $names): array

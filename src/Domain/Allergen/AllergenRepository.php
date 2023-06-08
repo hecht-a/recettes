@@ -39,7 +39,6 @@ class AllergenRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $q
      * @return Allergen[]
      */
     public function searchByName(string $q): array
@@ -55,6 +54,7 @@ class AllergenRepository extends ServiceEntityRepository
 
     /**
      * @param string[] $names
+     *
      * @return Allergen[]
      */
     public function findByNames(array $names): array
