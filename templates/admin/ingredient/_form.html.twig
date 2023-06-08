@@ -1,0 +1,35 @@
+{{ form_start(form, {attr: {class: 'stacked'}}) }}
+
+<section class="stack-large">
+
+    <section>
+        <div class="section-title">
+            Informations générales
+        </div>
+        <div class="grid">
+            {{ form_row(form.name) }}
+            {{ form_row(form.unit) }}
+        </div>
+    </section>
+
+    <section>
+        <div class="section-title">
+            Description
+        </div>
+        {{ form_row(form.description, {label: false}) }}
+    </section>
+
+    <section>
+        <div class="section-title">
+            Image
+        </div>
+        {{ form_row(form.imageFile, {label: false}) }}
+    </section>
+
+    <section>
+        <button type="submit" class="btn-gradient">Sauvegarder</button>
+    </section>
+
+</section>
+
+{{ form_end(form) }}

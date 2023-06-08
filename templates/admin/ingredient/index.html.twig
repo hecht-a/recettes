@@ -1,0 +1,54 @@
+{% extends 'admin/card.html.twig' %}
+
+{% block title %}
+    Gestion des ingrédients
+{% endblock %}
+
+{% block actions %}
+    <a href="{{ path(prefix ~ '_new') }}" class="btn-primary">Ajouter un ingrédient</a>
+{% endblock %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Nom</th>
+            <th>Unité</th>
+            <th class="text-right">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in rows %}
+            {% set link = path(prefix ~ '_edit', {id: row.id}) %}
+            <tr>
+                <td>
+                    <a href="{{ link }}">{{ row.id }}</a>
+                </td>
+                <td>
+                    <a href="{{ link }}">{{ row.name }}</a>
+                </td>
+                <td>
+                    {{ row.unit ? row.unit.label ~ " (" ~ row.unit.shortLabel ~ ")" }}
+                </td>
+                <td>
+                    <div class="dashboard-actions">
+                        <a href="{{ link }}">
+                            <svg class="icon icon-edit">
+                                <use href="/icons.svg#edit"></use>
+                            </svg>
+                        </a>
+                        <a href="{{ path(prefix ~ '_delete', {id: row.id}) }}">
+                            <svg class="icon icon-delete">
+                                <use href="/icons.svg#delete"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ paginate(rows) }}
+{% endblock %}

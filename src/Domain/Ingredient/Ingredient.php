@@ -4,16 +4,20 @@ namespace App\Domain\Ingredient;
 
 use App\Domain\IngredientRecipe\IngredientRecipe;
 use App\Domain\Unit\Unit;
+use App\Infra\Interfaces\IdentifiableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
-class Ingredient
+#[UniqueEntity(fields: ['name'])]
+#[Vich\Uploadable]
+class Ingredient implements IdentifiableInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -22,7 +26,6 @@ class Ingredient
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: false)]
     #[Assert\NotBlank]
-    #[Assert\Unique]
     private string $name;
 
     #[ORM\Column(type: Types::TEXT, nullable: false)]
