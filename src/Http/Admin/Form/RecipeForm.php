@@ -58,8 +58,10 @@ class RecipeForm extends AbstractType
                     'is' => 'steps-wrapper'
                 ],
             ])
-            ->add('image', VichImageType::class)
-        ;
+            ->add('imageFile', VichImageType::class, [
+                'allow_delete' => false,
+                'download_uri' => false
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

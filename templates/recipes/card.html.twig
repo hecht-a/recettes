@@ -1,4 +1,8 @@
-{% set image = "https://place-hold.it/400x250/0000FF/00000&text=" ~ recipe.name|replace({" ": "_"}) ~ "&fontsize=40" %}
+{% if recipe.imageName %}
+    {% set image = vich_uploader_asset(recipe) %}
+{% else %}
+    {% set image = "https://place-hold.it/400x250/0000FF/00000&text=" ~ recipe.name|replace({" ": "_"}) ~ "&fontsize=40" %}
+{% endif %}
 
 <article class="card">
     <div class="card-image">
@@ -7,7 +11,8 @@
     <div class="card-content">
         <div class="card-body">
             <h2 class="card-title">
-                <a href="{{ path('recipes_show', {'id': recipe.id, 'slug': recipe.slug}) }}" class="card-link">{{ recipe.name }}</a>
+                <a href="{{ path('recipes_show', {'id': recipe.id, 'slug': recipe.slug}) }}"
+                   class="card-link">{{ recipe.name }}</a>
             </h2>
             <div class="card-description">{{ recipe.description | excerpt(100) }}</div>
         </div>

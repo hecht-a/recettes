@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
+#[Vich\Uploadable]
 class Recipe
 {
     #[ORM\Id]
@@ -35,8 +36,11 @@ class Recipe
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: false)]
     #[Assert\NotBlank]
-    #[Assert\DateTime]
     private \DateTimeImmutable $createdAt;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    #[Assert\NotBlank]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(type: Types::INTEGER, nullable: false)]
     #[Assert\NotBlank]
@@ -84,6 +88,7 @@ class Recipe
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
         $this->ingredients = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->utensils = new ArrayCollection();
@@ -128,6 +133,18 @@ class Recipe
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): \DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
@@ -283,8 +300,6 @@ class Recipe
         $this->imageFile = $imageFile;
 
         if ($imageFile !== null) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
             $this->createdAt = new \DateTimeImmutable();
         }
 
