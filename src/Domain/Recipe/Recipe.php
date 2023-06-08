@@ -8,6 +8,7 @@ use App\Domain\Category\Category;
 use App\Domain\IngredientRecipe\IngredientRecipe;
 use App\Domain\Step\Step;
 use App\Domain\Utensil\Utensil;
+use App\Infra\Interfaces\IdentifiableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -19,7 +20,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 #[Vich\Uploadable]
-class Recipe
+class Recipe implements IdentifiableInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -28,19 +29,19 @@ class Recipe
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: false)]
     #[Assert\NotBlank]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\Column(type: Types::TEXT, nullable: false)]
     #[Assert\NotBlank]
-    private ?string $description = null;
+    private string $description;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: false)]
     #[Assert\NotBlank]
     private \DateTimeImmutable $createdAt;
 
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: false)]
     #[Assert\NotBlank]
-    private ?\DateTimeImmutable $updatedAt = null;
+    private \DateTimeImmutable $updatedAt;
 
     #[ORM\Column(type: Types::INTEGER, nullable: false)]
     #[Assert\NotBlank]

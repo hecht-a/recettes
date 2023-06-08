@@ -5,21 +5,23 @@ namespace App\Http\Admin\Controller;
 use App\Domain\Auth\User;
 use App\Domain\Recipe\Recipe;
 use App\Helper\Paginator\PaginatorInterface;
+use App\Infra\Interfaces\IdentifiableInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * @method User|null getUser()
+ * @method User getUser()
+ *
+ * @template E of object implementing IdentifiableInterface
  */
 class AbstractController extends \App\Http\Controller\AbstractController
 {
     protected bool $indexOnSave = false;
 
-    protected string $routePrefix = "";
+    protected string $routePrefix = '';
 
     /**
      * @var class-string<E>
@@ -41,7 +43,7 @@ class AbstractController extends \App\Http\Controller\AbstractController
      */
     public function getRepository(): EntityRepository
     {
-        return $this->em->getRepository($this->entity); /* @phpstan-ignore-line */
+        return $this->em->getRepository($this->entity);
     }
 
     protected function applySearch(string $search, QueryBuilder $query): QueryBuilder
@@ -51,12 +53,15 @@ class AbstractController extends \App\Http\Controller\AbstractController
             ->setParameter('search', '%'.strtolower($search).'%');
     }
 
-    protected function redirectAfterSave($entity): RedirectResponse
+    /**
+     * @param E&IdentifiableInterface $entity
+     */
+    protected function redirectAfterSave(object $entity): RedirectResponse
     {
         if ($this->indexOnSave) {
-            return $this->redirectToRoute($this->routePrefix . '_index');
+            return $this->redirectToRoute($this->routePrefix.'_index');
         }
 
-        return $this->redirectToRoute($this->routePrefix . '_edit', ['id' => $entity->getId()]);
+        return $this->redirectToRoute($this->routePrefix.'_edit', ['id' => $entity->getId()]);
     }
 }
