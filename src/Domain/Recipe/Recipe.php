@@ -53,7 +53,7 @@ class Recipe
     private int $cookingTime = 0;
 
     /** @var ArrayCollection<int, IngredientRecipe> */
-    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: IngredientRecipe::class, cascade: ['persist'])]
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: IngredientRecipe::class, cascade: ['persist', 'remove'])]
     private Collection $ingredients;
 
     /** @var ArrayCollection<int, Category> */
@@ -78,7 +78,7 @@ class Recipe
     private ?string $imageName = null;
 
     /** @var ArrayCollection<int, Step> */
-    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, cascade: ['persist'])]
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, cascade: ['persist', 'remove'])]
     private Collection $steps;
 
     #[ORM\Column(type: Types::STRING, length: 128, unique: true)]

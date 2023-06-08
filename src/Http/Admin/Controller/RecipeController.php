@@ -16,6 +16,15 @@ class RecipeController extends AbstractController
     protected string $templatePath = 'recipe';
     protected string $routePrefix = 'admin_recipe';
 
+    /** @var array{'update': ?string, 'delete': ?string, 'create': ?string} */
+    private array $events = [
+        'update' => null,
+        'delete' => null,
+        'create' => null,
+    ];
+
+    private string $formClass = RecipeForm::class;
+
     #[Route(path: '/', name: 'index')]
     public function index(Request $request): Response
     {
@@ -87,5 +96,21 @@ class RecipeController extends AbstractController
             'form' => $form->createView(),
             'entity' => $recipe
         ]);
+    }
+
+    #[Route(path: '/delete/{id<\d+>}', name: 'delete', methods: ['GET'])]
+    public function delete(Recipe $recipe): RedirectResponse
+    {
+        $this->em->remove($recipe);
+        if ($this->events['delete'] ?? null) {
+            $this->dispatcher->dispatch(new $this->events['delete']($recipe));
+        }
+        $this->em->flush();
+        $this->addFlash('success', [
+            'title' => 'Succès',
+            'description' => 'Le contenu a bien été supprimé'
+        ]);
+
+        return $this->redirectToRoute($this->routePrefix . '_index');
     }
 }
