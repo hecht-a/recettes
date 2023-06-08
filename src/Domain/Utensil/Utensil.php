@@ -3,6 +3,7 @@
 namespace App\Domain\Utensil;
 
 use App\Domain\Recipe\Recipe;
+use App\Infra\Interfaces\IdentifiableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -12,7 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: UtensilRepository::class)]
-class Utensil
+#[ORM\UniqueConstraint(fields: ['name'])]
+#[Vich\Uploadable]
+class Utensil implements IdentifiableInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,7 +24,6 @@ class Utensil
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: false)]
     #[Assert\NotBlank]
-    #[Assert\Unique]
     private string $name;
 
     #[ORM\Column(type: Types::TEXT, nullable: false)]

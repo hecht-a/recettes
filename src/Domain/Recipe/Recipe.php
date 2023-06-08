@@ -186,6 +186,7 @@ class Recipe implements IdentifiableInterface
     {
         if (!$this->ingredients->contains($ingredient)) {
             $this->ingredients[] = $ingredient;
+            $ingredient->setRecipe($this);
         }
 
         return $this;
