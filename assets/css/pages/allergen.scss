@@ -1,0 +1,7 @@
+.container.allergen {
+
+}
+
+.container.allergen .allergens-header {
+    @extend %hero-title;
+}

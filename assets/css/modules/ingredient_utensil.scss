@@ -8,6 +8,6 @@
     list-style-type: disc;
 }
 
-.allergen {
+.allergen:not(.container) {
     display: inline-block;
 }
