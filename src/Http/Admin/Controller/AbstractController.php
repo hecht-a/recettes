@@ -30,6 +30,8 @@ class AbstractController extends \App\Http\Controller\AbstractController
 
     protected string $searchField = 'name';
 
+    protected string $menuItem = '';
+
     public function __construct(
         EntityManagerInterface $em,
         protected PaginatorInterface $paginator,

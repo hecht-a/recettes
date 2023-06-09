@@ -13,8 +13,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class AllergenController extends AbstractController
 {
     protected string $entity = Allergen::class;
+
     protected string $templatePath = 'allergen';
+
     protected string $routePrefix = 'admin_allergen';
+
+    protected string $menuItem = 'allergen';
 
     /** @var array{'update': ?string, 'delete': ?string, 'create': ?string} */
     private array $events = [
@@ -43,6 +47,7 @@ class AllergenController extends AbstractController
             'rows' => $rows,
             'searchable' => true,
             'prefix' => $this->routePrefix,
+            'menuItem' => $this->menuItem,
         ]);
     }
 
@@ -70,6 +75,7 @@ class AllergenController extends AbstractController
         return $this->render("admin/{$this->templatePath}/new.html.twig", [
             'form' => $form->createView(),
             'entity' => $entity,
+            'menuItem' => $this->menuItem,
         ]);
     }
 
@@ -95,6 +101,7 @@ class AllergenController extends AbstractController
         return $this->render("admin/{$this->templatePath}/edit.html.twig", [
             'form' => $form->createView(),
             'entity' => $allergen,
+            'menuItem' => $this->menuItem,
         ]);
     }
 

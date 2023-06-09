@@ -13,8 +13,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class IngredientController extends AbstractController
 {
     protected string $entity = Ingredient::class;
+
     protected string $templatePath = 'ingredient';
+
     protected string $routePrefix = 'admin_ingredient';
+
+    protected string $menuItem = 'ingredient';
 
     /** @var array{'update': ?string, 'delete': ?string, 'create': ?string} */
     private array $events = [
@@ -41,6 +45,7 @@ class IngredientController extends AbstractController
             'rows' => $rows,
             'searchable' => true,
             'prefix' => $this->routePrefix,
+            'menuItem' => $this->menuItem,
         ]);
     }
 
@@ -68,6 +73,7 @@ class IngredientController extends AbstractController
         return $this->render("admin/{$this->templatePath}/new.html.twig", [
             'form' => $form->createView(),
             'entity' => $entity,
+            'menuItem' => $this->menuItem,
         ]);
     }
 
@@ -93,6 +99,7 @@ class IngredientController extends AbstractController
         return $this->render("admin/{$this->templatePath}/edit.html.twig", [
             'form' => $form->createView(),
             'entity' => $ingredient,
+            'menuItem' => $this->menuItem,
         ]);
     }
 

@@ -31,13 +31,20 @@
     display: flex;
     align-items: center;
     padding: space(1) 0;
+    gap: space(1);
+    line-height: 2;
 
     &[aria-current] {
-        border-left: 3px solid var(--dark-main);
-        background: var(--light-main);
+        border-left: 3px solid var(--secondary);
+        background: var(--white-green);
         margin:0 space(-3);
         padding-left: space(3);
-        color: var(--contrast);
+        color: var(--secondary);
+    }
+
+    svg {
+        width: 16px;
+        height: 16px;
     }
 }
 

@@ -31,19 +31,44 @@
                     <a href="">Accueil</a>
                 </li>
                 <li>
-                    <a href="{{ path('admin_recipe_index') }}">Recettes</a>
+                    <a href="{{ path('admin_recipe_index') }}" {{ is_active('recipe') }}>
+                        <svg>
+                            <use href="/icons.svg#toque"></use>
+                        </svg>
+                        Recettes
+                    </a>
                 </li>
                 <li>
-                    <a href="{{ path('admin_unit_index') }}">Unités</a>
+                    <a href="{{ path('admin_unit_index') }}" {{ is_active('unit') }}>
+                        <svg>
+                            <use href="/icons.svg#rule"></use>
+                        </svg>
+                        Unités
+                    </a>
                 </li>
                 <li>
-                    <a href="{{ path('admin_ingredient_index') }}">Ingrédients</a>
+                    <a href="{{ path('admin_ingredient_index') }}" {{ is_active('ingredient') }}>
+                        <svg>
+                            <use href="/icons.svg#carrot"></use>
+                        </svg>
+                        Ingrédients
+                    </a>
                 </li>
                 <li>
-                    <a href="{{ path('admin_utensil_index') }}">Ustensiles</a>
+                    <a href="{{ path('admin_utensil_index') }}" {{ is_active('utensil') }}>
+                        <svg>
+                            <use href="/icons.svg#shovel"></use>
+                        </svg>
+                        Ustensiles
+                    </a>
                 </li>
                 <li>
-                    <a href="{{ path('admin_allergen_index') }}">Allergènes</a>
+                    <a href="{{ path('admin_allergen_index') }}" {{ is_active('allergen') }}>
+                        <svg>
+                            <use href="/icons.svg#virus"></use>
+                        </svg>
+                        Allergènes
+                    </a>
                 </li>
             </ul>
         </div>

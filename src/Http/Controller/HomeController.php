@@ -27,6 +27,7 @@ class HomeController extends AbstractController
         return $this->render('pages/home.html.twig', [
             'recipes' => $recipes,
             'page' => $page,
+            'menuItem' => 'home',
         ]);
     }
 }

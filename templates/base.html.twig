@@ -30,7 +30,7 @@
                 </svg>
             </li>
             <li>
-                <a href="{{ path('home') }}">
+                <a href="{{ path('home') }}" {{ is_active('home') }}>
                     <svg>
                         <use href="/icons.svg#home"></use>
                     </svg>
@@ -41,7 +41,7 @@
                 <li>
                     <a href="{{ path('admin_recipe_index') }}">
                         <svg>
-                            <use href="/icons.svg#home"></use>
+                            <use href="/icons.svg#settings"></use>
                         </svg>
                         Admin
                     </a>

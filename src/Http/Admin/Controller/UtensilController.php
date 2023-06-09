@@ -13,8 +13,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class UtensilController extends AbstractController
 {
     protected string $entity = Utensil::class;
+
     protected string $templatePath = 'utensil';
+
     protected string $routePrefix = 'admin_utensil';
+
+    protected string $menuItem = 'utensil';
 
     /** @var array{'update': ?string, 'delete': ?string, 'create': ?string} */
     private array $events = [
@@ -41,6 +45,7 @@ class UtensilController extends AbstractController
             'rows' => $rows,
             'searchable' => true,
             'prefix' => $this->routePrefix,
+            'menuItem' => $this->menuItem,
         ]);
     }
 
@@ -68,6 +73,7 @@ class UtensilController extends AbstractController
         return $this->render("admin/{$this->templatePath}/new.html.twig", [
             'form' => $form->createView(),
             'entity' => $entity,
+            'menuItem' => $this->menuItem,
         ]);
     }
 
@@ -93,6 +99,7 @@ class UtensilController extends AbstractController
         return $this->render("admin/{$this->templatePath}/edit.html.twig", [
             'form' => $form->createView(),
             'entity' => $utensil,
+            'menuItem' => $this->menuItem,
         ]);
     }
 
