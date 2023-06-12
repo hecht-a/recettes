@@ -37,6 +37,14 @@
                     Accueil
                 </a>
             </li>
+            <li>
+                <a href="{{ path('allergen_index') }}" {{ is_active('allergen') }}>
+                    <svg>
+                        <use href="/icons.svg#virus"></use>
+                    </svg>
+                    Allergènes
+                </a>
+            </li>
             {% if is_granted('ROLE_ADMIN') %}
                 <li>
                     <a href="{{ path('admin_recipe_index') }}">

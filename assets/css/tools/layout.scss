@@ -26,6 +26,8 @@
 
 %container,
 .container {
+    @include margin(3, ['bottom']);
+
     box-sizing: border-box;
     width: 100%;
     padding-left: calc(50% - var(--container-width) / 2);

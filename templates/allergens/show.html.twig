@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title "Allergènes : " ~ allergen.name %}
+
+{% block body %}
+    <div class="container allergen-show">
+        <h1 class="allergen-title">{{ allergen.name }}</h1>
+        <div class="allergen-recipes">
+
+            <p class="muted">
+                Recettes: {% if allergen.recipes | length > 0 %}
+                    {{ allergen.recipes
+                    | map(recipe => "<a href='" ~ path('recipes_show', {slug: recipe.slug, id: recipe.id}) ~"'>"~ recipe.name ~"</a>")
+                    | join(', ')
+                    | raw }}
+
+                {% else %}
+                    pas de recettes contenant cet allergène
+                {% endif %}
+            </p>
+
+        </div>
+
+        <div class="allergen-description">
+            {{ allergen.description }}
+        </div>
+
+
+    </div>
+{% endblock %}

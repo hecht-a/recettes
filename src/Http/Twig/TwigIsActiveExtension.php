@@ -19,7 +19,6 @@ class TwigIsActiveExtension extends AbstractExtension
      */
     public function isActive(array $context, string $page): string
     {
-        dump($context);
         if (($context['menuItem'] ?? null) === $page) {
             return ' aria-current="page"';
         }

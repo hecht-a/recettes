@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="allergen container">
+        <div class="allergens-header">
+            <h1>Allergènes</h1>
+        </div>
+        <div class="allergen-wrapper">
+            <allergen-letters class="allergen-letters">
+                {% for letter in letters %}
+                    <a class="allergen-letter center" href="#letter-{{ letter | lower }}">
+                        {{ letter }}
+                    </a>
+                {% endfor %}
+            </allergen-letters>
+            <div class="container mx6">
+                {% for letter, allergens in allergensByLetters %}
+                    <section class="allergen-section" id="letter-{{ letter }}">
+                        <h2 class="allergen-lettering h1">{{ letter }}</h2>
+                        <ul class="allergen-words card mt2">
+                            {% for allergen in allergens %}
+                                <li class="allergen-word">
+                                    <a href="{{ path('allergen_show', {'id': allergen.id, 'slug': allergen.slug}) }}">
+                                        <span class="allergen-word__name">
+                                            {{ allergen.name }}
+                                        </span>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

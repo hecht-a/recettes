@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -31,6 +32,10 @@ class Allergen implements IdentifiableInterface
     /** @var ArrayCollection<int, Recipe> */
     #[ORM\ManyToMany(targetEntity: Recipe::class, inversedBy: 'allergens')]
     private Collection $recipes;
+
+    #[ORM\Column(type: Types::STRING, length: 128, unique: true)]
+    #[Gedmo\Slug(fields: ['name'])]
+    private string $slug;
 
     public function __construct()
     {
@@ -90,5 +95,10 @@ class Allergen implements IdentifiableInterface
         }
 
         return $this;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
     }
 }
