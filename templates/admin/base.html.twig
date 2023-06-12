@@ -39,6 +39,14 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ path('admin_category_index') }}" {{ is_active('category') }}>
+                        <svg>
+                            <use href="/icons.svg#category"></use>
+                        </svg>
+                        Catégories
+                    </a>
+                </li>
+                <li>
                     <a href="{{ path('admin_unit_index') }}" {{ is_active('unit') }}>
                         <svg>
                             <use href="/icons.svg#rule"></use>
