@@ -51,9 +51,17 @@ class Ingredient implements IdentifiableInterface
     #[Gedmo\Slug(fields: ['name'])]
     private string $slug;
 
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private \DateTimeImmutable $createdAt;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private \DateTimeImmutable $updatedAt;
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -61,7 +69,7 @@ class Ingredient implements IdentifiableInterface
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -127,6 +135,10 @@ class Ingredient implements IdentifiableInterface
     {
         $this->imageFile = $imageFile;
 
+        if ($imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+
         return $this;
     }
 
@@ -150,5 +162,29 @@ class Ingredient implements IdentifiableInterface
     public function getSlug(): string
     {
         return $this->slug;
+    }
+
+    public function getCreatedAt(): \DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): Ingredient
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): \DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): Ingredient
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

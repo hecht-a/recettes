@@ -302,7 +302,7 @@ class Recipe implements IdentifiableInterface
         $this->imageFile = $imageFile;
 
         if ($imageFile !== null) {
-            $this->createdAt = new \DateTimeImmutable();
+            $this->updatedAt = new \DateTimeImmutable();
         }
 
         return $this;

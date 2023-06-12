@@ -37,6 +37,7 @@ class IngredientRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
     /**
      * @return array<string, Ingredient[]>
      */
