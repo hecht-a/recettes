@@ -1,6 +1,6 @@
 import {debounce} from "../functions/debouce";
 
-export class AllergenLetters extends HTMLElement {
+export class GlossaryLetters extends HTMLElement {
   private links: HTMLAnchorElement[] = [];
   private sectionToAnchor: Map<any, HTMLAnchorElement> = new Map();
   constructor () {

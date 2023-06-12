@@ -65,4 +65,20 @@ class UtensilRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @return array<string, Utensil[]>
+     */
+    public function findUtensilsByLetters(): array
+    {
+        $words = $this->createQueryBuilder('u')
+            ->orderBy('u.name')
+            ->getQuery()
+            ->getResult();
+
+        return collect($words)
+            ->sortBy(fn (Utensil $item) => strtolower($item->getName()))
+            ->groupBy(fn (Utensil $item) => strtolower($item->getName()[0]))
+            ->toArray();
+    }
 }

@@ -33,7 +33,6 @@
 @import 'pages/home';
 @import 'pages/recipe';
 @import 'pages/auth';
-@import 'pages/allergen';
 
 @import 'modules/header';
 @import 'modules/card';
@@ -46,6 +45,7 @@
 @import 'modules/select';
 @import 'modules/btn';
 @import 'modules/icon';
+@import 'modules/glossary';
 
 * {
     font-family: Inter, Regular, sans-serif;

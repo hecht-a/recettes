@@ -1,25 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title "Allergènes : " ~ allergen.name %}
+{% block title "Allergènes : " ~ utensil.name %}
 
 {% block body %}
     <div class="container glossary-show">
-        <h1 class="glossary-title">{{ allergen.name }}</h1>
+        <h1 class="glossary-title">{{ utensil.name }}</h1>
+        <div class="glossary-image">
+            <img src="{{ vich_uploader_asset(utensil) }}" alt="{{ utensil.name }}">
+        </div>
         <div class="glossary-recipes">
             <p class="muted">
-                Recettes: {% if allergen.recipes | length > 0 %}
-                    {{ allergen.recipes
+                Recettes: {% if utensil.recipes | length > 0 %}
+                    {{ utensil.recipes
                     | map(recipe => "<a href='" ~ path('recipes_show', {slug: recipe.slug, id: recipe.id}) ~"'>"~ recipe.name ~"</a>")
                     | join(', ')
                     | raw }}
 
                 {% else %}
-                    pas de recettes contenant cet allergène
+                    pas de recettes contenant cet ustensile
                 {% endif %}
             </p>
         </div>
         <div class="glossary-description">
-            {{ allergen.description }}
+            {{ utensil.description }}
         </div>
     </div>
 {% endblock %}
