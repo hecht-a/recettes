@@ -3,6 +3,7 @@
 namespace App\Domain\Category;
 
 use App\Domain\Recipe\Recipe;
+use App\Infra\Interfaces\IdentifiableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[UniqueEntity(fields: ['name'])]
-class Category
+class Category implements IdentifiableInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

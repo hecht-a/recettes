@@ -3,7 +3,6 @@
 namespace App\Http\Admin\Form;
 
 use App\Domain\Category\Category;
-use App\Domain\Unit\Unit;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;

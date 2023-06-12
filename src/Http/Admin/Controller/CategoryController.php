@@ -3,9 +3,7 @@
 namespace App\Http\Admin\Controller;
 
 use App\Domain\Category\Category;
-use App\Domain\Ingredient\Ingredient;
 use App\Http\Admin\Form\CategoryForm;
-use App\Http\Admin\Form\IngredientForm;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
