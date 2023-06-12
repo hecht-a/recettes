@@ -65,4 +65,19 @@ class AllergenRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllergensByLetters(): array
+    {
+        $dto = AllergenDto::class;
+        $words = $this->createQueryBuilder('a')
+            ->distinct()
+            ->select("NEW {$dto}(a.id, a.name, a.description, a.slug)")
+            ->orderBy('a.name')
+            ->getQuery()
+            ->getResult();
+
+        return collect($words)
+            ->groupBy(fn (AllergenDto $item) => strtolower($item->name[0]))
+            ->toArray();
+    }
 }

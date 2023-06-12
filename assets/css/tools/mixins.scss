@@ -15,7 +15,6 @@
 }
 
 @mixin margin($multiplier, $positions: []) {
-    margin-bottom: space($multiplier);
     @if list.length($positions) > 0 {
         @each $position in $positions {
             margin-#{$position}: space($multiplier);
@@ -27,4 +26,22 @@
 
 .mb1 {
     @include margin(1, ['bottom']);
+}
+
+.mx6 {
+    @include margin(6, ['right', 'left'])
+}
+
+@mixin padding($multiplier, $positions: []) {
+    @if list.length($positions) > 0 {
+        @each $position in $positions {
+            padding-#{$position}: space($multiplier);
+        }
+    } @else {
+        padding: space($multiplier);
+    }
+}
+
+.pl6 {
+    @include padding(6, ['left'])
 }
