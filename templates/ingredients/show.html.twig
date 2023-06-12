@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title "Allergènes : " ~ ingredient.name %}
+
+{% block body %}
+    <div class="container glossary-show">
+        <h1 class="glossary-title">{{ ingredient.name }}</h1>
+        <div class="glossary-image">
+            <img src="{{ vich_uploader_asset(ingredient) }}" alt="{{ ingredient.name }}">
+        </div>
+        <div class="glossary-recipes">
+            <p class="muted">
+                Recettes: {% if ingredient.recipes | length > 0 %}
+                    {{ ingredient.recipes
+                    | map(recipe => "<a href='" ~ path('recipes_show', {slug: recipe.recipe.slug, id: recipe.recipe.id}) ~"'>"~ recipe.recipe.name ~"</a>")
+                    | join(', ')
+                    | raw }}
+
+                {% else %}
+                    pas de recettes contenant cet ustensile
+                {% endif %}
+            </p>
+        </div>
+        <div class="glossary-description">
+            {{ ingredient.description }}
+        </div>
+    </div>
+{% endblock %}

@@ -53,6 +53,14 @@
                     Ustensiles
                 </a>
             </li>
+            <li>
+                <a href="{{ path('ingredient_index') }}" {{ is_active('ingredient') }}>
+                    <svg>
+                        <use href="/icons.svg#carrot"></use>
+                    </svg>
+                    Ingrédients
+                </a>
+            </li>
             {% if is_granted('ROLE_ADMIN') %}
                 <li>
                     <a href="{{ path('admin_recipe_index') }}">

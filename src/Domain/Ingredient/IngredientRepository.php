@@ -37,29 +37,19 @@ class IngredientRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    /**
+     * @return array<string, Ingredient[]>
+     */
+    public function findIngredientsByLetters(): array
+    {
+        $words = $this->createQueryBuilder('i')
+            ->orderBy('i.name')
+            ->getQuery()
+            ->getResult();
 
-//    /**
-//     * @return Recipe[] Returns an array of Recipe objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Recipe
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        return collect($words)
+            ->sortBy(fn (Ingredient $item) => strtolower($item->getName()))
+            ->groupBy(fn (Ingredient $item) => strtolower($item->getName()[0]))
+            ->toArray();
+    }
 }

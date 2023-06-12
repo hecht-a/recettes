@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="glossary container">
+        <div class="glossary-header">
+            <h1>Ingrédients</h1>
+        </div>
+        <div class="glossary-wrapper">
+            <glossary-letters class="glossary-letters">
+                {% for letter in letters %}
+                    <a class="glossary-letter center" href="#letter-{{ letter | lower }}">
+                        {{ letter }}
+                    </a>
+                {% endfor %}
+            </glossary-letters>
+            <div class="container mx6">
+                {% for letter, ingredients in ingredientsByLetters %}
+                    <section class="glossary-section" id="letter-{{ letter }}">
+                        <h2 class="glossary-lettering h1">{{ letter }}</h2>
+                        <ul class="glossary-words card mt2">
+                            {% for ingredient in ingredients %}
+                                <li class="glossary-word">
+                                    <a href="{{ path('ingredient_show', {'id': ingredient.id, 'slug': ingredient.slug}) }}">
+                                        <span class="glossary-word__name">
+                                            {{ ingredient.name }}
+                                        </span>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
