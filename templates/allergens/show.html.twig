@@ -3,10 +3,9 @@
 {% block title "Allergènes : " ~ allergen.name %}
 
 {% block body %}
-    <div class="container allergen-show">
-        <h1 class="allergen-title">{{ allergen.name }}</h1>
-        <div class="allergen-recipes">
-
+    <div class="container glossary-show">
+        <h1 class="glossary-title">{{ allergen.name }}</h1>
+        <div class="glossary-recipes">
             <p class="muted">
                 Recettes: {% if allergen.recipes | length > 0 %}
                     {{ allergen.recipes
@@ -18,13 +17,9 @@
                     pas de recettes contenant cet allergène
                 {% endif %}
             </p>
-
         </div>
-
-        <div class="allergen-description">
+        <div class="glossary-description">
             {{ allergen.description }}
         </div>
-
-
     </div>
 {% endblock %}

@@ -1,27 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="allergen container">
-        <div class="allergens-header">
+    <div class="glossary container">
+        <div class="glossary-header">
             <h1>Allergènes</h1>
         </div>
-        <div class="allergen-wrapper">
-            <allergen-letters class="allergen-letters">
+        <div class="glossary-wrapper">
+            <glossary-letters class="glossary-letters">
                 {% for letter in letters %}
-                    <a class="allergen-letter center" href="#letter-{{ letter | lower }}">
+                    <a class="glossary-letter center" href="#letter-{{ letter | lower }}">
                         {{ letter }}
                     </a>
                 {% endfor %}
-            </allergen-letters>
+            </glossary-letters>
             <div class="container mx6">
                 {% for letter, allergens in allergensByLetters %}
-                    <section class="allergen-section" id="letter-{{ letter }}">
-                        <h2 class="allergen-lettering h1">{{ letter }}</h2>
-                        <ul class="allergen-words card mt2">
+                    <section class="glossary-section" id="letter-{{ letter }}">
+                        <h2 class="glossary-lettering h1">{{ letter }}</h2>
+                        <ul class="glossary-words card mt2">
                             {% for allergen in allergens %}
-                                <li class="allergen-word">
+                                <li class="glossary-word">
                                     <a href="{{ path('allergen_show', {'id': allergen.id, 'slug': allergen.slug}) }}">
-                                        <span class="allergen-word__name">
+                                        <span class="glossary-word__name">
                                             {{ allergen.name }}
                                         </span>
                                     </a>
