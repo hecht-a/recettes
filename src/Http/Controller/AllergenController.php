@@ -21,4 +21,20 @@ class AllergenController extends AbstractController
             'menuItem' => 'allergen'
         ]);
     }
+
+    #[Route('/{slug<[a-z0-9A-Z\-]+>}-{id<\d+>}', name: 'show', methods: ['GET'])]
+    public function show(Allergen $allergen, string $slug): Response
+    {
+        if ($allergen->getSlug() !== $slug) {
+            return $this->redirectToRoute('allergen_show', [
+                'id' => $allergen->getId(),
+                'slug' => $allergen->getSlug(),
+            ], 301);
+        }
+
+        return $this->render('allergens/show.html.twig', [
+            'menuItem' => 'allergen',
+            'allergen' => $allergen,
+        ]);
+    }
 }

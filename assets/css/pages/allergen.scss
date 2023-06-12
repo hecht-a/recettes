@@ -83,3 +83,22 @@
         border: none;
     }
 }
+
+.allergen-show {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: space(4);
+}
+
+.allergen-title {
+    @extend %hero-title;
+}
+
+.allergen-recipes {
+
+}
+
+.allergen-description {
+    @extend %hero-text;
+}

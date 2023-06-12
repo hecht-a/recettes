@@ -57,4 +57,12 @@
 
 %muted, .muted {
     color: var(--grey-green);
+
+    a {
+        text-decoration: underline;
+
+        &:hover {
+            color: var(--secondary);
+        }
+    }
 }
