@@ -45,6 +45,14 @@
                     Allergènes
                 </a>
             </li>
+            <li>
+                <a href="{{ path('utensil_index') }}" {{ is_active('utensil') }}>
+                    <svg>
+                        <use href="/icons.svg#shovel"></use>
+                    </svg>
+                    Ustensiles
+                </a>
+            </li>
             {% if is_granted('ROLE_ADMIN') %}
                 <li>
                     <a href="{{ path('admin_recipe_index') }}">

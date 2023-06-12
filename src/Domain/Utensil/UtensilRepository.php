@@ -2,6 +2,7 @@
 
 namespace App\Domain\Utensil;
 
+use App\Domain\Allergen\AllergenDto;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -64,5 +65,21 @@ class UtensilRepository extends ServiceEntityRepository
             ->setParameter('name', array_map(fn (string $name) => strtolower($name), $names))
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @return array<string, Utensil[]>
+     */
+    public function findUtensilsByLetters(): array
+    {
+        $words = $this->createQueryBuilder('u')
+            ->orderBy('u.name')
+            ->getQuery()
+            ->getResult();
+
+        return collect($words)
+            ->sortBy(fn (Utensil $item) => strtolower($item->getName()))
+            ->groupBy(fn (Utensil $item) => strtolower($item->getName()[0]))
+            ->toArray();
     }
 }

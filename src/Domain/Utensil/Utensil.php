@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: UtensilRepository::class)]
 #[ORM\UniqueConstraint(fields: ['name'])]
@@ -39,6 +40,10 @@ class Utensil implements IdentifiableInterface
 
     #[ORM\Column(nullable: true)]
     private ?string $imageName = null;
+
+    #[ORM\Column(type: Types::STRING, length: 128, unique: true)]
+    #[Gedmo\Slug(fields: ['name'])]
+    private string $slug;
 
     public function __construct()
     {
@@ -122,5 +127,10 @@ class Utensil implements IdentifiableInterface
     public function getImageName(): ?string
     {
         return $this->imageName;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
     }
 }
