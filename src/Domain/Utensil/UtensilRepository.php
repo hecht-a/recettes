@@ -2,7 +2,6 @@
 
 namespace App\Domain\Utensil;
 
-use App\Domain\Allergen\AllergenDto;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
