@@ -66,6 +66,9 @@ class AllergenRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * @return array<string, AllergenDto[]>
+     */
     public function findAllergensByLetters(): array
     {
         $dto = AllergenDto::class;

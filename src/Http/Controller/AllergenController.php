@@ -18,7 +18,7 @@ class AllergenController extends AbstractController
         return $this->render('allergens/index.html.twig', [
             'letters' => $letters,
             'allergensByLetters' => $allergensByLetters,
-            'menuItem' => 'allergen'
+            'menuItem' => 'allergen',
         ]);
     }
 
