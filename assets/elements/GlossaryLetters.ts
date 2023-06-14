@@ -1,5 +1,3 @@
-import {debounce} from "../functions/debouce";
-
 export class GlossaryLetters extends HTMLElement {
   private links: HTMLAnchorElement[] = [];
   private sectionToAnchor: Map<any, HTMLAnchorElement> = new Map();
@@ -26,13 +24,7 @@ export class GlossaryLetters extends HTMLElement {
       })
     )
 
-    this.onWindowResize = debounce(this.onWindowResize, 500)
-    this.onWindowResize()
     this.links = links
-  }
-
-  onWindowResize () {
-    document.body.style.setProperty('--scrollOffset', `${this.offsetHeight}px`)
   }
 
   onIntersection (entry: IntersectionObserverEntry) {
