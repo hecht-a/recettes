@@ -1,12 +1,13 @@
 export class GlossaryLetters extends HTMLElement {
-  private links: HTMLAnchorElement[] = [];
   private sectionToAnchor: Map<any, HTMLAnchorElement> = new Map();
-  constructor () {
+
+  constructor() {
     super()
+
     this.onIntersection = this.onIntersection.bind(this)
   }
 
-  connectedCallback () {
+  connectedCallback() {
     const observer = new IntersectionObserver(entries => entries.forEach(this.onIntersection), {
       rootMargin: '-20% 0px -80% 0px'
     })
@@ -23,8 +24,6 @@ export class GlossaryLetters extends HTMLElement {
         return [section, link]
       })
     )
-
-    this.links = links
   }
 
   onIntersection (entry: IntersectionObserverEntry) {
