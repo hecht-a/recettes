@@ -9,14 +9,21 @@ type Item = {
   image: string | null
 }
 
+enum Moves {
+  DOWN = 1,
+  UP = -1
+}
+
 export class SearchInput extends HTMLElement {
   input = ''
+  results: Item[] = []
+  selectedItem: number | null = null
 
   constructor() {
     super()
 
     this.onInput = this.onInput.bind(this)
-    this.suggest = this.suggest.bind(this)
+    this.moveFocusHandler = this.moveFocusHandler.bind(this)
   }
 
   connectedCallback() {
@@ -34,6 +41,18 @@ export class SearchInput extends HTMLElement {
     const input = this.querySelector('input')!
     input.focus()
     input.addEventListener('input', this.onInput)
+    window.addEventListener('keydown', this.moveFocusHandler)
+
+    this.querySelector('form')!.addEventListener('submit', (e) => {
+      if (this.selectedItem !== null && this.results[this.selectedItem]) {
+        e.preventDefault()
+        window.location.href = this.results[this.selectedItem].url
+      }
+    })
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener('keydown', this.moveFocusHandler)
   }
 
   onInput(e: Event) {
@@ -45,8 +64,8 @@ export class SearchInput extends HTMLElement {
 
   suggest() {
     return debounce(async (value: string) => {
-      const data = await fetch(`${SEARCH_API}?q=${encodeURI(value)}`).then<Item[]>((response) => response.json())
-      if (data.length < 1) {
+      this.results = await fetch(`${SEARCH_API}?q=${encodeURI(value)}`).then<Item[]>((response) => response.json())
+      if (this.results.length < 1) {
         const results = this.querySelector('.results')!
         if (results) {
           results.remove()
@@ -58,7 +77,7 @@ export class SearchInput extends HTMLElement {
       results.classList.add('results', 'search-input_suggestions')
       this.querySelector('form')!.appendChild(results
       )
-      const items: string[] = data.map((item) => {
+      const items: string[] = this.results.map((item) => {
         return this.buildItem(item).outerHTML
       })
 
@@ -83,5 +102,60 @@ export class SearchInput extends HTMLElement {
     li.appendChild(a)
 
     return li
+  }
+
+  selectItem(item: number|null) {
+    const focused = this.querySelector('.focused')
+    if(focused) {
+      focused.classList.remove('focused')
+    }
+
+    if(item === null) {
+      return
+    }
+
+    Array.from(this.querySelectorAll('a'))[item].classList.add('focused')
+  }
+
+  moveFocus(direction: Moves) {
+    if (this.results.length === 0) {
+      return
+    }
+
+    if (this.selectedItem === null && direction === Moves.DOWN) {
+      this.selectedItem = 0
+      this.selectItem(this.selectedItem)
+      return
+    }
+
+    if (this.selectedItem === null && direction === Moves.UP) {
+      this.selectedItem = this.results.length - 1
+      this.selectItem(this.selectedItem)
+      return
+    }
+
+    const newPosition = this.selectedItem! + direction
+    if (newPosition < 0 || newPosition >= this.results.length) {
+      this.selectedItem = null
+      this.selectItem(this.selectedItem)
+      return
+    }
+    this.selectedItem = newPosition
+    this.selectItem(this.selectedItem)
+  }
+
+  moveFocusHandler(e: KeyboardEvent) {
+    console.log('ok')
+    switch (e.key) {
+      case 'ArrowDown':
+      case 'Tab':
+        e.preventDefault()
+        this.moveFocus(Moves.DOWN)
+        return
+      case 'ArrowUp':
+        this.moveFocus(Moves.UP)
+        break
+      default:
+    }
   }
 }
