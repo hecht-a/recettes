@@ -14,9 +14,9 @@ class PathEncoder implements EncoderInterface
     }
 
     /**
-     * @param array $data
+     * @param mixed[] $context
      */
-    public function encode($data, string $format, array $context = []): string
+    public function encode(mixed $data, string $format, array $context = []): string
     {
         ['path' => $path, 'params' => $params] = array_merge(['params' => []], $data);
 
@@ -26,7 +26,7 @@ class PathEncoder implements EncoderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed[] $context
      */
     public function supportsEncoding(string $format, array $context = []): bool
     {

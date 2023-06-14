@@ -48,7 +48,6 @@ class RecipeRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $q
      * @return Recipe[]
      */
     public function searchByName(string $q): array

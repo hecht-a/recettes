@@ -8,22 +8,30 @@ use App\Infra\Normalizer\Normalizer;
 
 class RecipePathNormalizer extends Normalizer
 {
-    public function normalize($object, string $format = null, array $context = []): array
+    /**
+     * @param mixed[] $context
+     *
+     * @return array{path: 'recipes_show', params: array{slug: string, id: ?int}}
+     */
+    public function normalize(mixed $object, string $format = null, array $context = []): array
     {
-        if($object instanceof Recipe) {
+        if ($object instanceof Recipe) {
             return [
                 'path' => 'recipes_show',
                 'params' => [
                     'slug' => $object->getSlug(),
-                    'id' => $object->getId()
-                ]
+                    'id' => $object->getId(),
+                ],
             ];
         }
 
         throw new \RuntimeException("Can't normalize path");
     }
 
-    public function supportsNormalization($data, string $format = null, array $context = []): bool
+    /**
+     * @param mixed[] $context
+     */
+    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
     {
         return ($data instanceof Recipe) && PathEncoder::FORMAT === $format;
     }

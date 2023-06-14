@@ -6,6 +6,7 @@ use App\Domain\Category\Category;
 use App\Domain\Recipe\Recipe;
 use App\Http\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -19,10 +20,10 @@ class SearchController extends AbstractController
     }
 
     #[Route(path: '/search', name: 'search')]
-    public function search(Request $request)
+    public function search(Request $request): JsonResponse
     {
-        $q = trim((string)$request->get('q', ''));
-        if(empty($q)) {
+        $q = trim((string) $request->get('q', ''));
+        if (empty($q)) {
             return $this->json([]);
         }
 
@@ -30,8 +31,8 @@ class SearchController extends AbstractController
         $recipesMatches = array_map(fn (Recipe $recipe) => [
             'title' => $recipe->getName(),
             'url' => $this->serializer->serialize($recipe, 'path'),
-            'categories' => collect($recipe->getCategories())->map(fn(Category $category) => $category->getName())->join(', '),
-            'image' => $this->helper->asset($recipe)
+            'categories' => collect($recipe->getCategories())->map(fn (Category $category) => $category->getName())->join(', '),
+            'image' => $this->helper->asset($recipe),
         ], $recipes);
 
         return $this->json($recipesMatches);
