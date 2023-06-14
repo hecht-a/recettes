@@ -13,6 +13,11 @@
             <h2 class="card-title">
                 <a href="{{ path('recipes_show', {'id': recipe.id, 'slug': recipe.slug}) }}"
                    class="card-link">{{ recipe.name }}</a>
+                <span class="icon {{ is_liked(recipe) ? 'liked' }}">
+                    <svg>
+                        <use href="/icons.svg#fullheart"></use>
+                    </svg>
+                </span>
             </h2>
             <div class="card-description">{{ recipe.description | excerpt(100) }}</div>
         </div>

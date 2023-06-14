@@ -53,6 +53,23 @@
     line-height: 1.3;
     font-weight: bold;
     margin-bottom: space(1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card .card-content .card-body .card-title .icon,
+%card .card-content .card-body .card-title .icon {
+    color: var(--black);
+
+    svg {
+        height: 24px;
+        width: 24px;
+    }
+
+    &.liked {
+        color: var(--red);
+    }
 }
 
 .card .card-content .card-link,
