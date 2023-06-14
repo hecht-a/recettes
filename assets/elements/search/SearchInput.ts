@@ -5,7 +5,8 @@ const SEARCH_API = '/api/search'
 type Item = {
   title: string,
   url: string,
-  categories: string
+  categories: string,
+  image: string | null
 }
 
 export class SearchInput extends HTMLElement {
@@ -22,12 +23,11 @@ export class SearchInput extends HTMLElement {
     this.innerHTML = `
       <form>
         <input autofocus autocomplete="off" type="text" name="q" placeholder="Rechercher une recette..." />
-<!--        <button type="submit">-->
-<!--          <svg>-->
-<!--              <use href="/icons.svg#search"></use>-->
-<!--          </svg>-->
-<!--        </button>-->
-        <ul class="results"></ul>
+        <button type="submit" class="search">
+          <svg class="icon">
+              <use href="/icons.svg#search"></use>
+          </svg>
+        </button>
       </form>
     `
 
@@ -46,9 +46,20 @@ export class SearchInput extends HTMLElement {
   suggest() {
     return debounce(async (value: string) => {
       const data = await fetch(`${SEARCH_API}?q=${encodeURI(value)}`).then<Item[]>((response) => response.json())
-      const results = this.querySelector('.results')!
+      if (data.length < 1) {
+        const results = this.querySelector('.results')!
+        if (results) {
+          results.remove()
+        }
+        return
+      }
+
+      const results = document.createElement('ul')
+      results.classList.add('results', 'search-input_suggestions')
+      this.querySelector('form')!.appendChild(results
+      )
       const items: string[] = data.map((item) => {
-        return this.buildItem(item).innerHTML
+        return this.buildItem(item).outerHTML
       })
 
       results.innerHTML = items.join('')
@@ -60,7 +71,14 @@ export class SearchInput extends HTMLElement {
     const a = document.createElement('a')
 
     a.href = item.url
-    a.innerHTML = item.title
+    a.innerHTML = `
+        <span class='search-input_category'>${item.categories}</span>
+        <span class='search-input_title'>${item.title}</span>
+    `
+
+    if (item.image) {
+      a.innerHTML += `<img src="${item.image}" alt="${item.title}" class="search-input_image" />`
+    }
 
     li.appendChild(a)
 

@@ -146,22 +146,25 @@ search-input .icon {
     li:last-child {
         margin-top: space(1);
     }
-
-    li:last-child a {
-        font-size: 0.9rem;
-        justify-content: center;
-        color: var(--white);
-    }
 }
 
 .search-input_category {
-    color: var(--white);
-    text-align: right;
-    width: 101px;
+    color: var(--secondary);
+    text-align: left;
+    width: 20%;
     flex: none;
     padding-right: space(1);
     margin-right: space(1);
-    border-right: 1px solid var(--border-light);
+    border-right: 1px solid var(--border);
+}
+
+.search-input_title {
+    width: 100%;
+    padding-right: space(1);
+}
+
+.search-input_image {
+    width: 20%;
 }
 
 .search-result a:hover {

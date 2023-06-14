@@ -9,10 +9,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
+use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 class SearchController extends AbstractController
 {
-    public function __construct(EntityManagerInterface $em, private readonly SerializerInterface $serializer)
+    public function __construct(EntityManagerInterface $em, private readonly SerializerInterface $serializer, private readonly UploaderHelper $helper)
     {
         parent::__construct($em);
     }
@@ -29,7 +30,8 @@ class SearchController extends AbstractController
         $recipesMatches = array_map(fn (Recipe $recipe) => [
             'title' => $recipe->getName(),
             'url' => $this->serializer->serialize($recipe, 'path'),
-            'categories' => collect($recipe->getCategories())->map(fn(Category $category) => $category->getName())->join(', ')
+            'categories' => collect($recipe->getCategories())->map(fn(Category $category) => $category->getName())->join(', '),
+            'image' => $this->helper->asset($recipe)
         ], $recipes);
 
         return $this->json($recipesMatches);

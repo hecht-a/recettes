@@ -73,7 +73,7 @@ label {
     transform: scale(0.75);
 }
 
-button[type=submit] {
+button[type=submit]:not(.search) {
     width: 100%;
     height: auto;
     display: flex;
