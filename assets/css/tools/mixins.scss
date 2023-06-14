@@ -32,6 +32,10 @@
     @include margin(6, ['right', 'left'])
 }
 
+.mt1 {
+    @include margin(1, ['top'])
+}
+
 @mixin padding($multiplier, $positions: []) {
     @if list.length($positions) > 0 {
         @each $position in $positions {

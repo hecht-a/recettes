@@ -14,6 +14,7 @@ import {GlossaryLetters} from "./elements/GlossaryLetters";
 import {SearchButton} from "./elements/search/SearchButton";
 import {SearchInput} from "./elements/search/SearchInput";
 import {SearchPopup} from "./elements/search/SearchPopup";
+import {FavoriteButton} from "./elements/FavoriteButton";
 
 customElements.define('alert-message', Alert)
 customElements.define('input-choices', InputChoices, {extends: 'input'})
@@ -25,3 +26,4 @@ customElements.define('glossary-letters', GlossaryLetters)
 customElements.define('search-input', SearchInput)
 customElements.define('search-popup', SearchPopup)
 customElements.define('search-button', SearchButton)
+customElements.define('favorite-button', FavoriteButton)
