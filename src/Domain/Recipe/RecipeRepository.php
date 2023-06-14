@@ -46,4 +46,18 @@ class RecipeRepository extends ServiceEntityRepository
 
         return $qb->select('r');
     }
+
+    /**
+     * @return Recipe[]
+     */
+    public function searchByName(string $q): array
+    {
+        return $this->createQueryBuilder('r')
+            ->where('LOWER(r.name) LIKE :q')
+            ->orderBy('LENGTH(r.name)', 'ASC')
+            ->setMaxResults(3)
+            ->setParameter('q', strtolower($q).'%')
+            ->getQuery()
+            ->getResult();
+    }
 }

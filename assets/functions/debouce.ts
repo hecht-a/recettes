@@ -1,7 +1,7 @@
-export function debounce(func: () => unknown, wait: number, immediate: boolean = false) {
+export function debounce<T extends CallableFunction>(func: T, wait: number, immediate: boolean = false): T {
   let timeout: number | undefined | null
-  return (...args: []) => {
-    if(timeout) {
+  return ((...args: []) => {
+    if (timeout) {
       clearTimeout(timeout)
     }
     timeout = setTimeout(() => {
@@ -15,5 +15,5 @@ export function debounce(func: () => unknown, wait: number, immediate: boolean =
       // @ts-expect-error
       func.apply(this, args)
     }
-  }
+  }) as unknown as T
 }
