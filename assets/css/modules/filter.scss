@@ -1,0 +1,29 @@
+.grid-filter {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.grid-filter > *:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.grid-filter > *:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-right: 1px solid var(--border);
+}
+.grid-filter__group {
+    padding: space(2);
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border);
+    border-right: none;
+    box-shadow: 0 1px 2px rgba(36, 57, 141, 0.1);
+    background: var(--white);
+}
+
+.grid-filter__group label {
+    margin-right: space(1);
+    color: var(--black);
+    white-space: nowrap;
+}

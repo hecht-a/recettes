@@ -28,6 +28,10 @@
     @include margin(1, ['bottom']);
 }
 
+.mb3 {
+    @include margin(3, ['bottom'])
+}
+
 .mx6 {
     @include margin(6, ['right', 'left'])
 }

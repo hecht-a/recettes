@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "dayjs": "^1.11.7",
+        "htmx.org": "^1.9.2",
         "tom-select": "^2.2.2"
     }
 }
