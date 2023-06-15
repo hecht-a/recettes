@@ -15,6 +15,7 @@ import {SearchButton} from "./elements/search/SearchButton";
 import {SearchInput} from "./elements/search/SearchInput";
 import {SearchPopup} from "./elements/search/SearchPopup";
 import {FavoriteButton} from "./elements/FavoriteButton";
+import {Switch} from "./elements/Switch";
 
 customElements.define('alert-message', Alert)
 customElements.define('input-choices', InputChoices, {extends: 'input'})
@@ -23,6 +24,7 @@ customElements.define('ingredient-field', IngredientField, {extends: 'fieldset'}
 customElements.define('ingredients-wrapper', IngredientsWrapper, {extends: 'fieldset'})
 customElements.define('steps-wrapper', StepsWrapper, {extends: 'fieldset'})
 customElements.define('glossary-letters', GlossaryLetters)
+customElements.define('switch-input', Switch, {extends: 'input'})
 customElements.define('search-input', SearchInput)
 customElements.define('search-popup', SearchPopup)
 customElements.define('search-button', SearchButton)
