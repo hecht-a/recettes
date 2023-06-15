@@ -1,10 +1,12 @@
 import {debounce} from "../functions/debouce";
 
+type Status = 'liked' | 'disliked'
+
 export class FavoriteButton extends HTMLElement {
   connectedCallback() {
     const isLiked = this.getAttribute('is-liked')
 
-    this.setButton(isLiked)
+    this.setButton(isLiked ? 'liked' : 'disliked')
   }
 
   buttonTemplate(label: string, className: string, icon: string) {
@@ -18,8 +20,8 @@ export class FavoriteButton extends HTMLElement {
     `
   }
 
-  setButton(isLiked: string|null) {
-    if(isLiked !== null) {
+  setButton(status: Status) {
+    if(status === 'liked') {
       this.setAttribute('is-liked', 'true')
       this.innerHTML = this.buttonTemplate('Supprimer des favoris', 'btn-dislike', 'emptyheart')
     } else {
@@ -34,8 +36,9 @@ export class FavoriteButton extends HTMLElement {
       const isLiked = this.getAttribute('is-liked')
       const recipe = this.getAttribute('data-recipe')!
       const uri = isLiked ? `/api/dislike/${recipe}` : `/api/like/${recipe}`
-      await fetch(uri)
-      this.setButton(isLiked)
+      const {status} = await fetch(uri).then<{status: Status}>((response) => response.json())
+
+      this.setButton(status)
     }, 300)
   }
 }

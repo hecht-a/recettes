@@ -17,7 +17,9 @@ class FavoriteController extends AbstractController
         $recipe->addUserFavorite($this->getUser());
         $this->em->flush();
 
-        return new JsonResponse();
+        return new JsonResponse([
+            'status' => 'liked'
+        ]);
     }
 
     #[Route(path: '/dislike/{id<\d+>}', name: 'dislike')]
@@ -27,6 +29,8 @@ class FavoriteController extends AbstractController
         $recipe->removeUserFavorite($this->getUser());
         $this->em->flush();
 
-        return new JsonResponse();
+        return new JsonResponse([
+            'status' => 'disliked'
+        ]);
     }
 }
