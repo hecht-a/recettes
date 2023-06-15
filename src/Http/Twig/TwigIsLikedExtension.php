@@ -4,7 +4,6 @@ namespace App\Http\Twig;
 
 use App\Domain\Auth\User;
 use App\Domain\Recipe\Recipe;
-use Symfony\Bridge\Twig\AppVariable;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -20,11 +19,11 @@ class TwigIsLikedExtension extends AbstractExtension
     /**
      * @param array<string, mixed> $context
      */
-    public function isLiked(array $context, Recipe $recipe): string
+    public function isLiked(array $context, Recipe $recipe): bool
     {
-        /** @var User $user */
+        /** @var User|null $user */
         $user = $context['app']->getUser();
-        if(!$user) {
+        if (!$user) {
             return false;
         }
 

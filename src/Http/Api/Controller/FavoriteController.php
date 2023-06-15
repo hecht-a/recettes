@@ -14,11 +14,11 @@ class FavoriteController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function like(Recipe $recipe): JsonResponse
     {
-        $recipe->addUserFavorite($this->getUser());
+        $recipe->addUserFavorite($this->getUserOrThrow());
         $this->em->flush();
 
         return new JsonResponse([
-            'status' => 'liked'
+            'status' => 'liked',
         ]);
     }
 
@@ -26,11 +26,11 @@ class FavoriteController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function dislike(Recipe $recipe): JsonResponse
     {
-        $recipe->removeUserFavorite($this->getUser());
+        $recipe->removeUserFavorite($this->getUserOrThrow());
         $this->em->flush();
 
         return new JsonResponse([
-            'status' => 'disliked'
+            'status' => 'disliked',
         ]);
     }
 }
