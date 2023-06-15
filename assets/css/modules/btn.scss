@@ -146,3 +146,33 @@
 .stack > button {
     justify-self: flex-start;
 }
+
+%btn-like-dislike {
+    @extend %btn;
+    padding: space(1);
+    border: 1px solid var(--btn-color);
+    color: var(--btn-color);
+    box-shadow: none;
+
+    &:hover {
+        filter: none;
+        background: var(--btn-color);
+        color: #fff;
+    }
+
+    svg {
+        margin-left: space(1);
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.btn-like {
+    @extend %btn-like-dislike;
+    --btn-color: var(--red);
+}
+
+.btn-dislike {
+    @extend %btn-like-dislike;
+    --btn-color: var(--black);
+}

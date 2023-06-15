@@ -19,15 +19,24 @@ class HomeController extends AbstractController
     #[Route(path: '/', name: 'home')]
     public function index(Request $request): Response
     {
-        $page = $request->query->getInt('page', 1);
-        $query = $this->em->getRepository(Recipe::class)->findAllQuery();
+        $repo = $this->em->getRepository(Recipe::class);
 
+        $favoritesOnly = $request->query->getBoolean('favorite');
+        $query = $repo->findAllQuery();
+
+        if ($favoritesOnly) {
+            $user = $this->getUserOrThrow();
+            $query = $repo->findFavoritesQuery($user);
+        }
+
+        $page = $request->query->getInt('page', 1);
         $recipes = $this->paginator->paginate($query->setMaxResults(10)->getQuery());
 
         return $this->render('pages/home.html.twig', [
             'recipes' => $recipes,
             'page' => $page,
             'menuItem' => 'home',
+            'favorites_only' => $favoritesOnly,
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Domain\Recipe;
 
+use App\Domain\Auth\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -43,6 +44,16 @@ class RecipeRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('r')
         ->orderBy('r.id');
+
+        return $qb->select('r');
+    }
+
+    public function findFavoritesQuery(User $user): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->join('r.usersFavorite', 'user')
+            ->where('user = :user')
+            ->setParameter('user', $user);
 
         return $qb->select('r');
     }

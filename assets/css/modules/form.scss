@@ -107,3 +107,52 @@ fieldset > div fieldset > div {
     @extend %grid;
     align-items: flex-end;
 }
+
+.form-switch {
+    position: relative;
+    cursor: pointer;
+
+    input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        cursor: pointer;
+        min-height: auto;
+    }
+
+    label {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        cursor: pointer;
+        margin-bottom: 0 !important;
+    }
+}
+.switch {
+    width: 40px;
+    height: 20px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    transition: background 0.3s;
+
+    &::before {
+        content: '';
+        display: block;
+        height: 18px;
+        width: 18px;
+        background: var(--white-green);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        transition: transform 0.3s;
+    }
+}
+
+input:checked + label .switch {
+    background-color: var(--secondary);
+
+    &::before {
+        transform: translateX(20px);
+    }
+}

@@ -86,6 +86,11 @@ class Recipe implements IdentifiableInterface
     #[Gedmo\Slug(fields: ['name'])]
     private string $slug;
 
+    /** @var ArrayCollection<int, User> */
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoriteRecipes')]
+    #[ORM\JoinTable(name: 'favorite_recipe')]
+    private Collection $usersFavorite;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -95,6 +100,7 @@ class Recipe implements IdentifiableInterface
         $this->utensils = new ArrayCollection();
         $this->allergens = new ArrayCollection();
         $this->steps = new ArrayCollection();
+        $this->usersFavorite = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -354,5 +360,33 @@ class Recipe implements IdentifiableInterface
     public function getSlug(): string
     {
         return $this->slug;
+    }
+
+    /**
+     * @return ArrayCollection<int, User>
+     */
+    public function getUsersFavorite(): Collection
+    {
+        return $this->usersFavorite;
+    }
+
+    public function addUserFavorite(User $usersFavorite): self
+    {
+        if (!$this->usersFavorite->contains($usersFavorite)) {
+            $this->usersFavorite[] = $usersFavorite;
+            $usersFavorite->addFavoriteRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserFavorite(User $usersFavorite): self
+    {
+        if ($this->usersFavorite->contains($usersFavorite)) {
+            $this->usersFavorite->removeElement($usersFavorite);
+            $usersFavorite->removeFavoriteRecipe($this);
+        }
+
+        return $this;
     }
 }
