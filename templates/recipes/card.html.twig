@@ -15,7 +15,7 @@
                    class="card-link">{{ recipe.name }}</a>
                 <span class="icon {{ is_liked(recipe) ? 'liked' }}">
                     <svg>
-                        <use href="/icons.svg#fullheart"></use>
+                        <use href="/icons.svg#{{ is_liked(recipe) ? 'fullheart' : 'emptyheart' }}"></use>
                     </svg>
                 </span>
             </h2>
