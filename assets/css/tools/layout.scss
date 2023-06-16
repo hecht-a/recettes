@@ -128,3 +128,13 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
 }
+
+%grid3,
+.grid3 {
+    width: 100%;
+    display: grid !important;
+    --gap: 2;
+    gap: calc(var(--gap) * var(--space));
+    grid-template-columns: 1fr 30%;
+    grid-template-rows: 1fr;
+}
