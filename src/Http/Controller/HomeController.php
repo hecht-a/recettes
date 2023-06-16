@@ -2,6 +2,7 @@
 
 namespace App\Http\Controller;
 
+use App\Domain\Category\Category;
 use App\Domain\Recipe\Recipe;
 use App\Helper\Paginator\PaginatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,12 +22,29 @@ class HomeController extends AbstractController
     {
         $repo = $this->em->getRepository(Recipe::class);
 
+        // Filtre favoris
         $favoritesOnly = $request->query->getBoolean('favorite');
         $query = $repo->findAllQuery();
 
         if ($favoritesOnly) {
             $user = $this->getUserOrThrow();
             $query = $repo->findFavoritesQuery($user);
+        }
+
+        // Filtre catégorie
+        $categories = $this->em->getRepository(Category::class)->findAll();
+        $category = $request->query->get('category');
+        if ($category) {
+            if ($category === 'none') {
+                $query
+                    ->leftJoin('r.categories', 'category')
+                    ->where('category IS NULL');
+            } else {
+                $query
+                    ->join('r.categories', 'category')
+                    ->where('category = :category')
+                    ->setParameter('category', $category);
+            }
         }
 
         $page = $request->query->getInt('page', 1);
@@ -37,6 +55,7 @@ class HomeController extends AbstractController
             'page' => $page,
             'menuItem' => 'home',
             'favorites_only' => $favoritesOnly,
+            'categories' => $categories,
         ]);
     }
 }

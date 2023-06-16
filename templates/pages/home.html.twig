@@ -4,6 +4,25 @@
     <div class="homepage container">
         <div class="grid-filter mb3">
             <div class="grid-filter__group">
+                <label for="filter-category">Catégorie : </label>
+                <select
+                    name="category"
+                    id="filter-category"
+                    is="select-choices"
+                    hx-target="#recipes"
+                    hx-get="/"
+                    hx-swap="outerHTML"
+                    hx-select="#recipes"
+                >
+                    <option value="">Tous</option>
+                    <option value="none">Sans catégorie</option>
+                    {% for category in categories  %}
+                        {% set key = category.id %}
+                        <option {{ app.request.get('category') == key ~ '' ? 'selected' : ''}} value="{{ key }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="grid-filter__group">
                 <label for="filter-favorite">Favoris : </label>
                 <div class="form-switch">
                     <input
