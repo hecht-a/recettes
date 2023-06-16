@@ -30,3 +30,18 @@ customElements.define('search-input', SearchInput)
 customElements.define('search-popup', SearchPopup)
 customElements.define('search-button', SearchButton)
 customElements.define('favorite-button', FavoriteButton)
+
+declare global {
+  interface DocumentEventMap {
+    "htmx:load": Event & {detail: {elt: HTMLElement}}
+  }
+}
+
+document.addEventListener('htmx:load', (event: Event & {detail: {elt: unknown}}) => {
+  const burger = document.querySelector('.header_burger .burger')!
+  const navbar = document.querySelector('.header')!
+
+  burger.addEventListener('click', () => {
+    navbar.classList.toggle('is-open')
+  })
+})
