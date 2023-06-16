@@ -145,7 +145,6 @@ export class SearchInput extends HTMLElement {
   }
 
   moveFocusHandler(e: KeyboardEvent) {
-    console.log('ok')
     switch (e.key) {
       case 'ArrowDown':
       case 'Tab':
