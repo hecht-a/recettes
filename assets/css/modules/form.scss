@@ -156,3 +156,31 @@ input:checked + label .switch {
         transform: translateX(20px);
     }
 }
+
+.amount-persons {
+    display: flex;
+    height: 48px;
+
+    button {
+        height: 100%;
+        aspect-ratio: .5/1;
+        border: 1px solid var(--grey-stroke);
+
+        &.minus {
+            border-radius: 4px 0 0 4px;
+            border-right: none;
+        }
+        &.plus {
+            border-radius: 0 4px 4px 0;
+            border-left: none;
+        }
+    }
+
+    input {
+        border-radius: 0;
+    }
+
+    label {
+        left: 32px !important;
+    }
+}

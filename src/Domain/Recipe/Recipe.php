@@ -91,6 +91,9 @@ class Recipe implements IdentifiableInterface
     #[ORM\JoinTable(name: 'favorite_recipe')]
     private Collection $usersFavorite;
 
+    #[ORM\Column(type: Types::INTEGER, nullable: false)]
+    private int $amountPersons;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -386,6 +389,18 @@ class Recipe implements IdentifiableInterface
             $this->usersFavorite->removeElement($usersFavorite);
             $usersFavorite->removeFavoriteRecipe($this);
         }
+
+        return $this;
+    }
+
+    public function getAmountPersons(): int
+    {
+        return $this->amountPersons;
+    }
+
+    public function setAmountPersons(int $amountPersons): Recipe
+    {
+        $this->amountPersons = $amountPersons;
 
         return $this;
     }

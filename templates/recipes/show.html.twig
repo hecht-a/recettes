@@ -48,6 +48,7 @@
             <div class="ingredients_utensils">
                 <div class="ingredients">
                     <div class="ingredients_utensils__title">Ingredients</div>
+                    <input class="mb1" type="number" is="number-input" value="{{ recipe.amountPersons }}">
                     {% for ingredient in recipe.ingredients %}
                         {{ include('recipes/_ingredient.html.twig') }}
                     {% endfor %}

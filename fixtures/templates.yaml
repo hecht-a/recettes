@@ -42,6 +42,7 @@ App\Domain\Recipe\Recipe:
         utensils: '<numberBetween(1, 3)>x @utensil*'
         allergens: '<numberBetween(1, 3)>x @allergen*'
         user: '@user*'
+        amountPersons: '<numberBetween(2, 6)>'
 
 App\Domain\IngredientRecipe\IngredientRecipe:
     ingredientrecipe (template):
