@@ -25,11 +25,12 @@ class RecipeForm extends AbstractType
             ->add('name', TextType::class)
             ->add('amountPersons', IntegerType::class, [
                 'attr' => [
-                    'is' => 'number-input'
+                    'is' => 'number-input',
+                    'is-form' => true,
                 ],
                 'row_attr' => [
-                    'class' => 'amount-persons'
-                ]
+                    'class' => 'amount-persons',
+                ],
             ])
             ->add('description', TextareaType::class)
             ->add('preparationTime', IntegerType::class)
