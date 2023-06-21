@@ -39,7 +39,7 @@ declare global {
   }
 }
 
-document.addEventListener('htmx:load', (event: Event & {detail: {elt: unknown}}) => {
+document.addEventListener('htmx:load', (event) => {
   const burger = document.querySelector('.header_burger .burger')!
   const navbar = document.querySelector('.header')!
 
