@@ -57,27 +57,29 @@ abstract class CrudController extends AbstractController
     }
 
     /**
+     * @param string[] $only
+     *
      * @throws MissingPropertyException
      */
-    public function isValidCrudController(): void
+    public function isValidCrudController(array $only = []): void
     {
-        if (isset($this->entity)) {
-            throw new MissingPropertyException(self::class, 'entity');
-        }
-        if ($this->templatePath === null) {
-            throw new MissingPropertyException(self::class, 'templatePath');
-        }
-        if ($this->routePrefix === null) {
-            throw new MissingPropertyException(self::class, 'routePrefix');
-        }
-        if ($this->menuItem === null) {
-            throw new MissingPropertyException(self::class, 'menuItem');
-        }
-        if ($this->searchField === null) {
-            throw new MissingPropertyException(self::class, 'searchField');
-        }
-        if ($this->formClass === '') {
-            throw new MissingPropertyException(self::class, 'formClass');
+        $properties = [
+            'entity' => $this->entity,
+            'templatePath' => $this->templatePath,
+            'routePrefix' => $this->routePrefix,
+            'menuItem' => $this->menuItem,
+            'searchField' => $this->searchField,
+            'formClass' => $this->formClass,
+        ];
+
+        foreach ($properties as $key => $property) {
+            if (!empty($only) && !in_array($key, $only)) {
+                continue;
+            }
+
+            if (!isset($property)) {
+                throw new MissingPropertyException(self::class, $key);
+            }
         }
     }
 
@@ -86,7 +88,7 @@ abstract class CrudController extends AbstractController
      */
     public function crudIndex(?QueryBuilder $query = null): Response
     {
-        $this->isValidCrudController();
+        $this->isValidCrudController(['templatePath', 'routePrefix', 'menuItem', 'entity', 'searchField']);
 
         /** @var Request $request */
         $request = $this->requestStack->getCurrentRequest();
@@ -115,7 +117,7 @@ abstract class CrudController extends AbstractController
      */
     public function crudNew(object $entity): Response
     {
-        $this->isValidCrudController();
+        $this->isValidCrudController(['formClass', 'templatePath', 'menuItem']);
 
         /** @var Request $request */
         $request = $this->requestStack->getCurrentRequest();
@@ -150,7 +152,7 @@ abstract class CrudController extends AbstractController
      */
     public function crudEdit(object $entity): Response
     {
-        $this->isValidCrudController();
+        $this->isValidCrudController(['formClass', 'templatePath', 'menuItem']);
 
         $request = $this->requestStack->getCurrentRequest();
 
@@ -184,7 +186,7 @@ abstract class CrudController extends AbstractController
      */
     public function crudDelete(object $entity): RedirectResponse
     {
-        $this->isValidCrudController();
+        $this->isValidCrudController(['routePrefix']);
 
         $this->em->remove($entity);
         if ($this->events['delete'] ?? null) {
