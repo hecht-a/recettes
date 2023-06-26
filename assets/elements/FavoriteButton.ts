@@ -1,6 +1,6 @@
 import {debounce} from "../functions/debouce";
 
-type Status = 'liked' | 'disliked'
+type Status = 'liked' | 'disliked' | 'loading'
 
 export class FavoriteButton extends HTMLElement {
   connectedCallback() {
@@ -24,9 +24,14 @@ export class FavoriteButton extends HTMLElement {
     if(status === 'liked') {
       this.setAttribute('is-liked', 'true')
       this.innerHTML = this.buttonTemplate('Supprimer des favoris', 'btn-dislike', 'emptyheart')
-    } else {
+    } else if(status === 'disliked') {
       this.removeAttribute('is-liked')
       this.innerHTML = this.buttonTemplate('Ajouter aux favoris', 'btn-like', 'fullheart')
+    } else {
+      this.innerHTML = `<button type="button" class="btn-loading mt1" disabled>
+        Chargement
+        <circle-loader></circle-loader>
+      </button>`
     }
     this.querySelector('button')!.addEventListener('click', this.handler())
   }
@@ -36,6 +41,8 @@ export class FavoriteButton extends HTMLElement {
       const isLiked = this.getAttribute('is-liked')
       const recipe = this.getAttribute('data-recipe')!
       const uri = isLiked ? `/api/dislike/${recipe}` : `/api/like/${recipe}`
+
+      this.setButton('loading')
       const {status} = await fetch(uri).then<{status: Status}>((response) => response.json())
 
       this.setButton(status)

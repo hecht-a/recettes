@@ -18,6 +18,7 @@ import {SearchPopup} from "./elements/search/SearchPopup";
 import {FavoriteButton} from "./elements/FavoriteButton";
 import {Switch} from "./elements/Switch";
 import {NumberInput} from "./elements/NumberInput";
+import {Loader} from "./elements/Loader";
 
 customElements.define('alert-message', Alert)
 customElements.define('input-choices', InputChoices, {extends: 'input'})
@@ -32,6 +33,7 @@ customElements.define('search-popup', SearchPopup)
 customElements.define('search-button', SearchButton)
 customElements.define('favorite-button', FavoriteButton)
 customElements.define('number-input', NumberInput, {extends: 'input'})
+customElements.define('circle-loader', Loader)
 
 declare global {
   interface DocumentEventMap {

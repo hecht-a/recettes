@@ -176,3 +176,8 @@
     @extend %btn-like-dislike;
     --btn-color: var(--black);
 }
+
+.btn-loading {
+    @extend %btn-like-dislike;
+    --btn-color: var(--grey);
+}
