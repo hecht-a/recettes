@@ -45,7 +45,9 @@ document.addEventListener('htmx:load', (event) => {
   const burger = document.querySelector('.header_burger .burger')!
   const navbar = document.querySelector('.header')!
 
-  burger.addEventListener('click', () => {
-    navbar.classList.toggle('is-open')
-  })
+  if(burger) {
+    burger.addEventListener('click', () => {
+      navbar.classList.toggle('is-open')
+    })
+  }
 })
