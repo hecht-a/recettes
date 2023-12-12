@@ -63,7 +63,7 @@ function bindBehaviour (cls: typeof InputChoices|typeof SelectChoices) {
     if (this.dataset.remote) {
       options.valueField = this.dataset.value
       options.labelField = this.dataset.label
-      options.searchField = [this.dataset.label]
+      options.searchField = [this.dataset.label!]
       options.load = async (query: string, callback: TomLoadCallback) => {
         const url = `${this.dataset.remote}?q=${encodeURIComponent(query)}`
         const data = await fetch(url).then((response) => response.json())

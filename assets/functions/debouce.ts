@@ -1,5 +1,5 @@
 export function debounce<T extends CallableFunction>(func: T, wait: number, immediate: boolean = false): T {
-  let timeout: number | undefined | null
+  let timeout: NodeJS.Timeout | null
   return ((...args: []) => {
     if (timeout) {
       clearTimeout(timeout)
