@@ -81,7 +81,6 @@ function asset_watcher(): void
 
     $eventCounts = [];
     watch('assets/...', function (string $file, string $action) use (&$eventCounts, $c) {
-        $file = str_replace('/home/ahecht/Documents/projets/cerfrance/cerfrance-analytics/', '', $file);
         if (str_contains($file, '~')) {
             return;
         }

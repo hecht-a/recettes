@@ -1,4 +1,4 @@
-import {debounce} from "../functions/debouce";
+import {debounce} from "../functions/debouce.ts";
 
 type Status = 'liked' | 'disliked' | 'loading'
 

@@ -11,14 +11,6 @@
 node_modules
 /.pnpm-store
 public/assets
-
-###> symfony/webpack-encore-bundle ###
-/node_modules/
-/public/build/
-npm-debug.log
-yarn-error.log
-###< symfony/webpack-encore-bundle ###
-
 ###> docker ###
 /docker/db/data
 ###< docker ###
@@ -38,3 +30,8 @@ public/images
 tools/**/vendor
 *.pem
 .yarn
+
+###> symfony/asset-mapper ###
+/public/assets/
+/assets/vendor/
+###< symfony/asset-mapper ###
