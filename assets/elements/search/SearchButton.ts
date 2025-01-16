@@ -1,4 +1,4 @@
-import {SearchPopup} from "./SearchPopup";
+import {SearchPopup} from "./SearchPopup.ts";
 
 export class SearchButton extends HTMLElement {
   constructor() {

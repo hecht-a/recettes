@@ -1,24 +1,24 @@
 import dayjs from 'dayjs'
-import 'dayjs/locale/fr'
-import 'htmx.org';
+// import 'dayjs/locale/fr'
+import 'htmx.org'
 
 dayjs.locale('fr')
 
-import './css/app.scss'
+import './styles/app.scss'
 
-import {Alert} from "./elements/Alert";
-import {InputChoices, SelectChoices} from "./elements/Choices";
-import {IngredientField} from "./elements/IngredientField";
-import {IngredientsWrapper} from "./elements/IngredientsWrapper";
-import {StepsWrapper} from "./elements/StepsWrapper";
-import {GlossaryLetters} from "./elements/GlossaryLetters";
-import {SearchButton} from "./elements/search/SearchButton";
-import {SearchInput} from "./elements/search/SearchInput";
-import {SearchPopup} from "./elements/search/SearchPopup";
-import {FavoriteButton} from "./elements/FavoriteButton";
-import {Switch} from "./elements/Switch";
-import {NumberInput} from "./elements/NumberInput";
-import {Loader} from "./elements/Loader";
+import {Alert} from "./elements/Alert.ts";
+import {InputChoices, SelectChoices} from "./elements/Choices.ts";
+import {IngredientField} from "./elements/IngredientField.ts";
+import {IngredientsWrapper} from "./elements/IngredientsWrapper.ts";
+import {StepsWrapper} from "./elements/StepsWrapper.ts";
+import {GlossaryLetters} from "./elements/GlossaryLetters.ts";
+import {SearchButton} from "./elements/search/SearchButton.ts";
+import {SearchInput} from "./elements/search/SearchInput.ts";
+import {SearchPopup} from "./elements/search/SearchPopup.ts";
+import {FavoriteButton} from "./elements/FavoriteButton.ts";
+import {Switch} from "./elements/Switch.ts";
+import {NumberInput} from "./elements/NumberInput.ts";
+import {Loader} from "./elements/Loader.ts";
 
 customElements.define('alert-message', Alert)
 customElements.define('input-choices', InputChoices, {extends: 'input'})

@@ -1,4 +1,4 @@
-import {debounce} from "../../functions/debouce";
+import {debounce} from "../../functions/debouce.ts";
 
 const SEARCH_API = '/api/search'
 

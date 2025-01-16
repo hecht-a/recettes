@@ -13,11 +13,11 @@
     <link rel="icon" type="image/png" sizes="310x310" href="/favicons/icon-310x310.png"/>
     <meta name="application-name" content="Recettes"/>
     {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
     {% endblock %}
 
     {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
+        <script type="text/javascript" src="{{ asset('app.ts') }}"></script>
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
     {% endblock %}
 </head>
 <body>
