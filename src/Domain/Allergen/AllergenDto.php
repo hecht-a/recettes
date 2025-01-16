@@ -8,7 +8,7 @@ class AllergenDto
         public int $id,
         public string $name,
         public string $description,
-        public string $slug
+        public string $slug,
     ) {
     }
 }

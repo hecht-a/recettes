@@ -9,6 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @extends CrudController<Allergen>
+ */
 #[Route(path: '/allergens', name: 'allergen_')]
 class AllergenController extends CrudController
 {

@@ -14,6 +14,7 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class IngredientForm extends AbstractType
 {
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -21,7 +22,7 @@ class IngredientForm extends AbstractType
             ->add('description', TextareaType::class)
             ->add('unit', EntityType::class, [
                 'class' => Unit::class,
-                'choice_label' => fn (Unit $unit) => sprintf('%s (%s)', $unit->getLabel(), $unit->getShortLabel()),
+                'choice_label' => fn (Unit $unit): string => sprintf('%s (%s)', $unit->getLabel(), $unit->getShortLabel()),
                 'attr' => [
                     'is' => 'select-choices',
                 ],
@@ -33,6 +34,7 @@ class IngredientForm extends AbstractType
         ;
     }
 
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

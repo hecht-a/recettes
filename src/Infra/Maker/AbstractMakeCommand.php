@@ -80,6 +80,6 @@ abstract class AbstractMakeCommand extends Command
             $q->setAutocompleterValues($values);
         }
 
-        return $io->askQuestion($q);
+        return (string) $io->askQuestion($q);
     }
 }

@@ -28,7 +28,7 @@ class Unit implements IdentifiableInterface
     #[Assert\NotBlank]
     private string $shortLabel;
 
-    /** @var ArrayCollection<int, Ingredient> */
+    /** @var Collection<int, Ingredient> */
     #[ORM\OneToMany(mappedBy: 'unit', targetEntity: Ingredient::class)]
     private Collection $ingredients;
 
@@ -37,6 +37,7 @@ class Unit implements IdentifiableInterface
         $this->ingredients = new ArrayCollection();
     }
 
+    #[\Override]
     public function getId(): ?int
     {
         return $this->id;
@@ -67,7 +68,7 @@ class Unit implements IdentifiableInterface
     }
 
     /**
-     * @return ArrayCollection<int, Ingredient>
+     * @return Collection<int, Ingredient>
      */
     public function getIngredients(): Collection
     {

@@ -12,6 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand('do:crud')]
 class MakeCrudCommand extends AbstractMakeCommand
 {
+    #[\Override]
     protected function configure(): void
     {
         $this
@@ -19,6 +20,7 @@ class MakeCrudCommand extends AbstractMakeCommand
             ->addArgument('controllerName', InputArgument::OPTIONAL, 'Nom du controller');
     }
 
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
@@ -32,7 +34,7 @@ class MakeCrudCommand extends AbstractMakeCommand
             $controllerName = $this->ask($io, 'Saisir le nom du crud');
         }
 
-        $controllerName = ucfirst($controllerName);
+        $controllerName = ucfirst((string) $controllerName);
         if (!str_ends_with($controllerName, 'Controller')) {
             $controllerName .= 'Controller';
         }
@@ -44,7 +46,7 @@ class MakeCrudCommand extends AbstractMakeCommand
             $namespace = '';
             $className = $parts[0];
         } else {
-            $namespace = '\\'.implode('\\', array_slice($parts, 0, -1));
+            $namespace = '\\' . implode('\\', array_slice($parts, 0, -1));
             $className = $parts[count($parts) - 1];
         }
 

@@ -67,7 +67,7 @@ class RecipeRepository extends ServiceEntityRepository
             ->where('LOWER(r.name) LIKE :q')
             ->orderBy('LENGTH(r.name)', 'ASC')
             ->setMaxResults(3)
-            ->setParameter('q', strtolower($q).'%')
+            ->setParameter('q', strtolower($q) . '%')
             ->getQuery()
             ->getResult();
     }

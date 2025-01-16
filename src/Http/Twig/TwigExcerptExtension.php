@@ -7,6 +7,7 @@ use Twig\TwigFilter;
 
 class TwigExcerptExtension extends AbstractExtension
 {
+    #[\Override]
     public function getFilters(): array
     {
         return [
@@ -27,6 +28,6 @@ class TwigExcerptExtension extends AbstractExtension
             return $content;
         }
 
-        return substr($content, 0, $lastSpace).'...';
+        return substr($content, 0, $lastSpace) . '...';
     }
 }

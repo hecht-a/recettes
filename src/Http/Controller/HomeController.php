@@ -3,7 +3,7 @@
 namespace App\Http\Controller;
 
 use App\Domain\Category\Category;
-use App\Domain\Recipe\Recipe;
+use App\Domain\Recipe\RecipeRepository;
 use App\Helper\Paginator\PaginatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    public function __construct(EntityManagerInterface $em, private readonly PaginatorInterface $paginator)
+    public function __construct(EntityManagerInterface $em, private readonly PaginatorInterface $paginator, private readonly RecipeRepository $recipeRepository)
     {
         parent::__construct($em);
     }
@@ -20,22 +20,20 @@ class HomeController extends AbstractController
     #[Route(path: '/', name: 'home')]
     public function index(Request $request): Response
     {
-        $repo = $this->em->getRepository(Recipe::class);
-
         // Filtre favoris
         $favoritesOnly = $request->query->getBoolean('favorite');
-        $query = $repo->findAllQuery();
+        $query = $this->recipeRepository->findAllQuery();
 
         if ($favoritesOnly) {
             $user = $this->getUserOrThrow();
-            $query = $repo->findFavoritesQuery($user);
+            $query = $this->recipeRepository->findFavoritesQuery($user);
         }
 
         // Filtre catégorie
         $categories = $this->em->getRepository(Category::class)->findAll();
         $category = $request->query->get('category');
         if ($category) {
-            if ($category === 'none') {
+            if ('none' === $category) {
                 $query
                     ->leftJoin('r.categories', 'category')
                     ->where('category IS NULL');

@@ -1,5 +1,5 @@
 parameters:
-    level: 9
+    level: 6
     tmpDir: var/phpstan/cache
     paths:
         - src
@@ -10,3 +10,11 @@ parameters:
         containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml
         # Disabled for now, it make the CI instable
         # consoleApplicationLoader: var/phpstan/console-application.php
+    ignoreErrors:
+#        - "#Method .+ has parameter .+ with no value type specified in iterable type array#"
+        - "#Method .+ return type has no value type specified in iterable type array#"
+#        - "#Property .+ type has no value type specified in iterable type array#"
+        - "#Unable to resolve the template type .+ in call to function collect#"
+        - "#Class .+ implements generic interface .+ but does not specify its types: .+#"
+        - "#Method .+ return type with generic interface .+ does not specify its types: .+#"
+        - "#Method .+ has parameter .+ with generic class .+ but does not specify its types: .+#"

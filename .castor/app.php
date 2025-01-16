@@ -46,8 +46,7 @@ function yarn_install(): void
 function yarn_build(
     #[AsOption(description: 'Run in watch mode')]
     bool $watch = false,
-): void
-{
+): void {
     if ($watch) {
         io()->title('Watching yarn dependencies');
         docker_compose_run('yarn encore dev --watch');
@@ -89,13 +88,13 @@ function asset_watcher(): void
             $eventCounts[$file] = 0;
         }
 
-        $eventCounts[$file]++;
+        ++$eventCounts[$file];
 
-        if ($eventCounts[$file] === 2) {
+        if (2 === $eventCounts[$file]) {
             docker_compose_run('rm -rf public/assets', c: $c);
             $exitCode = docker_compose_run('bin/console sass:build', c: $c)->getExitCode();
 
-            if ($exitCode === 0) {
+            if (0 === $exitCode) {
                 docker_compose_run('bin/console asset-map:compile', c: $c);
                 io()->writeln("File <comment>$file</comment> has been $action.");
             }

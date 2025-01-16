@@ -14,6 +14,7 @@ class TwigPaginatorExtension extends AbstractExtension
     {
     }
 
+    #[\Override]
     public function getFunctions(): array
     {
         return [
@@ -29,7 +30,7 @@ class TwigPaginatorExtension extends AbstractExtension
         Environment $env,
         SlidingPagination $pagination,
         array $queryParams = [],
-        array $viewParams = []
+        array $viewParams = [],
     ): string {
         return $env->render(
             $pagination->getTemplate() ?: 'partials/pagination.html.twig',

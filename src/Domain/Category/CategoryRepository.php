@@ -47,7 +47,7 @@ class CategoryRepository extends ServiceEntityRepository
             ->where('LOWER(t.name) LIKE :q')
             ->orderBy('LENGTH(t.name)', 'ASC')
             ->setMaxResults(3)
-            ->setParameter('q', strtolower($q).'%')
+            ->setParameter('q', strtolower($q) . '%')
             ->getQuery()
             ->getResult();
     }

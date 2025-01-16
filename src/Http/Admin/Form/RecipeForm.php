@@ -19,6 +19,7 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class RecipeForm extends AbstractType
 {
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -72,6 +73,7 @@ class RecipeForm extends AbstractType
             ]);
     }
 
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

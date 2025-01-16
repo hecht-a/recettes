@@ -13,6 +13,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand('do:entity')]
 class MakeEntityCommand extends AbstractMakeCommand
 {
+    #[\Override]
     protected function configure(): void
     {
         $this
@@ -21,11 +22,12 @@ class MakeEntityCommand extends AbstractMakeCommand
         ;
     }
 
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
         $domain = $this->askDomain($io);
-        $entity = ucfirst($input->getArgument('entityName'));
+        $entity = ucfirst((string) $input->getArgument('entityName'));
 
         /** @var Application $application */
         $application = $this->getApplication();

@@ -23,7 +23,7 @@ class Step
     private string $description;
 
     #[ORM\ManyToOne(targetEntity: Recipe::class, inversedBy: 'steps')]
-    private ?Recipe $recipe;
+    private ?Recipe $recipe = null;
 
     public function getId(): ?int
     {

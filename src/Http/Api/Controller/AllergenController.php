@@ -20,7 +20,7 @@ class AllergenController extends AbstractController
         }
         $allergens = $allergenRepository->searchByName($search);
 
-        return $this->json(array_map(fn (Allergen $allergen) => [
+        return $this->json(array_map(fn (Allergen $allergen): array => [
             'name' => $allergen->getName(),
             'id' => $allergen->getId(),
         ], $allergens));

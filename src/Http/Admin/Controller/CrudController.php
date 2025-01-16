@@ -51,7 +51,7 @@ abstract class CrudController extends AbstractController
         EntityManagerInterface $em,
         protected readonly PaginatorInterface $paginator,
         protected readonly EventDispatcherInterface $dispatcher,
-        private readonly RequestStack $requestStack
+        private readonly RequestStack $requestStack,
     ) {
         parent::__construct($em);
     }
@@ -73,7 +73,7 @@ abstract class CrudController extends AbstractController
         ];
 
         foreach ($properties as $key => $property) {
-            if (!empty($only) && !in_array($key, $only)) {
+            if ([] !== $only && !in_array($key, $only)) {
                 continue;
             }
 
@@ -198,7 +198,7 @@ abstract class CrudController extends AbstractController
             'description' => 'Le contenu a bien été supprimé',
         ]);
 
-        return $this->redirectToRoute($this->routePrefix.'_index');
+        return $this->redirectToRoute($this->routePrefix . '_index');
     }
 
     /**
@@ -213,7 +213,7 @@ abstract class CrudController extends AbstractController
     {
         return $query
             ->where("LOWER(row.{$this->searchField}) LIKE :search")
-            ->setParameter('search', '%'.strtolower($search).'%');
+            ->setParameter('search', '%' . strtolower($search) . '%');
     }
 
     /**
@@ -222,9 +222,9 @@ abstract class CrudController extends AbstractController
     protected function redirectAfterSave(object $entity): RedirectResponse
     {
         if ($this->indexOnSave) {
-            return $this->redirectToRoute($this->routePrefix.'_index');
+            return $this->redirectToRoute($this->routePrefix . '_index');
         }
 
-        return $this->redirectToRoute($this->routePrefix.'_edit', ['id' => $entity->getId()]);
+        return $this->redirectToRoute($this->routePrefix . '_edit', ['id' => $entity->getId()]);
     }
 }
