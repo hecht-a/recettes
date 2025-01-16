@@ -18,17 +18,20 @@ class UtensilsType extends TextType implements DataTransformerInterface
     {
     }
 
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addViewTransformer($this);
         parent::buildForm($builder, $options);
     }
 
+    #[\Override]
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         parent::buildView($view, $form, $options);
     }
 
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -46,6 +49,7 @@ class UtensilsType extends TextType implements DataTransformerInterface
     /**
      * @param string|Utensil[] $value
      */
+    #[\Override]
     public function transform($value): ?string
     {
         if (!is_array($value)) {
@@ -66,6 +70,7 @@ class UtensilsType extends TextType implements DataTransformerInterface
      *
      * @return Utensil[]
      */
+    #[\Override]
     public function reverseTransform($value): array
     {
         if (empty($value)) {
@@ -76,15 +81,15 @@ class UtensilsType extends TextType implements DataTransformerInterface
         $utensils = explode(',', $value);
         foreach ($utensils as $utensil) {
             $parts = explode(':', trim($utensil));
-            if (!empty($parts[0])) {
+            if (isset($parts[0]) && ('' !== $parts[0] && '0' !== $parts[0])) {
                 $ids[$parts[0]] = $parts[1] ?? null;
             }
         }
 
         $utensils = $this->repository->findByNames(array_keys($ids));
-        $utensilsByName = collect($utensils)->keyBy(fn ($utensil) => $utensil->getName())->toArray();
+        $utensilsByName = collect($utensils)->keyBy(fn ($utensil): string => $utensil->getName())->toArray();
 
-        foreach ($ids as $name => $version) {
+        foreach (array_keys($ids) as $name) {
             if (!isset($utensilsByName[$name])) {
                 $utensils[] = (new Utensil())
                     ->setName($name);

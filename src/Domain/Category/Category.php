@@ -32,7 +32,7 @@ class Category implements IdentifiableInterface
     #[Assert\CssColor(formats: ['hex_long', 'hex_short'])]
     private string $color;
 
-    /** @var ArrayCollection<int, Recipe> */
+    /** @var Collection<int, Recipe> */
     #[ORM\ManyToMany(targetEntity: Recipe::class, inversedBy: 'categories')]
     private Collection $recipes;
 
@@ -41,6 +41,7 @@ class Category implements IdentifiableInterface
         $this->recipes = new ArrayCollection();
     }
 
+    #[\Override]
     public function getId(): ?int
     {
         return $this->id;
@@ -83,7 +84,7 @@ class Category implements IdentifiableInterface
     }
 
     /**
-     * @return ArrayCollection<int, Recipe>
+     * @return Collection<int, Recipe>
      */
     public function getRecipes(): Collection
     {

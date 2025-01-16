@@ -18,17 +18,20 @@ class CategoriesType extends TextType implements DataTransformerInterface
     {
     }
 
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addViewTransformer($this);
         parent::buildForm($builder, $options);
     }
 
+    #[\Override]
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         parent::buildView($view, $form, $options);
     }
 
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -46,6 +49,7 @@ class CategoriesType extends TextType implements DataTransformerInterface
     /**
      * @param string|Category[] $value
      */
+    #[\Override]
     public function transform($value): ?string
     {
         if (!is_array($value)) {
@@ -66,6 +70,7 @@ class CategoriesType extends TextType implements DataTransformerInterface
      *
      * @return Category[]
      */
+    #[\Override]
     public function reverseTransform($value): array
     {
         if (empty($value)) {
@@ -76,15 +81,15 @@ class CategoriesType extends TextType implements DataTransformerInterface
         $categories = explode(',', $value);
         foreach ($categories as $category) {
             $parts = explode(':', trim($category));
-            if (!empty($parts[0])) {
+            if (isset($parts[0]) && ('' !== $parts[0] && '0' !== $parts[0])) {
                 $ids[$parts[0]] = $parts[1] ?? null;
             }
         }
 
         $categories = $this->repository->findByNames(array_keys($ids));
-        $categoriesByName = collect($categories)->keyBy(fn ($category) => $category->getName())->toArray();
+        $categoriesByName = collect($categories)->keyBy(fn ($category): ?string => $category->getName())->toArray();
 
-        foreach ($ids as $name => $version) {
+        foreach (array_keys($ids) as $name) {
             if (!isset($categoriesByName[$name])) {
                 $categories[] = (new Category())
                     ->setName($name);

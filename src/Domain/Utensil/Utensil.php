@@ -31,7 +31,7 @@ class Utensil implements IdentifiableInterface
     #[Assert\NotBlank]
     private string $description;
 
-    /** @var ArrayCollection<int, Recipe> */
+    /** @var Collection<int, Recipe> */
     #[ORM\ManyToMany(targetEntity: Recipe::class, inversedBy: 'utensils')]
     private Collection $recipes;
 
@@ -43,7 +43,7 @@ class Utensil implements IdentifiableInterface
 
     #[ORM\Column(type: Types::STRING, length: 128, unique: true)]
     #[Gedmo\Slug(fields: ['name'])]
-    private string $slug;
+    public string $slug;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $createdAt;
@@ -58,6 +58,7 @@ class Utensil implements IdentifiableInterface
         $this->updatedAt = new \DateTimeImmutable();
     }
 
+    #[\Override]
     public function getId(): ?int
     {
         return $this->id;
@@ -88,7 +89,7 @@ class Utensil implements IdentifiableInterface
     }
 
     /**
-     * @return ArrayCollection<int, Recipe>
+     * @return Collection<int, Recipe>
      */
     public function getRecipes(): Collection
     {
@@ -117,7 +118,7 @@ class Utensil implements IdentifiableInterface
     {
         $this->imageFile = $imageFile;
 
-        if ($imageFile) {
+        if ($imageFile instanceof File) {
             $this->updatedAt = new \DateTimeImmutable();
         }
 

@@ -47,7 +47,7 @@ class UtensilRepository extends ServiceEntityRepository
             ->where('LOWER(a.name) LIKE :q')
             ->orderBy('LENGTH(a.name)', 'ASC')
             ->setMaxResults(3)
-            ->setParameter('q', strtolower($q).'%')
+            ->setParameter('q', strtolower($q) . '%')
             ->getQuery()
             ->getResult();
     }

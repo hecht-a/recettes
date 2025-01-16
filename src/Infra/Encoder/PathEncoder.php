@@ -7,7 +7,7 @@ use Symfony\Component\Serializer\Encoder\EncoderInterface;
 
 class PathEncoder implements EncoderInterface
 {
-    final public const FORMAT = 'path';
+    final public const string FORMAT = 'path';
 
     public function __construct(private readonly UrlGeneratorInterface $urlGenerator)
     {
@@ -16,6 +16,7 @@ class PathEncoder implements EncoderInterface
     /**
      * @param mixed[] $context
      */
+    #[\Override]
     public function encode(mixed $data, string $format, array $context = []): string
     {
         ['path' => $path, 'params' => $params] = array_merge(['params' => []], $data);
@@ -28,6 +29,7 @@ class PathEncoder implements EncoderInterface
     /**
      * @param mixed[] $context
      */
+    #[\Override]
     public function supportsEncoding(string $format, array $context = []): bool
     {
         return self::FORMAT === $format;

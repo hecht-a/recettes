@@ -8,13 +8,13 @@ final class DateImmutableProvider extends BaseProvider
 {
     public static function dateTimeImmutableThisYear(\DateTimeImmutable|int|string $max = 'now'): \DateTimeImmutable
     {
-        return static::dateTimeBetween('first day of january this year', $max);
+        return self::dateTimeBetween('first day of january this year', $max);
     }
 
     public static function dateTimeBetween(\DateTimeImmutable|string $startDate = '-30 years', \DateTimeImmutable|int|string $endDate = 'now'): \DateTimeImmutable
     {
         $startTimestamp = $startDate instanceof \DateTimeImmutable ? $startDate->getTimestamp() : (int) strtotime($startDate);
-        $endTimestamp = static::getMaxTimestamp($endDate);
+        $endTimestamp = self::getMaxTimestamp($endDate);
 
         if ($startTimestamp > $endTimestamp) {
             throw new \InvalidArgumentException('Start date must be anterior to end date.');
@@ -25,7 +25,7 @@ final class DateImmutableProvider extends BaseProvider
         return new \DateTimeImmutable("@{$timestamp}");
     }
 
-    protected static function getMaxTimestamp(\DateTimeImmutable|float|int|string $max = 'now'): int
+    private static function getMaxTimestamp(\DateTimeImmutable|float|int|string $max = 'now'): int
     {
         if (is_numeric($max)) {
             return (int) $max;
@@ -35,6 +35,6 @@ final class DateImmutableProvider extends BaseProvider
             return $max->getTimestamp();
         }
 
-        return (int) strtotime(empty($max) ? 'now' : $max);
+        return (int) strtotime('' === $max || '0' === $max ? 'now' : $max);
     }
 }

@@ -9,6 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @extends CrudController<Category>
+ */
 #[Route(path: '/categories', name: 'category_')]
 class CategoryController extends CrudController
 {

@@ -53,24 +53,24 @@ class Recipe implements IdentifiableInterface
     #[Assert\Positive]
     private int $cookingTime = 0;
 
-    /** @var ArrayCollection<int, IngredientRecipe> */
+    /** @var Collection<int, IngredientRecipe> */
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: IngredientRecipe::class, cascade: ['persist', 'remove'])]
     private Collection $ingredients;
 
-    /** @var ArrayCollection<int, Category> */
-    #[Orm\ManyToMany(targetEntity: Category::class, mappedBy: 'recipes')]
+    /** @var Collection<int, Category> */
+    #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'recipes')]
     private Collection $categories;
 
-    /** @var ArrayCollection<int, Utensil> */
+    /** @var Collection<int, Utensil> */
     #[ORM\ManyToMany(targetEntity: Utensil::class, mappedBy: 'recipes')]
     private Collection $utensils;
 
-    /** @var ArrayCollection<int, Allergen> */
+    /** @var Collection<int, Allergen> */
     #[ORM\ManyToMany(targetEntity: Allergen::class, mappedBy: 'recipes')]
     private Collection $allergens;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'recipes')]
-    private ?User $user;
+    private ?User $user = null;
 
     #[Vich\UploadableField(mapping: 'recipe', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
@@ -78,15 +78,15 @@ class Recipe implements IdentifiableInterface
     #[ORM\Column(nullable: true)]
     private ?string $imageName = null;
 
-    /** @var ArrayCollection<int, Step> */
+    /** @var Collection<int, Step> */
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, cascade: ['persist', 'remove'])]
     private Collection $steps;
 
     #[ORM\Column(type: Types::STRING, length: 128, unique: true)]
     #[Gedmo\Slug(fields: ['name'])]
-    private string $slug;
+    public string $slug;
 
-    /** @var ArrayCollection<int, User> */
+    /** @var Collection<int, User> */
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoriteRecipes')]
     #[ORM\JoinTable(name: 'favorite_recipe')]
     private Collection $usersFavorite;
@@ -106,6 +106,7 @@ class Recipe implements IdentifiableInterface
         $this->usersFavorite = new ArrayCollection();
     }
 
+    #[\Override]
     public function getId(): ?int
     {
         return $this->id;
@@ -184,7 +185,7 @@ class Recipe implements IdentifiableInterface
     }
 
     /**
-     * @return ArrayCollection<int, IngredientRecipe>
+     * @return Collection<int, IngredientRecipe>
      */
     public function getIngredients(): Collection
     {
@@ -211,7 +212,7 @@ class Recipe implements IdentifiableInterface
     }
 
     /**
-     * @return ArrayCollection<int, Category>
+     * @return Collection<int, Category>
      */
     public function getCategories(): Collection
     {
@@ -239,7 +240,7 @@ class Recipe implements IdentifiableInterface
     }
 
     /**
-     * @return ArrayCollection<int, Utensil>
+     * @return Collection<int, Utensil>
      */
     public function getUtensils(): Collection
     {
@@ -267,7 +268,7 @@ class Recipe implements IdentifiableInterface
     }
 
     /**
-     * @return ArrayCollection<int, Allergen>
+     * @return Collection<int, Allergen>
      */
     public function getAllergens(): Collection
     {
@@ -310,7 +311,7 @@ class Recipe implements IdentifiableInterface
     {
         $this->imageFile = $imageFile;
 
-        if ($imageFile !== null) {
+        if ($imageFile instanceof File) {
             $this->updatedAt = new \DateTimeImmutable();
         }
 
@@ -335,7 +336,7 @@ class Recipe implements IdentifiableInterface
     }
 
     /**
-     * @return ArrayCollection<int, Step>
+     * @return Collection<int, Step>
      */
     public function getSteps(): Collection
     {
@@ -366,7 +367,7 @@ class Recipe implements IdentifiableInterface
     }
 
     /**
-     * @return ArrayCollection<int, User>
+     * @return Collection<int, User>
      */
     public function getUsersFavorite(): Collection
     {

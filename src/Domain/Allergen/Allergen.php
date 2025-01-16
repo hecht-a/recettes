@@ -29,19 +29,20 @@ class Allergen implements IdentifiableInterface
     #[Assert\NotBlank]
     private string $description;
 
-    /** @var ArrayCollection<int, Recipe> */
+    /** @var Collection<int, Recipe> */
     #[ORM\ManyToMany(targetEntity: Recipe::class, inversedBy: 'allergens')]
     private Collection $recipes;
 
     #[ORM\Column(type: Types::STRING, length: 128, unique: true)]
     #[Gedmo\Slug(fields: ['name'])]
-    private string $slug;
+    public string $slug;
 
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
     }
 
+    #[\Override]
     public function getId(): ?int
     {
         return $this->id;
@@ -72,7 +73,7 @@ class Allergen implements IdentifiableInterface
     }
 
     /**
-     * @return ArrayCollection<int, Recipe>
+     * @return Collection<int, Recipe>
      */
     public function getRecipes(): Collection
     {

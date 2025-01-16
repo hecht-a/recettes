@@ -18,17 +18,20 @@ class AllergensType extends TextType implements DataTransformerInterface
     {
     }
 
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addViewTransformer($this);
         parent::buildForm($builder, $options);
     }
 
+    #[\Override]
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         parent::buildView($view, $form, $options);
     }
 
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -46,6 +49,7 @@ class AllergensType extends TextType implements DataTransformerInterface
     /**
      * @param string|Allergen[] $value
      */
+    #[\Override]
     public function transform($value): ?string
     {
         if (!is_array($value)) {
@@ -66,6 +70,7 @@ class AllergensType extends TextType implements DataTransformerInterface
      *
      * @return Allergen[]
      */
+    #[\Override]
     public function reverseTransform($value): array
     {
         if (empty($value)) {
@@ -76,15 +81,15 @@ class AllergensType extends TextType implements DataTransformerInterface
         $allergens = explode(',', $value);
         foreach ($allergens as $allergen) {
             $parts = explode(':', trim($allergen));
-            if (!empty($parts[0])) {
+            if (isset($parts[0]) && ('' !== $parts[0] && '0' !== $parts[0])) {
                 $ids[$parts[0]] = $parts[1] ?? null;
             }
         }
 
         $allergens = $this->repository->findByNames(array_keys($ids));
-        $allergensByName = collect($allergens)->keyBy(fn ($allergen) => $allergen->getName())->toArray();
+        $allergensByName = collect($allergens)->keyBy(fn ($allergen): ?string => $allergen->getName())->toArray();
 
-        foreach ($ids as $name => $version) {
+        foreach (array_keys($ids) as $name) {
             if (!isset($allergensByName[$name])) {
                 $allergens[] = (new Allergen())
                     ->setName($name);

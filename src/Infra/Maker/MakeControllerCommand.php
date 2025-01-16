@@ -13,6 +13,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand('do:controller')]
 class MakeControllerCommand extends AbstractMakeCommand
 {
+    #[\Override]
     protected function configure(): void
     {
         $this
@@ -22,10 +23,11 @@ class MakeControllerCommand extends AbstractMakeCommand
         ;
     }
 
+    #[\Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $controllerPath = ucfirst($input->getArgument('controllerName'));
+        $controllerPath = ucfirst((string) $input->getArgument('controllerName'));
         if (!str_ends_with($controllerPath, 'Controller')) {
             $controllerPath .= 'Controller';
         }
@@ -37,16 +39,12 @@ class MakeControllerCommand extends AbstractMakeCommand
             $namespace = '';
             $className = $parts[0];
         } else {
-            $namespace = '\\'.implode('\\', array_slice($parts, 0, -1));
+            $namespace = '\\' . implode('\\', array_slice($parts, 0, -1));
             $className = $parts[count($parts) - 1];
         }
 
         $api = $input->getOption('api');
-        if (false === $api) {
-            $basePath = 'src/Http/Controller/';
-        } else {
-            $basePath = 'src/Http/Api/Controller/';
-        }
+        $basePath = false === $api ? 'src/Http/Controller/' : 'src/Http/Api/Controller/';
 
         $params = [
             'namespace' => $namespace,

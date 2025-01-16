@@ -33,13 +33,13 @@ class Ingredient implements IdentifiableInterface
     #[Assert\NotBlank]
     private string $description;
 
-    /** @var ArrayCollection<int, IngredientRecipe> */
+    /** @var Collection<int, IngredientRecipe> */
     #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: IngredientRecipe::class)]
     private Collection $recipes;
 
-    #[Orm\ManyToOne(targetEntity: Unit::class, inversedBy: 'ingredients')]
+    #[ORM\ManyToOne(targetEntity: Unit::class, inversedBy: 'ingredients')]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
-    private ?Unit $unit;
+    private ?Unit $unit = null;
 
     #[Vich\UploadableField(mapping: 'ingredient', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
@@ -49,7 +49,7 @@ class Ingredient implements IdentifiableInterface
 
     #[ORM\Column(type: Types::STRING, length: 128, unique: true)]
     #[Gedmo\Slug(fields: ['name'])]
-    private string $slug;
+    public string $slug;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $createdAt;
@@ -64,6 +64,7 @@ class Ingredient implements IdentifiableInterface
         $this->updatedAt = new \DateTimeImmutable();
     }
 
+    #[\Override]
     public function getId(): ?int
     {
         return $this->id;
@@ -94,7 +95,7 @@ class Ingredient implements IdentifiableInterface
     }
 
     /**
-     * @return ArrayCollection<int, IngredientRecipe>
+     * @return Collection<int, IngredientRecipe>
      */
     public function getRecipes(): Collection
     {
@@ -135,7 +136,7 @@ class Ingredient implements IdentifiableInterface
     {
         $this->imageFile = $imageFile;
 
-        if ($imageFile) {
+        if ($imageFile instanceof File) {
             $this->updatedAt = new \DateTimeImmutable();
         }
 

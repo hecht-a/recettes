@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @extends CrudController<Ingredient>
+ */
 #[Route(path: '/ingredients', name: 'ingredient_')]
 class IngredientController extends CrudController
 {

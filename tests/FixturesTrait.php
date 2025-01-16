@@ -26,7 +26,7 @@ trait FixturesTrait
     public function loadFixtures(array $fixtures): array
     {
         $fixturePath = $this->getFixturesPath();
-        $files = array_map(fn ($fixture) => PathHelper::join($fixturePath, $fixture.'.yaml'), $fixtures);
+        $files = array_map(fn ($fixture) => PathHelper::join($fixturePath, $fixture . '.yaml'), $fixtures);
 
         /** @var ContainerBagInterface $container */
         $container = $this->getContainer();
@@ -39,6 +39,6 @@ trait FixturesTrait
 
     private function getFixturesPath()
     {
-        return __DIR__.'/fixtures/';
+        return __DIR__ . '/fixtures/';
     }
 }

@@ -42,11 +42,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(min: 3, max: 40)]
     private string $name;
 
-    /** @var ArrayCollection<int, Recipe> */
+    /** @var Collection<int, Recipe> */
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Recipe::class)]
     private Collection $recipes;
 
-    /** @var ArrayCollection<int, Recipe> */
+    /** @var Collection<int, Recipe> */
     #[ORM\ManyToMany(targetEntity: Recipe::class, inversedBy: 'usersFavorite')]
     #[ORM\JoinTable(name: 'favorite_recipe')]
     private Collection $favoriteRecipes;
@@ -78,17 +78,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @see UserInterface
      */
+    #[\Override]
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
-    }
-
-    /**
-     * @deprecated since Symfony 5.3, use getUserIdentifier instead
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->email;
+        return $this->email;
     }
 
     /**
@@ -96,6 +89,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return string[]
      */
+    #[\Override]
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -120,6 +114,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see PasswordAuthenticatedUserInterface
      */
+    #[\Override]
     public function getPassword(): string
     {
         return $this->password;
@@ -146,6 +141,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
+    #[\Override]
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
@@ -165,7 +161,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return ArrayCollection<int, Recipe>
+     * @return Collection<int, Recipe>
      */
     public function getRecipes(): Collection
     {
@@ -191,7 +187,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return ArrayCollection<int, Recipe>
+     * @return Collection<int, Recipe>
      */
     public function getFavoriteRecipes(): Collection
     {
