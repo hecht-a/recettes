@@ -43,7 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $name;
 
     /** @var Collection<int, Recipe> */
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Recipe::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Recipe::class, cascade: ['remove', 'persist'])]
     private Collection $recipes;
 
     /** @var Collection<int, Recipe> */

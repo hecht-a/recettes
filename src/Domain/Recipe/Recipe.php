@@ -69,7 +69,7 @@ class Recipe implements IdentifiableInterface
     #[ORM\ManyToMany(targetEntity: Allergen::class, mappedBy: 'recipes')]
     private Collection $allergens;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'recipes')]
+    #[ORM\ManyToOne(targetEntity: User::class, cascade: ['remove', 'persist'], inversedBy: 'recipes')]
     private ?User $user = null;
 
     #[Vich\UploadableField(mapping: 'recipe', fileNameProperty: 'imageName')]
