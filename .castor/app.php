@@ -17,9 +17,6 @@ function install(): void
     io()->section('Installing PHP dependencies');
     docker_compose_run('composer install -n --prefer-dist --optimize-autoloader');
 
-    yarn_install();
-    yarn_build();
-
     \qa\install();
 }
 
@@ -33,33 +30,6 @@ function update_php(bool $withTools = false): void
     docker_compose_run('composer bump');
 
     \qa\update();
-}
-
-#[AsTask(description: 'Installs yarn dependencies', name: 'yarn:install', aliases: ['yarn'])]
-function yarn_install(): void
-{
-    io()->title('Installing yarn dependencies');
-    docker_compose_run('yarn install --frozen-lockfile');
-}
-
-#[AsTask(description: 'Builds yarn dependencies', name: 'yarn:build', aliases: ['yarn-build'])]
-function yarn_build(
-    #[AsOption(description: 'Run in watch mode')]
-    bool $watch = false,
-): void {
-    if ($watch) {
-        io()->title('Watching yarn dependencies');
-        docker_compose_run('yarn encore dev --watch');
-
-        return;
-    }
-
-    io()->title('Building yarn dependencies');
-    if ('ci' == context()->name) {
-        docker_compose_run('yarn encore dev', c: context()->withAllowFailure());
-    } else {
-        docker_compose_run('yarn build');
-    }
 }
 
 #[AsTask(description: 'Clear the application cache', aliases: ['cache-clear'])]
