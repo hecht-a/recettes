@@ -45,7 +45,6 @@ function asset_watcher(): void
 {
     $c = context()->withAllowFailure();
 
-    docker_compose_run('bin/console sass:build', c: $c);
     docker_compose_run('bin/console asset-map:compile', c: $c);
 
     $eventCounts = [];

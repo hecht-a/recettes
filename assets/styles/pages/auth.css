@@ -4,9 +4,8 @@
 }
 
 .card-auth {
-    @extend %card;
-
     min-width: 40%;
+    width: 40% !important;
 }
 
 .card-auth .card-content {
@@ -16,8 +15,8 @@
 .card-auth .card-content .card-body form {
     display: flex;
     flex-direction: column;
-    gap: space(2);
-    margin-top: space(2);
+    gap: calc(2 * var(--space));
+    margin-top: calc(2 * var(--space));
 }
 
 .card-auth .card-content .card-body .link {
@@ -33,7 +32,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: space(4) 0;
+    margin: calc(4 * var(--space)) 0;
 
     &:before, &:after {
         content: '';

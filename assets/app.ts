@@ -4,7 +4,31 @@ import 'htmx.org'
 
 dayjs.locale('fr')
 
-import './styles/app.scss'
+import './styles/tools/reset.css';
+import './styles/tools/mixins.css';
+import './styles/tools/layout.css';
+import './styles/tools/typography.css';
+
+import './styles/pages/home.css';
+import './styles/pages/recipe.css';
+import './styles/pages/auth.css';
+
+import './styles/modules/header.css';
+import './styles/modules/card.css';
+import './styles/modules/pagination.css';
+import './styles/modules/step.css';
+import './styles/modules/ingredient_utensil.css';
+import './styles/modules/form.css';
+import './styles/modules/alert.css';
+import './styles/modules/table.css';
+import './styles/modules/select.css';
+import './styles/modules/btn.css';
+import './styles/modules/icon.css';
+import './styles/modules/glossary.css';
+import './styles/modules/search.css';
+import './styles/modules/filter.css';
+import './styles/modules/progressbar.css';
+import './styles/app.css'
 
 import {Alert} from "./elements/Alert.ts";
 import {InputChoices, SelectChoices} from "./elements/Choices.ts";
@@ -41,7 +65,7 @@ declare global {
   }
 }
 
-document.addEventListener('htmx:load', (event) => {
+document.addEventListener('htmx:load', () => {
   const burger = document.querySelector('.header_burger .burger')!
   const navbar = document.querySelector('.header')!
 

@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="container glossary-show">
-        <h1 class="glossary-title">{{ allergen.name }}</h1>
+        <h1 class="glossary-title hero-title">{{ allergen.name }}</h1>
         <div class="glossary-recipes">
             <p class="muted">
                 Recettes: {% if allergen.recipes | length > 0 %}
@@ -18,7 +18,7 @@
                 {% endif %}
             </p>
         </div>
-        <div class="glossary-description">
+        <div class="glossary-description hero-text">
             {{ allergen.description }}
         </div>
     </div>

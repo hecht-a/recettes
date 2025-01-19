@@ -24,9 +24,8 @@
     overflow: hidden;
 }
 
-%container,
 .container {
-    @include margin(3, ['bottom']);
+    margin-bottom: calc(3 * var(--space));
 
     box-sizing: border-box;
     width: 100%;
@@ -34,7 +33,6 @@
     padding-right: calc(50% - var(--container-width) / 2);
 }
 
-%stack,
 .stack,
 .stack-large,
 .stack-separated {
@@ -94,7 +92,7 @@
 }
 
 .hstack-large > * + * {
-    margin-left: space(4);
+    margin-left: calc(4 * var(--space));
 }
 
 .flex {
@@ -107,19 +105,20 @@
     }
 }
 
-%grid,
-.grid {
+.grid,
+fieldset > div fieldset > div {
     width: 100%;
     display: grid !important;
-    gap: space(2);
+    gap: calc(2 * var(--space));
     grid-template-columns: repeat(auto-fill, minmax(var(--col, 275px), 1fr));
 
-    @include up(720) {
-        grid-template-columns: repeat(2, 1fr);
+    @media (min-width: 720px) {
+        & {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 }
 
-%grid2,
 .grid2 {
     width: 100%;
     display: grid !important;
@@ -129,7 +128,6 @@
     grid-template-rows: 1fr;
 }
 
-%grid3,
 .grid3 {
     width: 100%;
     display: grid !important;

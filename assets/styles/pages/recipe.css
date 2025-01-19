@@ -2,19 +2,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: space(3);
+    gap: calc(3 * var(--space));
 }
 
 .recipe .titles {
     text-align: center;
 }
 
-.recipe .titles .recipe__name {
-    @extend %hero-title;
-    font-weight: normal;
-}
-.recipe .titles .recipe__description {
-    @extend %hero-text;
+.recipe .titles .recipe__name, .recipe .titles .recipe__description {
     font-weight: normal;
 }
 
@@ -27,15 +22,17 @@
         height: 100%;
     }
 
-    @include down(860) {
-        width: 80%;
-        height: auto;
+    @media (max-width: 860px) {
+        & {
+            width: 80%;
+            height: auto;
+        }
     }
 }
 
 .recipe .meta {
     display: flex;
-    gap: space(2);
+    gap: calc(2 * var(--space));
     position: relative;
 
     &:after {
@@ -44,23 +41,23 @@
         height: 2px;
         background: var(--grey-green);
         position: absolute;
-        bottom: space(-1.5);
+        bottom: calc(-1.5 * var(--space));
         left: 0;
     }
 
-    @include down(980) {
-        flex-direction: column;
+    @media (max-width: 980px) {
+        & {
+            flex-direction: column;
+        }
     }
 }
 
 .recipe .meta .times {
-    @extend %muted, %card;
-
-    padding: space(1);
+    padding: calc(1 * var(--space));
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: space(1);
+    gap: calc(1 * var(--space));
     width: calc(650px / 1.5);
 
     div {
@@ -74,15 +71,13 @@
 }
 
 .recipe .meta .allergens {
-    @extend %card;
-
-    padding: space(1);
+    padding: calc(1 * var(--space));
     word-break: break-word;
     max-width: calc(650px / 1.5);
 
     .label {
         font-weight: bold;
-        margin-right: space(1);
+        margin-right: calc(1 * var(--space));
     }
 }
 
@@ -91,15 +86,17 @@
     width: 80%;
     grid-template-columns: 3fr 1fr;
     grid-template-rows: 1fr;
-    grid-column-gap: space(6);
+    grid-column-gap: calc(6 * var(--space));
     grid-template-areas: 'steps ingredients_utensils';
-    margin-bottom: space(2);
+    margin-bottom: calc(2 * var(--space));
 
-    @include down(980) {
-        grid-template-rows: 3fr;
-        grid-template-columns: 1fr;
-        grid-row-gap: space(6);
-        grid-template-areas: 'ingredients_utensils' 'steps';
+    @media (max-width: 980px) {
+        & {
+            grid-template-rows: 3fr;
+            grid-template-columns: 1fr;
+            grid-row-gap: calc(6 * var(--space));
+            grid-template-areas: 'ingredients_utensils' 'steps';
+        }
     }
 }
 
@@ -107,7 +104,7 @@
     grid-area: steps;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: space(2);
+    grid-gap: calc(2 * var(--space));
     position: relative;
 
     &:after {
@@ -116,49 +113,52 @@
         width: 1px;
         height: 100%;
         background: var(--grey-green);
-        right: space(-3);
+        right: calc(-3 * var(--space));
 
-        @include down(980) {
-            width: 100%;
-            height: 1px;
-            top: space(-3);
-            right: 0;
+        @media (max-width: 980px) {
+            & {
+                width: 100%;
+                height: 1px;
+                top: calc(-3 * var(--space));
+                right: 0;
+            }
         }
     }
 
-    @include down(860) {
-        grid-template-columns: 1fr;
+    @media (max-width: 860px) {
+        & {
+            grid-template-columns: 1fr;
+        }
     }
 }
 
 .recipe .ingredients_utensils {
     grid-area: ingredients_utensils;
-    @extend %card;
-
     background: red;
     height: max-content;
-    padding: space(2);
+    padding: calc(2 * var(--space));
     display: flex;
     flex-direction: column;
-    gap: space(2);
+    gap: calc(2 * var(--space));
 
-    @include down(980) {
-        flex-direction: row;
+    @media (max-width: 980px) {
+        & {
+            flex-direction: row;
 
-        .ingredients, .utensils {
-            width: 50%;
+            .ingredients, .utensils {
+                width: 50%;
+            }
         }
     }
 }
 
 .recipe .ingredients_utensils .ingredients_utensils__title {
-    @extend %hero-text;
-    margin-bottom: space(1);
+    margin-bottom: calc(1 * var(--space));
 }
 
 .recipe .ingredients_utensils .ingredients {
     position: relative;
-    margin-bottom: space(4);
+    margin-bottom: calc(4 * var(--space));
 
     &:after {
         position: absolute;
@@ -166,19 +166,21 @@
         height: 1px;
         width: 100%;
         background: var(--grey-green);
-        bottom: space(-2);
+        bottom: calc(-2 * var(--space));
         left: 0;
     }
 
-    @include down(980) {
-        margin-bottom: 0;
+    @media (max-width: 980px) {
+        & {
+            margin-bottom: 0;
 
-        &:after {
-            height: 100%;
-            width: 1px;
-            left: calc(100% + #{space(1)});
-            bottom: 0;
-            top: 0;
+            &:after {
+                height: 100%;
+                width: 1px;
+                left: calc(100% + calc(1 * var(--space)));
+                bottom: 0;
+                top: 0;
+            }
         }
     }
 }

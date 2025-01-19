@@ -20,25 +20,21 @@
     position: sticky;
     max-height: 100vh;
     overflow: auto;
-    padding: space(1.5) space(3);
-}
-
-.dashboard-sidebar__main li:first-child a {
-    @extend %h3;
+    padding: calc(1.5 * var(--space)) calc(3 * var(--space));
 }
 
 .dashboard-sidebar__main li a {
     display: flex;
     align-items: center;
-    padding: space(1) 0;
-    gap: space(1);
+    padding: calc(1 * var(--space)) 0;
+    gap: calc(1 * var(--space));
     line-height: 2;
 
     &[aria-current] {
         border-left: 3px solid var(--secondary);
         background: var(--white-green);
-        margin:0 space(-3);
-        padding-left: space(3);
+        margin:0 calc(-3 * var(--space));
+        padding-left: calc(3 * var(--space));
         color: var(--secondary);
     }
 
@@ -48,9 +44,9 @@
     }
 }
 
-// TOPBAR
+/* TOPBAR */
 .dashboard-topbar {
-    padding: 0 space(6);
+    padding: 0 calc(6 * var(--space));
     display: flex;
     align-items: center;
     height: 60px;
@@ -70,7 +66,7 @@
 }
 .dashboard-topbar__nav > li {
     display: block;
-    margin-left: space(2);
+    margin-left: calc(2 * var(--space));
 }
 .dashboard-topbar__nav > li > a,
 .dashboard-topbar__nav > li > button {
@@ -83,7 +79,7 @@
     input {
         outline: none;
         width: 100%;
-        padding: space(1) 0 space(1) space(3);
+        padding: calc(1 * var(--space)) 0 calc(1 * var(--space)) calc(3 * var(--space));
         border: none;
         background: url(../../../images/input-search.svg) left center / 14px 14px no-repeat;
         color: inherit;
@@ -93,10 +89,10 @@
     }
 }
 
-// MAIN
+/* MAIN */
 .dashboard-body {
     position: relative;
-    padding: space(3) space(6);
+    padding: calc(3 * var(--space)) calc(6 * var(--space));
     grid-area: body;
 }
 
@@ -115,19 +111,19 @@
     box-shadow: 0 2px 4px var(--shadow);
     border-radius: 3px;
     transition: 0.3s;
-    padding: space(3);
+    padding: calc(3 * var(--space));
 }
 .dashboard-card__tabs {
     display: flex;
     justify-content: flex-start;
     border-bottom: 1px solid var(--border);
-    margin: space(-3) space(-3) space(3) space(-3);
+    margin: calc(-3 * var(--space)) calc(-3 * var(--space)) calc(3 * var(--space)) calc(-3 * var(--space));
     color: var(--black);
     background: var(--main);
     font-size: .9rem;
 
     & > * {
-        padding: space(1) space(2);
+        padding: calc(1 * var(--space)) calc(2 * var(--space));
         background: var(--main);
         border-right: 1px solid var(--border);
         border-bottom: 1px solid var(--border);
@@ -163,12 +159,12 @@
     justify-content: flex-end;
 
     & > * + * {
-        margin-left: space(1);
+        margin-left: calc(1 * var(--space));
     }
 }
 
 .color_column {
     display: flex;
     align-items: center;
-    gap: space(2);
+    gap: calc(2 * var(--space));
 }

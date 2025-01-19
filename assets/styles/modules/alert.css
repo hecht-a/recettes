@@ -1,4 +1,4 @@
-// Container
+/* Container */
 .alert {
     z-index: 100;
     display: flex;
@@ -7,12 +7,12 @@
     width: 460px;
     height: 70px;
     background: var(--white);
-    padding: space(1) space(2);
+    padding: calc(1 * var(--space)) calc(2 * var(--space));
     border-radius: 8px;
     border-left: 4px solid var(--color);
     position: absolute;
-    bottom: space(6);
-    right: space(6);
+    bottom: calc(6 * var(--space));
+    right: calc(6 * var(--space));
     animation: alertIn 0.5s both;
     box-shadow: 0 2px 4px var(--shadow);
 }
@@ -37,7 +37,7 @@
     --color: var(--blue);
 }
 
-// Icons
+/* Icons*/
 .alert .icon svg {
     color: var(--color);
     width: 32px;
@@ -50,7 +50,7 @@
     cursor: pointer;
 }
 
-// Content
+/* Content*/
 .alert .content {
     width: 340px;
 }
@@ -67,7 +67,7 @@
     font-size: 12px;
 }
 
-// Load bar
+/* Load bar*/
 .alert-progress {
     height: 4px;
     background: var(--color);

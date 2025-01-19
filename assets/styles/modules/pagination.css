@@ -1,27 +1,21 @@
-// Pagination classique
-// =============
 .pagination {
     display: flex;
     width: 100%;
     justify-content: center;
-    margin: space(3) 0;
+    margin: calc(3 * var(--space)) 0;
     overflow-x: auto;
     overflow-y: hidden;
-    // Evite le découpage des ombres
     padding: 6px 0;
 }
 .pagination li a,
 .pagination li span {
-    margin: space(0.5);
-    padding: space(0.5) space(1);
+    margin: calc(0.5 * var(--space));
+    padding: calc(0.5 * var(--space)) calc(1 * var(--space));
     min-width: 35px;
     white-space: nowrap;
 }
 .pagination span {
     opacity: 0.6;
-}
-.pagination a {
-    @extend %card;
 }
 .pagination a:hover {
     background: var(--main);

@@ -74,7 +74,7 @@ export class SearchInput extends HTMLElement {
       }
 
       const results = document.createElement('ul')
-      results.classList.add('results', 'search-input_suggestions')
+      results.classList.add('results', 'search-input_suggestions', 'card')
       this.querySelector('form')!.appendChild(results
       )
       const items: string[] = this.results.map((item) => {

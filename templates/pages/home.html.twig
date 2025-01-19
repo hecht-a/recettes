@@ -45,14 +45,14 @@
             </div>
         </div>
         <div class="recipes" id="recipes">
-            <div class="recipe-hero ">
+            <div class="recipe-hero hero-text">
                 {% if favorites_only %}
-                    <h1>Vos recettes favories</h1>
+                    <h1 class="hero-title">Vos recettes favories</h1>
                     {% if page > 1 %}
                         <p>page {{ page }}</p>
                     {% endif %}
                 {% else %}
-                    <h1>Toutes les recettes</h1>
+                    <h1 class="hero-title">Toutes les recettes</h1>
                     {% if page > 1 %}
                         <p>page {{ page }}</p>
                     {% else %}

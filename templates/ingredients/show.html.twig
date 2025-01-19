@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="container glossary-show">
-        <h1 class="glossary-title">{{ ingredient.name }}</h1>
+        <h1 class="glossary-title hero-title">{{ ingredient.name }}</h1>
         <div class="glossary-image">
             <img src="{{ vich_uploader_asset(ingredient) }}" alt="{{ ingredient.name }}">
         </div>
@@ -21,7 +21,7 @@
                 {% endif %}
             </p>
         </div>
-        <div class="glossary-description">
+        <div class="glossary-description hero-text">
             {{ ingredient.description }}
         </div>
     </div>
