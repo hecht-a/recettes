@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-// import 'dayjs/locale/fr'
+import 'dayjs/locale/fr'
 import 'htmx.org'
 
 dayjs.locale('fr')
