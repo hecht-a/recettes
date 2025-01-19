@@ -12,9 +12,6 @@
     <link rel="icon" type="image/png" sizes="196x196" href="/favicons/icon-196x196.png"/>
     <link rel="icon" type="image/png" sizes="310x310" href="/favicons/icon-310x310.png"/>
     <meta name="application-name" content="Recettes"/>
-    {% block stylesheets %}
-    {% endblock %}
-
     {% block javascripts %}
         <script type="text/javascript" src="{{ asset('app.ts') }}"></script>
         {% block importmap %}{{ importmap('app') }}{% endblock %}
@@ -25,7 +22,7 @@
     <div class="progress-bar">
         <div class="bar"></div>
     </div>
-    <nav class="header">
+    <nav class="container header">
         <ul class="header-nav">
             <li class="header__home">
                 <svg>

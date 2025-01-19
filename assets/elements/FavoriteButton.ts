@@ -23,12 +23,12 @@ export class FavoriteButton extends HTMLElement {
   setButton(status: Status) {
     if(status === 'liked') {
       this.setAttribute('is-liked', 'true')
-      this.innerHTML = this.buttonTemplate('Supprimer des favoris', 'btn-dislike', 'emptyheart')
+      this.innerHTML = this.buttonTemplate('Supprimer des favoris', 'btn btn-like-dislike btn-dislike', 'emptyheart')
     } else if(status === 'disliked') {
       this.removeAttribute('is-liked')
-      this.innerHTML = this.buttonTemplate('Ajouter aux favoris', 'btn-like', 'fullheart')
+      this.innerHTML = this.buttonTemplate('Ajouter aux favoris', 'btn btn-like-dislike btn-like', 'fullheart')
     } else {
-      this.innerHTML = `<button type="button" class="btn-loading mt1" disabled>
+      this.innerHTML = `<button type="button" class="btn btn-like-dislike btn-loading mt1" disabled>
         Chargement
         <circle-loader></circle-loader>
       </button>`

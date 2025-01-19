@@ -1,7 +1,7 @@
 .form-group.ingredients, .form-group.steps {
     display: flex;
     flex-direction: column-reverse;
-    gap: space(3);
+    gap: calc(3 * var(--space));
 }
 
 .form-group.ingredients div fieldset > div {
@@ -12,7 +12,7 @@
 .form-group.steps > div {
     display: flex;
     flex-direction: column;
-    gap: space(2);
+    gap: calc(2 * var(--space));
 }
 
 .form-group.steps div fieldset > div {

@@ -1,7 +1,7 @@
 {% extends 'admin/card.html.twig' %}
 
 {% block actions %}
-  <a href="{{ path('recipes_show', {slug: entity.slug, id: entity.id}) }}" target="_blank" class="btn-secondary btn-small">Voir le tutoriel</a>
+  <a href="{{ path('recipes_show', {slug: entity.slug, id: entity.id}) }}" target="_blank" class="btn btn-secondary btn-small">Voir le tutoriel</a>
 {% endblock %}
 
 {% block title %}

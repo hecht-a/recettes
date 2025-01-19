@@ -1,0 +1,16 @@
+.mb1 {
+    margin-bottom: calc(1 * var(--space));
+}
+
+.mb3 {
+    margin-bottom: calc(3 * var(--space));
+}
+
+.mx6 {
+    margin-right: calc(6 * var(--space));
+    margin-left: calc(6 * var(--space));
+}
+
+.mt1 {
+    margin-top: calc(1 * var(--space));
+}

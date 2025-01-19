@@ -9,8 +9,8 @@
 {% block body %}
     <div class="recipe container">
         <div class="titles">
-            <h1 class="recipe__name">{{ recipe.name }}</h1>
-            <h2 class="recipe__description">{{ recipe.description }}</h2>
+            <h1 class="recipe__name hero-title">{{ recipe.name }}</h1>
+            <h2 class="recipe__description hero-text">{{ recipe.description }}</h2>
             <favorite-button {{ is_liked(recipe) ? 'is-liked="true"' }} data-recipe="{{ recipe.id }}" class="mt1"></favorite-button>
         </div>
 
@@ -19,7 +19,7 @@
         </div>
 
         <div class="meta">
-            <div class="times">
+            <div class="times muted card">
                 <div>
                     <p class="label">Temps de préparation:</p>
                     <p>{{ format_time(recipe.preparationTime) }}</p>
@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <div class="allergens">
+            <div class="allergens card">
                 <span class="label">Allergènes:</span>
                 {% for i, allergen in recipe.allergens %}
                     {{ include('recipes/_allergen.html.twig') }}
@@ -45,9 +45,9 @@
                 {% endfor %}
             </div>
 
-            <div class="ingredients_utensils">
+            <div class="ingredients_utensils card">
                 <div class="ingredients">
-                    <div class="ingredients_utensils__title">Ingredients</div>
+                    <div class="ingredients_utensils__title hero-text">Ingredients</div>
                     <input class="mb1" type="number" is="number-input" value="{{ recipe.amountPersons }}">
                     {% for ingredient in recipe.ingredients %}
                         {{ include('recipes/_ingredient.html.twig') }}
@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="utensils">
-                    <div class="ingredients_utensils__title">Ustensiles</div>
+                    <div class="ingredients_utensils__title hero-text">Ustensiles</div>
                     <ul>
                         {% for utensil in recipe.utensils %}
                             {{ include('recipes/_utensil.html.twig') }}

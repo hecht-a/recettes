@@ -21,10 +21,8 @@
 
     --space: 8px;
     --gap: calc(3 * var(--space));
+    --col: 400px;
 }
-
-@import 'functions';
-@import 'base';
 
 @import 'tools/reset';
 @import 'tools/mixins';

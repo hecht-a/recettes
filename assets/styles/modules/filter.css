@@ -3,17 +3,20 @@
     display: flex;
     justify-content: flex-end;
 }
+
 .grid-filter > *:first-child {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
+
 .grid-filter > *:last-child {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-right: 1px solid var(--border);
 }
+
 .grid-filter__group {
-    padding: space(2);
+    padding: calc(2 * var(--space));
     display: flex;
     align-items: center;
     border: 1px solid var(--border);
@@ -23,7 +26,7 @@
 }
 
 .grid-filter__group label {
-    margin-right: space(1);
+    margin-right: calc(1 * var(--space));
     color: var(--black);
     white-space: nowrap;
 }

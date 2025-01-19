@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="glossary container">
-        <div class="glossary-header">
+        <div class="glossary-header hero-title">
             <h1>Ustensiles</h1>
         </div>
         <div class="glossary-wrapper">
@@ -16,7 +16,7 @@
             <div class="container mx6">
                 {% for letter, utensils in utensilsByLetters %}
                     <section class="glossary-section" id="letter-{{ letter }}">
-                        <h2 class="glossary-lettering h1">{{ letter }}</h2>
+                        <h2 class="glossary-lettering h1 hero-text">{{ letter }}</h2>
                         <ul class="glossary-words card mt2">
                             {% for utensil in utensils %}
                                 <li class="glossary-word">

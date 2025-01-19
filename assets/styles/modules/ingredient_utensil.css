@@ -4,7 +4,7 @@
 }
 
 .utensil {
-    margin-left: space(3);
+    margin-left: calc(3 * var(--space));
     list-style-type: disc;
 }
 

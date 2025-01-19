@@ -18,5 +18,4 @@ return [
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
     Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle::class => ['all' => true],
     Sensiolabs\TypeScriptBundle\SensiolabsTypeScriptBundle::class => ['all' => true],
-    Symfonycasts\SassBundle\SymfonycastsSassBundle::class => ['all' => true],
 ];
