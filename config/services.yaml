@@ -19,12 +19,6 @@ services:
     App\:
         resource: '../src/'
         exclude: '../src/{DependencyInjection,Entity,Infra/Migrations,Tests,Kernel.php}'
-    App\Infra\Faker\PasswordProvider:
-        tags: [{ name: nelmio_alice.faker.provider }]
     Knp\Bundle\PaginatorBundle\Helper\Processor: ~
-    App\Infra\Faker\HexColorProvider:
-        tags: [ { name: nelmio_alice.faker.provider } ]
-    App\Infra\Faker\DateImmutableProvider:
-        tags: [ { name: nelmio_alice.faker.provider } ]
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
