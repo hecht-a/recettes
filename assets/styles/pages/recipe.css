@@ -134,7 +134,6 @@
 
 .recipe .ingredients_utensils {
     grid-area: ingredients_utensils;
-    background: red;
     height: max-content;
     padding: calc(2 * var(--space));
     display: flex;
