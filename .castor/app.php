@@ -61,12 +61,8 @@ function asset_watcher(): void
 
         if (2 === $eventCounts[$file]) {
             docker_compose_run('rm -rf public/assets', c: $c);
-            $exitCode = docker_compose_run('bin/console sass:build', c: $c)->getExitCode();
-
-            if (0 === $exitCode) {
-                docker_compose_run('bin/console asset-map:compile', c: $c);
-                io()->writeln("File <comment>$file</comment> has been $action.");
-            }
+            docker_compose_run('bin/console asset-map:compile', c: $c);
+            io()->writeln("File <comment>$file</comment> has been $action.");
 
             $eventCounts[$file] = 0;
         }
