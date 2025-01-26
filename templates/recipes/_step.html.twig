@@ -2,7 +2,7 @@
     <div class="step__position">
         <p>{{ step.position }}</p>
     </div>
-    <p class="step__description">
-        {{ step.description|nl2br }}
-    </p>
+    <div class="step__description">
+        {{ step.description|raw }}
+    </div>
 </div>

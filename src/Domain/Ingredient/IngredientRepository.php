@@ -2,18 +2,18 @@
 
 namespace App\Domain\Ingredient;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Infra\Repository\AbstractEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Ingredient>
+ * @extends AbstractEntityRepository<Ingredient>
  *
  * @method Ingredient|null find($id, $lockMode = null, $lockVersion = null)
  * @method Ingredient|null findOneBy(array $criteria, array $orderBy = null)
  * @method Ingredient[]    findAll()
  * @method Ingredient[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class IngredientRepository extends ServiceEntityRepository
+class IngredientRepository extends AbstractEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

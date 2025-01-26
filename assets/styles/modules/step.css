@@ -15,3 +15,21 @@
     justify-content: center;
     align-items: center;
 }
+
+.step .step__description {
+    display: flex;
+    flex-direction: column;
+    gap: calc(2 * var(--space));
+
+    ul {
+        list-style-type: disc;
+
+        li {
+            margin-bottom: calc(2 * var(--space));
+        }
+    }
+
+    p {
+        font-weight: bold;
+    }
+}

@@ -16,7 +16,7 @@ class UnitFixtures extends Fixture
             ['label' => 'Litre', 'shortLabel' => 'L'],
             ['label' => 'Gramme', 'shortLabel' => 'g'],
             ['label' => 'Millilitre', 'shortLabel' => 'ml'],
-            ['label' => 'Unité', 'shortLabel' => 'u'],
+            ['label' => 'Pièce(s)', 'shortLabel' => 'pièce(s)'],
         ];
 
         UnitFactory::createSequence($units);

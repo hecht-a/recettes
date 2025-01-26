@@ -83,7 +83,6 @@
 
 .recipe .content {
     display: grid;
-    width: 80%;
     grid-template-columns: 3fr 1fr;
     grid-template-rows: 1fr;
     grid-column-gap: calc(6 * var(--space));

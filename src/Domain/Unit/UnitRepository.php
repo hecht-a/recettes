@@ -2,18 +2,18 @@
 
 namespace App\Domain\Unit;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Infra\Repository\AbstractEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Unit>
+ * @extends AbstractEntityRepository<Unit>
  *
  * @method Unit|null find($id, $lockMode = null, $lockVersion = null)
  * @method Unit|null findOneBy(array $criteria, array $orderBy = null)
  * @method Unit[]    findAll()
  * @method Unit[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UnitRepository extends ServiceEntityRepository
+class UnitRepository extends AbstractEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

@@ -16,7 +16,7 @@ class IngredientRecipe
     private Ingredient $ingredient;
 
     #[ORM\Id]
-    #[ORM\ManyToOne(targetEntity: Recipe::class, inversedBy: 'ingredients')]
+    #[ORM\ManyToOne(targetEntity: Recipe::class, cascade: ['persist'], inversedBy: 'ingredients')]
     private Recipe $recipe;
 
     #[ORM\Column(type: Types::FLOAT, nullable: false)]

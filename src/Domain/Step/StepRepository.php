@@ -2,18 +2,18 @@
 
 namespace App\Domain\Step;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Infra\Repository\AbstractEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Step>
+ * @extends AbstractEntityRepository<Step>
  *
  * @method Step|null find($id, $lockMode = null, $lockVersion = null)
  * @method Step|null findOneBy(array $criteria, array $orderBy = null)
  * @method Step[]    findAll()
  * @method Step[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class StepRepository extends ServiceEntityRepository
+class StepRepository extends AbstractEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

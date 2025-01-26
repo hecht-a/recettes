@@ -11,7 +11,7 @@ parameters:
         # Disabled for now, it make the CI instable
         # consoleApplicationLoader: var/phpstan/console-application.php
     ignoreErrors:
-#        - "#Method .+ has parameter .+ with no value type specified in iterable type array#"
+        - "#Method .+ has parameter .+ with no value type specified in iterable type array#"
         - "#Method .+ return type has no value type specified in iterable type array#"
 #        - "#Property .+ type has no value type specified in iterable type array#"
         - "#Unable to resolve the template type .+ in call to function collect#"
