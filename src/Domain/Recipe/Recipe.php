@@ -92,7 +92,7 @@ class Recipe implements IdentifiableInterface
     private Collection $usersFavorite;
 
     #[ORM\Column(type: Types::INTEGER, nullable: false)]
-    private int $amountPersons;
+    private int $amountPersons = 1;
 
     public function __construct()
     {

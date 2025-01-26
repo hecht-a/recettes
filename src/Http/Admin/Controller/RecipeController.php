@@ -2,8 +2,11 @@
 
 namespace App\Http\Admin\Controller;
 
+use App\Domain\Admin\ImportRecipeDto;
 use App\Domain\Recipe\Recipe;
+use App\Http\Admin\Form\ImportRecipeForm;
 use App\Http\Admin\Form\RecipeForm;
+use App\Infra\Scraper\HelloFreshScraper;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,5 +63,30 @@ class RecipeController extends CrudController
     public function delete(Recipe $recipe): RedirectResponse
     {
         return $this->crudDelete($recipe);
+    }
+
+    #[Route(path: '/import', name: 'import', methods: ['GET', 'POST'])]
+    public function import(Request $request, HelloFreshScraper $scraper): Response
+    {
+        $form = $this->createForm(ImportRecipeForm::class, new ImportRecipeDto());
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var ImportRecipeDto $data */
+            $data = $form->getData();
+            $recipe = $scraper->scrape($data->url);
+
+            $this->em->persist($recipe);
+            $this->em->flush();
+
+            return $this->redirectToRoute('recipes_show', [
+                'id' => $recipe->getId(),
+                'slug' => $recipe->getSlug(),
+            ]);
+        }
+
+        return $this->render('admin/recipe/import.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

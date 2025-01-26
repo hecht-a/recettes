@@ -2,18 +2,18 @@
 
 namespace App\Domain\Allergen;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Infra\Repository\AbstractEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Allergen>
+ * @extends AbstractEntityRepository<Allergen>
  *
  * @method Allergen|null find($id, $lockMode = null, $lockVersion = null)
  * @method Allergen|null findOneBy(array $criteria, array $orderBy = null)
  * @method Allergen[]    findAll()
  * @method Allergen[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AllergenRepository extends ServiceEntityRepository
+class AllergenRepository extends AbstractEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

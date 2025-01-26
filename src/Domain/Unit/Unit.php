@@ -24,7 +24,7 @@ class Unit implements IdentifiableInterface
     #[Assert\NotBlank]
     private string $label;
 
-    #[ORM\Column(type: Types::STRING, length: 3, nullable: false)]
+    #[ORM\Column(type: Types::STRING, length: 10, nullable: false)]
     #[Assert\NotBlank]
     private string $shortLabel;
 

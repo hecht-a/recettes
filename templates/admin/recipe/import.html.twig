@@ -1,0 +1,18 @@
+{% extends 'admin/card.html.twig' %}
+
+{% block content %}
+    {{ form_start(form) }}
+    <section>
+        {{ form_row(form, {label: false}) }}
+    </section>
+
+    <section>
+        <button type="submit" class="btn btn-gradient">Importer</button>
+    </section>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block title %}
+    Importer une recette
+{% endblock %}
+

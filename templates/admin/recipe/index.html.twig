@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block actions %}
+    <a href="{{ path(prefix ~ '_import') }}" class="btn btn-primary-outlined">Importer une recette</a>
     <a href="{{ path(prefix ~ '_new') }}" class="btn btn-primary">Ajouter une recette</a>
 {% endblock %}
 
@@ -33,7 +34,7 @@
                     {{ row.createdAt | date("d M Y") }}
                 </td>
                 <td>
-                    {{ row.user.name }}
+                    {{ row.user.name ?? '' }}
                 </td>
                 <td>
                     <div class="dashboard-actions">
