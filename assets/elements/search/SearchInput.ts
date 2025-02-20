@@ -75,8 +75,12 @@ export class SearchInput extends HTMLElement {
 
       const results = document.createElement('ul')
       results.classList.add('results', 'search-input_suggestions', 'card')
-      this.querySelector('form')!.appendChild(results
-      )
+      const previousResults = this.querySelector('.search-input_suggestions ')
+      if (previousResults) {
+        previousResults.remove()
+      }
+
+      this.querySelector('form')!.appendChild(results)
       const items: string[] = this.results.map((item) => {
         return this.buildItem(item).outerHTML
       })
@@ -104,13 +108,13 @@ export class SearchInput extends HTMLElement {
     return li
   }
 
-  selectItem(item: number|null) {
+  selectItem(item: number | null) {
     const focused = this.querySelector('.focused')
-    if(focused) {
+    if (focused) {
       focused.classList.remove('focused')
     }
 
-    if(item === null) {
+    if (item === null) {
       return
     }
 
