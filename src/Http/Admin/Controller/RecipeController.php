@@ -6,7 +6,7 @@ use App\Domain\Admin\ImportRecipeDto;
 use App\Domain\Recipe\Recipe;
 use App\Http\Admin\Form\ImportRecipeForm;
 use App\Http\Admin\Form\RecipeForm;
-use App\Infra\Scraper\HelloFreshScraper;
+use App\Infra\Scraper\ScraperProvider;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,7 +66,7 @@ class RecipeController extends CrudController
     }
 
     #[Route(path: '/import', name: 'import', methods: ['GET', 'POST'])]
-    public function import(Request $request, HelloFreshScraper $scraper): Response
+    public function import(Request $request, ScraperProvider $scraperProvider): Response
     {
         $form = $this->createForm(ImportRecipeForm::class, new ImportRecipeDto());
         $form->handleRequest($request);
@@ -74,7 +74,7 @@ class RecipeController extends CrudController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var ImportRecipeDto $data */
             $data = $form->getData();
-            $recipe = $scraper->scrape($data->url);
+            $recipe = $scraperProvider->scrape($data->url);
 
             $this->em->persist($recipe);
             $this->em->flush();

@@ -1,4 +1,6 @@
 <div class="ingredient">
     <div class="name">{{ ingredient.ingredient.name }}</div>
-    <div class="quantity">{{ ingredient.quantity }} {{ ingredient.ingredient.unit.shortLabel }}</div>
+    {% if ingredient.quantity > 0 %}
+        <div class="quantity">{{ ingredient.quantity }} {{ ingredient.ingredient.unit.shortLabel ?? '' }}</div>
+    {% endif %}
 </div>

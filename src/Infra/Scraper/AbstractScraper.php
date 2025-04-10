@@ -8,6 +8,8 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 abstract class AbstractScraper
 {
+    protected ?Recipe $recipe = null;
+
     protected const array SPECIAL_AMOUNTS = [
         '¼' => '0.25',
         '½' => '0.5',
@@ -30,10 +32,39 @@ abstract class AbstractScraper
         $string = str_replace('œ', 'oe', $string);
         $string = str_replace('Œ', 'oe', $string);
 
-        return ucfirst($string);
+        return trim(ucfirst($string));
     }
 
-    abstract public function scrape(string $scrapeUrl): Recipe;
+    public function scrape(string $scrapeUrl): Recipe
+    {
+        $crawler = $this->getCrawler($scrapeUrl);
+
+        $this->recipe = new Recipe();
+        $this->recipe->setName($this->getTitle($crawler));
+        $this->recipe->setDescription($this->getDescription($crawler));
+
+        foreach ($this->getIngredients($crawler) as $ingredient) {
+            $this->recipe->addIngredient($ingredient);
+        }
+
+        foreach ($this->getUtensils($crawler) as $utensil) {
+            $this->recipe->addUtensil($utensil);
+        }
+
+        foreach ($this->getAllergens($crawler) as $allergen) {
+            $this->recipe->addAllergen($allergen);
+        }
+
+        foreach ($this->getCategories($crawler) as $category) {
+            $this->recipe->addCategory($category);
+        }
+
+        foreach ($this->getSteps($crawler) as $step) {
+            $this->recipe->addStep($step);
+        }
+
+        return $this->recipe;
+    }
 
     abstract protected function getTitle(Crawler $crawler): string;
 

@@ -6,7 +6,6 @@ use App\Domain\Allergen\AllergenRepository;
 use App\Domain\Category\CategoryRepository;
 use App\Domain\Ingredient\IngredientRepository;
 use App\Domain\IngredientRecipe\IngredientRecipeRepository;
-use App\Domain\Recipe\Recipe;
 use App\Domain\Step\StepRepository;
 use App\Domain\Unit\UnitRepository;
 use App\Domain\Utensil\UtensilRepository;
@@ -16,8 +15,6 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class HelloFreshScraper extends AbstractScraper
 {
-    private ?Recipe $recipe = null;
-
     public function __construct(
         HttpClientInterface $httpClient,
         private readonly HexColorGenerator $hexColorGenerator,
@@ -30,38 +27,6 @@ class HelloFreshScraper extends AbstractScraper
         private readonly IngredientRecipeRepository $ingredientRecipeRepository,
     ) {
         parent::__construct($httpClient);
-    }
-
-    #[\Override]
-    public function scrape(string $scrapeUrl): Recipe
-    {
-        $crawler = $this->getCrawler($scrapeUrl);
-
-        $this->recipe = new Recipe();
-        $this->recipe->setName($this->getTitle($crawler));
-        $this->recipe->setDescription($this->getDescription($crawler));
-
-        foreach ($this->getIngredients($crawler) as $ingredient) {
-            $this->recipe->addIngredient($ingredient);
-        }
-
-        foreach ($this->getUtensils($crawler) as $utensil) {
-            $this->recipe->addUtensil($utensil);
-        }
-
-        foreach ($this->getAllergens($crawler) as $allergen) {
-            $this->recipe->addAllergen($allergen);
-        }
-
-        foreach ($this->getCategories($crawler) as $category) {
-            $this->recipe->addCategory($category);
-        }
-
-        foreach ($this->getSteps($crawler) as $step) {
-            $this->recipe->addStep($step);
-        }
-
-        return $this->recipe;
     }
 
     #[\Override]
