@@ -8,12 +8,12 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/annotations": "^2.0.2",
-        "doctrine/doctrine-bundle": "^2.13.2",
-        "doctrine/doctrine-migrations-bundle": "^3.3.1",
-        "doctrine/orm": "^2.20.1",
-        "gedmo/doctrine-extensions": "^3.17.1",
-        "illuminate/collections": "^10.48.25",
-        "knplabs/knp-paginator-bundle": "^6.6.1",
+        "doctrine/doctrine-bundle": "^2.14.0",
+        "doctrine/doctrine-migrations-bundle": "^3.4.1",
+        "doctrine/orm": "^2.20.2",
+        "gedmo/doctrine-extensions": "^3.20.0",
+        "illuminate/collections": "^10.48.28",
+        "knplabs/knp-paginator-bundle": "^6.7.0",
         "nelmio/cors-bundle": "^2.5",
         "phpdocumentor/reflection-docblock": "^5.6.1",
         "phpstan/phpdoc-parser": "^1.33",
@@ -25,7 +25,7 @@
         "symfony/dotenv": "7.2.*",
         "symfony/event-dispatcher": "7.2.*",
         "symfony/expression-language": "7.2.*",
-        "symfony/flex": "^2.4.7",
+        "symfony/flex": "^2.5.0",
         "symfony/form": "7.2.*",
         "symfony/framework-bundle": "7.2.*",
         "symfony/monolog-bundle": "^3.10",
@@ -38,7 +38,7 @@
         "symfony/twig-bundle": "7.2.*",
         "symfony/validator": "7.2.*",
         "symfony/yaml": "7.2.*",
-        "vich/uploader-bundle": "^2.5.1"
+        "vich/uploader-bundle": "^2.6.1"
     },
     "config": {
         "allow-plugins": {
@@ -91,8 +91,8 @@
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "8.2.*",
-        "doctrine/doctrine-fixtures-bundle": "^3.7",
-        "phpunit/phpunit": "^10.5.41",
+        "doctrine/doctrine-fixtures-bundle": "^3.7.1",
+        "phpunit/phpunit": "^10.5.45",
         "symfony/browser-kit": "7.2.*",
         "symfony/css-selector": "7.2.*",
         "symfony/debug-bundle": "7.2.*",
@@ -100,6 +100,6 @@
         "symfony/phpunit-bridge": "7.2.*",
         "symfony/stopwatch": "7.2.*",
         "symfony/web-profiler-bundle": "7.2.*",
-        "zenstruck/foundry": "^2.3"
+        "zenstruck/foundry": "^2.3.10"
     }
 }

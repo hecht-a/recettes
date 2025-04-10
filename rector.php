@@ -28,8 +28,7 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->sets([
         LevelSetList::UP_TO_PHP_83,
-        SymfonySetList::SYMFONY_70,
-        SymfonySetList::SYMFONY_27,
+        SymfonySetList::SYMFONY_72,
     ]);
     $rectorConfig->sets([SetList::CODE_QUALITY]);
     $rectorConfig->sets([SetList::PRIVATIZATION]);

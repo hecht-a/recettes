@@ -3,8 +3,8 @@
     "require": {
         "ekino/phpstan-banned-code": "^v2.1.0",
         "phpstan/extension-installer": "^1.4.3",
-        "phpstan/phpstan-symfony": "^1.4.13",
-        "phpstan/phpstan": "^1.12.15"
+        "phpstan/phpstan-symfony": "^1.4.15",
+        "phpstan/phpstan": "^1.12.23"
     },
     "config": {
         "allow-plugins": {

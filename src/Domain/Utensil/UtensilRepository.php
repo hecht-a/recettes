@@ -60,7 +60,7 @@ class UtensilRepository extends AbstractEntityRepository
 
         return collect($words)
             ->sortBy(fn (Utensil $item) => strtolower($item->getName()))
-            ->groupBy(fn (Utensil $item) => strtolower($item->getName()[0]))
+            ->groupBy(fn (Utensil $item): string => strtolower($item->getName()[0]))
             ->toArray();
     }
 }

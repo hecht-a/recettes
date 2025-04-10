@@ -1,7 +1,7 @@
 {
     "type": "project",
     "require": {
-        "rector/rector": "^1.2.10",
-        "symfony/var-dumper": "^7.2.0"
+        "rector/rector": "^2.0.11",
+        "symfony/var-dumper": "^7.2.3"
     }
 }

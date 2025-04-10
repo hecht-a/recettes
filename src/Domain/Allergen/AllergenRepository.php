@@ -80,7 +80,7 @@ class AllergenRepository extends AbstractEntityRepository
             ->getResult();
 
         return collect($words)
-            ->groupBy(fn (AllergenDto $item) => strtolower($item->name[0]))
+            ->groupBy(fn (AllergenDto $item): string => strtolower($item->name[0]))
             ->toArray();
     }
 }
