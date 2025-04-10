@@ -71,12 +71,12 @@ class HelloFreshScraper extends AbstractScraper
         $h2 = '';
 
         try {
-            $h1 = $crawler->filter('.ghBzOL')->text();
+            $h1 = $crawler->filterXPath('//*[@id="page"]/div[1]/div[4]/div/div[2]/div/div[1]/div[1]/h1')->text();
         } catch (\LogicException) {
         }
 
         try {
-            $h2 = $crawler->filter('.cSYzey')->text();
+            $h2 = $crawler->filterXPath('//*[@id="page"]/div[2]/div[4]/div/div[2]/div/div[1]/div[1]/h2')->text();
         } catch (\LogicException) {
         }
 
@@ -93,8 +93,8 @@ class HelloFreshScraper extends AbstractScraper
     protected function getIngredients(Crawler $crawler): array
     {
         try {
-            return $crawler->filter('.fVouJt')->each(function (Crawler $node, $i): object {
-                $quantity = $node->filter('.ccrEYr')->text();
+            return $crawler->filterXPath('//*[@id="page"]/div[1]/div[4]/div/div[3]/div[1]/div/div[2]/div[2]/div')->each(function (Crawler $node, $i): object {
+                $quantity = $node->filterXPath('.//p[1]')->text();
                 [$amount, $unit] = explode(' ', $quantity);
 
                 if (isset(self::SPECIAL_AMOUNTS[$amount])) {
@@ -107,7 +107,7 @@ class HelloFreshScraper extends AbstractScraper
                     'shortLabel' => $unit,
                 ], true);
 
-                $ingredientName = $this->formatStrings($node->filter('.jELdJr')->text());
+                $ingredientName = $this->formatStrings($node->filterXPath('.//p[2]')->text());
 
                 $ingredient = $this->ingredientRepository->findOneOrCreate(['name' => $ingredientName], [
                     'name' => $ingredientName,
@@ -130,7 +130,7 @@ class HelloFreshScraper extends AbstractScraper
     protected function getUtensils(Crawler $crawler): array
     {
         try {
-            return $crawler->filter('.BlmJr .hysTOH .dvaxob')->each(fn (Crawler $node, $i): object => $this->utensilRepository->findOneOrCreate(['name' => $node->text()], [
+            return $crawler->filterXPath('//*[@id="page"]/div[1]/div[4]/div/div[4]/div/div/div[2]/div/div/span[2]')->each(fn (Crawler $node, $i): object => $this->utensilRepository->findOneOrCreate(['name' => $node->text()], [
                 'name' => $node->text(),
                 'description' => $node->text(),
             ]));
@@ -174,7 +174,7 @@ class HelloFreshScraper extends AbstractScraper
     protected function getSteps(Crawler $crawler): array
     {
         try {
-            return $crawler->filter('.gNOFyU')->each(fn (Crawler $node, $i): object => $this->stepRepository->findOneOrCreate(['description' => $node->html(), 'recipe' => $this->recipe], [
+            return $crawler->filterXPath('//*[@id="page"]/div[1]/div[4]/div/div[5]/div/div/div[2]/div/div/div[2]/div[2]/span/ul')->each(fn (Crawler $node, $i): object => $this->stepRepository->findOneOrCreate(['description' => $node->html(), 'recipe' => $this->recipe], [
                 'description' => $node->html(),
                 'position' => $i + 1,
                 'recipe' => $this->recipe,
