@@ -50,7 +50,7 @@ class IngredientRepository extends AbstractEntityRepository
 
         return collect($words)
             ->sortBy(fn (Ingredient $item) => strtolower($item->getName()))
-            ->groupBy(fn (Ingredient $item) => strtolower($item->getName()[0]))
+            ->groupBy(fn (Ingredient $item): string => strtolower($item->getName()[0]))
             ->toArray();
     }
 }
