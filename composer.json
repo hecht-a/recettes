@@ -13,6 +13,7 @@
         "doctrine/orm": "^2.20.2",
         "gedmo/doctrine-extensions": "^3.20.0",
         "illuminate/collections": "^10.48.28",
+        "jolicode/automapper": "^9.3",
         "knplabs/knp-paginator-bundle": "^6.7.0",
         "nelmio/cors-bundle": "^2.5",
         "phpdocumentor/reflection-docblock": "^5.6.1",

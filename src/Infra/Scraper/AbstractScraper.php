@@ -26,9 +26,11 @@ abstract class AbstractScraper
         return new Crawler($response->getContent());
     }
 
-    protected function formatStrings(string $string): string
+    protected function formatStrings(string $string, bool $toLower = true): string
     {
-        $string = strtolower($string);
+        if ($toLower) {
+            $string = strtolower($string);
+        }
         $string = str_replace('œ', 'oe', $string);
         $string = str_replace('Œ', 'oe', $string);
 
