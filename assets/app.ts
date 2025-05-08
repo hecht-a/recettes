@@ -1,3 +1,5 @@
+import './bootstrap.ts'
+
 import dayjs from 'dayjs'
 import 'dayjs/locale/fr'
 import 'htmx.org'
