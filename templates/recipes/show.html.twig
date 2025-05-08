@@ -12,6 +12,7 @@
             <h1 class="recipe__name hero-title">{{ recipe.name }}</h1>
             <h2 class="recipe__description hero-text">{{ recipe.description }}</h2>
             <favorite-button {{ is_liked(recipe) ? 'is-liked="true"' }} data-recipe="{{ recipe.id }}" class="mt1"></favorite-button>
+            <twig:AddToShoppingCart recipe="{{ recipe }}"/>
         </div>
 
         <div class="recipe__thumbnail">

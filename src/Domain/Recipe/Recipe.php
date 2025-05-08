@@ -6,6 +6,7 @@ use App\Domain\Allergen\Allergen;
 use App\Domain\Auth\User;
 use App\Domain\Category\Category;
 use App\Domain\IngredientRecipe\IngredientRecipe;
+use App\Domain\ShoppingListRecipe\ShoppingListRecipe;
 use App\Domain\Step\Step;
 use App\Domain\Utensil\Utensil;
 use App\Infra\Interfaces\IdentifiableInterface;
@@ -94,6 +95,10 @@ class Recipe implements IdentifiableInterface
     #[ORM\Column(type: Types::INTEGER, nullable: false)]
     private int $amountPersons = 1;
 
+    /** @var Collection<int, ShoppingListRecipe> */
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: ShoppingListRecipe::class)]
+    private Collection $shoppingListRecipes;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -104,6 +109,7 @@ class Recipe implements IdentifiableInterface
         $this->allergens = new ArrayCollection();
         $this->steps = new ArrayCollection();
         $this->usersFavorite = new ArrayCollection();
+        $this->shoppingListRecipes = new ArrayCollection();
     }
 
     #[\Override]
@@ -402,6 +408,34 @@ class Recipe implements IdentifiableInterface
     public function setAmountPersons(int $amountPersons): Recipe
     {
         $this->amountPersons = $amountPersons;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ShoppingListRecipe>
+     */
+    public function getShoppingListRecipes(): Collection
+    {
+        return $this->shoppingListRecipes;
+    }
+
+    public function addShoppingListRecipe(ShoppingListRecipe $shoppingListRecipe): self
+    {
+        if (!$this->shoppingListRecipes->contains($shoppingListRecipe)) {
+            $this->shoppingListRecipes[] = $shoppingListRecipe;
+            $shoppingListRecipe->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeShoppingListRecipe(ShoppingListRecipe $shoppingListRecipe): self
+    {
+        if ($this->shoppingListRecipes->contains($shoppingListRecipe)) {
+            $this->shoppingListRecipes->removeElement($shoppingListRecipe);
+            $shoppingListRecipe->setRecipe(null);
+        }
 
         return $this;
     }
