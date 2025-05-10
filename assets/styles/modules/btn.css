@@ -34,6 +34,12 @@
         height: 16px;
         margin-right: calc(1 * var(--space));
     }
+
+    svg {
+        margin-left: calc(1 * var(--space));
+        width: 24px;
+        height: 24px;
+    }
 }
 
 .btn-gradient {
