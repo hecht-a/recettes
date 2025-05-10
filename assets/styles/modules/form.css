@@ -67,6 +67,7 @@ textarea {
     color: var(--black);
     font-weight: 700;
     transform: scale(0.75);
+    z-index: 10;
 }
 
 button[type=submit]:not(.search) {

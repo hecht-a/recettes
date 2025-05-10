@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Twig\Components;
+namespace App\Http\Twig\Components\Recipe;
 
 use App\Domain\Recipe\Recipe;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -9,16 +9,21 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 #[AsLiveComponent]
-final class AddToShoppingCart
+final class Title
 {
     use DefaultActionTrait;
+
+    public ?string $id = null;
 
     #[LiveProp]
     public Recipe $recipe;
 
+    #[LiveProp]
+    public bool $isModalOpened = false;
+
     #[LiveAction]
-    public function add(): void
+    public function openModal(): void
     {
-        // TODO
+        $this->isModalOpened = !$this->isModalOpened;
     }
 }

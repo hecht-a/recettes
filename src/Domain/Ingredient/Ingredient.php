@@ -59,7 +59,7 @@ class Ingredient implements IdentifiableInterface
     private \DateTimeImmutable $updatedAt;
 
     /** @var Collection<int, ShoppingListIngredient> */
-    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: ShoppingListIngredient::class)]
+    #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: ShoppingListIngredient::class)]
     private Collection $shoppingListIngredients;
 
     public function __construct()

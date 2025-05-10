@@ -1,0 +1,13 @@
+<div {{ attributes }} {{ stimulus_controller('add-to-shopping-cart-form') }}>
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_end(form) }}
+
+    <button
+        type="button"
+        class="btn btn-secondary"
+        data-action="live#action"
+        data-live-action-param="add"
+    >add
+    </button>
+</div>

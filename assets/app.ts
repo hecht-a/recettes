@@ -30,6 +30,7 @@ import './styles/modules/glossary.css';
 import './styles/modules/search.css';
 import './styles/modules/filter.css';
 import './styles/modules/progressbar.css';
+import './styles/modules/modal.css';
 import './styles/app.css'
 
 import {Alert} from "./elements/Alert.ts";

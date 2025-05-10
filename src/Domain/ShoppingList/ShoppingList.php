@@ -21,7 +21,7 @@ class ShoppingList
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class, cascade: ['remove', 'persist'], inversedBy: 'recipes')]
+    #[ORM\ManyToOne(targetEntity: User::class, cascade: ['remove', 'persist'], inversedBy: 'shoppingLists')]
     private ?User $user = null;
 
     #[ORM\Column(type: Types::STRING, nullable: false)]

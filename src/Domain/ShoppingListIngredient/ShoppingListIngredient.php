@@ -18,7 +18,7 @@ class ShoppingListIngredient
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: ShoppingList::class, inversedBy: 'items')]
+    #[ORM\ManyToOne(targetEntity: ShoppingList::class, inversedBy: 'ingredients')]
     private ShoppingList $shoppingList;
 
     #[ORM\ManyToOne(targetEntity: Ingredient::class, inversedBy: 'shoppingListIngredients')]
