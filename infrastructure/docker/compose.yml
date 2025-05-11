@@ -9,6 +9,8 @@ services:
             - "../..:/var/www:cached"
         environment:
             - "PHP_VERSION=${PHP_VERSION}"
+        ports:
+            - "8000:8000"
         labels:
             - "traefik.enable=true"
             - "traefik.http.routers.myproject.rule=Host(`localhost`)"

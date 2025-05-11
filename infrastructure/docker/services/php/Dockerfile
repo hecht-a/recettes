@@ -46,6 +46,8 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
+RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash \
+ && apt-get install -y symfony-cli
 
 # Fake user to maps with the one on the host
 ARG USER_ID
@@ -83,7 +85,8 @@ RUN phpenmod app-default \
     && phpenmod app-fpm
 EXPOSE 80
 
-CMD ["runsvdir", "-P", "/etc/service"]
+#CMD ["runsvdir", "-P", "/etc/service"]
+CMD ["symfony", "serve", "--no-tls", "--allow-http", "--listen-ip=0.0.0.0", "--port=80"]
 
 FROM php-base as worker
 

@@ -6,13 +6,13 @@ framework:
         excluded_patterns:
             - '*/assets/styles/_*.scss'
             - '*/assets/styles/**/_*.scss'
-    assets:
-        json_manifest_path: "%kernel.project_dir%/public/assets/manifest.json"
 
 when@prod:
     framework:
         asset_mapper:
             missing_import_mode: warn
+        assets:
+            json_manifest_path: "%kernel.project_dir%/public/assets/manifest.json"
 
 sensiolabs_typescript:
     source_dir: ['%kernel.project_dir%/assets']
