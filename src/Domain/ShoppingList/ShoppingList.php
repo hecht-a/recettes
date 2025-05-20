@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: ShoppingListRepository::class)]
 class ShoppingList
@@ -24,8 +25,12 @@ class ShoppingList
     #[ORM\ManyToOne(targetEntity: User::class, cascade: ['remove', 'persist'], inversedBy: 'shoppingLists')]
     private ?User $user = null;
 
-    #[ORM\Column(type: Types::STRING, nullable: false)]
+    #[ORM\Column(type: Types::STRING, unique: true, nullable: false)]
     private string $name;
+
+    #[ORM\Column(type: Types::STRING, length: 128, unique: true)]
+    #[Gedmo\Slug(fields: ['name'])]
+    private string $slug;
 
     /** @var Collection<int, ShoppingListRecipe> */
     #[ORM\OneToMany(mappedBy: 'shoppingList', targetEntity: ShoppingListRecipe::class, cascade: ['persist', 'remove'])]
@@ -73,7 +78,7 @@ class ShoppingList
         return $this->recipes;
     }
 
-    public function addRecipes(ShoppingListRecipe $recipe): self
+    public function addRecipe(ShoppingListRecipe $recipe): self
     {
         if (!$this->recipes->contains($recipe)) {
             $this->recipes[] = $recipe;
@@ -117,5 +122,10 @@ class ShoppingList
         }
 
         return $this;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
     }
 }

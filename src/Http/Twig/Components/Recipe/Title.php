@@ -5,6 +5,7 @@ namespace App\Http\Twig\Components\Recipe;
 use App\Domain\Recipe\Recipe;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
+use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
@@ -22,7 +23,8 @@ final class Title
     public bool $isModalOpened = false;
 
     #[LiveAction]
-    public function openModal(): void
+    #[LiveListener('modal:toggle')]
+    public function toggleModal(): void
     {
         $this->isModalOpened = !$this->isModalOpened;
     }

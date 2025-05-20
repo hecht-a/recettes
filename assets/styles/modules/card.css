@@ -93,4 +93,15 @@
 
 .card .card-footer {
     margin-top: calc(2 * var(--space));
+
+    p {
+        display: flex;
+        align-items: center;
+        gap: calc(2 * var(--space));
+    }
+
+    svg {
+        width: 24px;
+        height: 24px;
+    }
 }

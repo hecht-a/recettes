@@ -182,3 +182,13 @@
         }
     }
 }
+
+.add-to-shopping-cart-form {
+    display: flex;
+    flex-direction: column;
+    gap: calc(1 * var(--space));
+
+    button {
+        align-self: flex-end;
+    }
+}

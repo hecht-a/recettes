@@ -26,6 +26,7 @@ body:has(#modal-container.active) {
                 display: flex;
                 flex-direction: column;
                 margin: auto;
+                gap: calc(3 * var(--space));
             }
         }
 

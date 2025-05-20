@@ -3,12 +3,11 @@
     <h2 class="recipe__description hero-text">{{ recipe.description }}</h2>
 
     <twig:AddToFavorite recipe="{{ recipe }}" isLiked="{{ is_liked(recipe) }}"/>
-    {#    <twig:AddToShoppingCart recipe="{{ recipe }}"/> #}
     <button
         type="button"
         class="btn btn-primary-outlined mt1"
         data-action="live#action"
-        data-live-action-param="openModal"
+        data-live-action-param="toggleModal"
         data-recipe="{{ recipe.id }}"
     >
         Ajouter à ma liste
@@ -17,28 +16,18 @@
 
     {% component Modal with {id: recipe ? recipe.id, isModalOpened: isModalOpened} %}
         {% block modal_header %}
-            <h5 class="modal-title">{{ recipe ? recipe.name }}</h5>
+            <h5 class="modal-title">Ajouter à une liste de courses</h5>
             <button
                 type="button"
                 class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
                 data-action="live#action"
-                data-live-action-param="openModal"
-            ></button>
+                data-live-action-param="toggleModal"
+            ><twig:ux:icon name="lucide:x" /></button>
         {% endblock %}
         {% block modal_body %}
             <twig:AddToShoppingCartForm recipe="{{ recipe }}"/>
-        {% endblock %}
-        {% block modal_footer %}
-            <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-                data-action="live#action"
-                data-live-action-param="openModal"
-            >Close
-            </button>
         {% endblock %}
     {% endcomponent %}
 </div>

@@ -17,7 +17,7 @@ class ShoppingListRecipe
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: ShoppingList::class, cascade: ['remove', 'persist'], inversedBy: 'recipes')]
+    #[ORM\ManyToOne(targetEntity: ShoppingList::class, cascade: ['remove'], inversedBy: 'recipes')]
     private ?ShoppingList $shoppingList = null;
 
     #[ORM\ManyToOne(targetEntity: Recipe::class, inversedBy: 'shoppingListRecipes')]

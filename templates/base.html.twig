@@ -78,7 +78,7 @@
             </li>
             <li class="header-side__auth">
                 {% if app.user %}
-                    <a href="#">
+                    <a href="{{ path('profile_index') }}">
                         <svg>
                             <use href="/icons.svg#user"></use>
                         </svg>

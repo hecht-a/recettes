@@ -1,0 +1,16 @@
+<article class="card">
+    <div class="card-content">
+        <div class="card-body">
+            <h2 class="card-title">
+                <a href="{{ path('profile_show', {slug: list.slug, 'id': list.id}) }}" class="card-link">{{ list.name }}</a>
+            </h2>
+{#            <div class="card-description">{{ list.description | excerpt(100) }}</div>#}
+        </div>
+
+        <div class="card-footer">
+            <p><twig:ux:icon name="hugeicons:cook-book" /> {{ list.recipes|length }} recettes</p>
+            <p><twig:ux:icon name="lucide:shopping-cart"/> {{ list.ingredients|length }} ingrédients</p>
+            <p><twig:ux:icon name="lucide:calendar-days" /> Créée le {{ list.createdAt|date('d/m/Y') }}</p>
+        </div>
+    </div>
+</article>

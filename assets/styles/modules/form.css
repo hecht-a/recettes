@@ -49,7 +49,6 @@ textarea {
 .form-group:focus-within textarea ~ .float-label {
     color: var(--black);
     font-weight: 700;
-    z-index: 0;
     opacity: 1;
     top: -5px;
     left: 8px;
