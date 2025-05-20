@@ -1,0 +1,7 @@
+<div
+    {{ attributes.defaults(stimulus_controller('alert', { delay: '4000' })) }}
+    id="alert"
+    class="alert {{ message is null ? 'hidden' }} {{ type }}"
+>
+    {{ message }}
+</div>

@@ -49,7 +49,6 @@ textarea {
 .form-group:focus-within textarea ~ .float-label {
     color: var(--black);
     font-weight: 700;
-    z-index: 0;
     opacity: 1;
     top: -5px;
     left: 8px;
@@ -67,6 +66,7 @@ textarea {
     color: var(--black);
     font-weight: 700;
     transform: scale(0.75);
+    z-index: 10;
 }
 
 button[type=submit]:not(.search) {

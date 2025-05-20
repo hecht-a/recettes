@@ -1,0 +1,15 @@
+<button {{ attributes }}
+    type="button"
+    class="btn btn-like-dislike {{ isLiked ? 'btn-dislike' : 'btn-like' }}"
+    data-action="live#action"
+    data-live-action-param="toggleLike"
+    data-recipe="{{ recipe.id }}"
+>
+    {% if isLiked %}
+        Supprimer des favoris
+        <twig:ux:icon name="si:heart-line" />
+    {% else %}
+        Ajouter aux favoris
+        <twig:ux:icon name="si:heart-fill" />
+    {% endif %}
+</button>

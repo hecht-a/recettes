@@ -1,0 +1,18 @@
+<div {{ attributes }} class="add-to-shopping-cart-form">
+    {{ form_start(form) }}
+{#    {{ form_row(form.name) }}#}
+    <div class="form-group">
+        {{ form_widget(form.name) }}
+        {{ form_label(form.name) }}
+        {{ form_errors(form.name) }}
+    </div>
+    {{ form_end(form) }}
+
+    <button
+        type="button"
+        class="btn btn-primary-outlined"
+        data-action="live#action"
+        data-live-action-param="add"
+    >Ajouter
+    </button>
+</div>

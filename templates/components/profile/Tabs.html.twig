@@ -1,0 +1,41 @@
+<div {{ attributes }}>
+    <div class="tabs">
+        <button
+            data-action="live#action"
+            data-live-action-param="switchTab"
+            data-live-tab-param="favorites"
+            class="{{ tab == 'favorites' ? 'active' : '' }}"
+        >
+            Recettes favories
+        </button>
+        <button
+            data-action="live#action"
+            data-live-action-param="switchTab"
+            data-live-tab-param="shopping_lists"
+            class="{{ tab == 'shopping_lists' ? 'active' : '' }}"
+        >
+            Listes de courses
+        </button>
+    </div>
+
+    <div class="tab-content mt-4">
+        {% if tab == 'favorites' %}
+            <div class="recipes">
+                {% for recipe in favorites %}
+                    {{ include('recipes/card.html.twig') }}
+                {% else %}
+                    <p>Aucun favori</p>
+                {% endfor %}
+            </div>
+        {% elseif tab == 'shopping_lists' %}
+            <div class="shopping-lists">
+                {% for list in shoppingLists %}
+                    {{ include('shopping_lists/card.html.twig') }}
+                {% else %}
+                    <p>Aucune liste de courses</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+</div>

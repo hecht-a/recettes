@@ -48,6 +48,8 @@
 @import 'modules/search';
 @import 'modules/filter';
 @import 'modules/progressbar';
+@import 'modules/modal';
+@import 'modules/tabs';
 
 * {
     font-family: Inter, Regular, sans-serif;

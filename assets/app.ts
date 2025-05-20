@@ -1,3 +1,5 @@
+import './bootstrap.ts'
+
 import dayjs from 'dayjs'
 import 'dayjs/locale/fr'
 import 'htmx.org'
@@ -28,6 +30,8 @@ import './styles/modules/glossary.css';
 import './styles/modules/search.css';
 import './styles/modules/filter.css';
 import './styles/modules/progressbar.css';
+import './styles/modules/modal.css';
+import './styles/modules/tabs.css';
 import './styles/app.css'
 
 import {Alert} from "./elements/Alert.ts";
@@ -39,7 +43,6 @@ import {GlossaryLetters} from "./elements/GlossaryLetters.ts";
 import {SearchButton} from "./elements/search/SearchButton.ts";
 import {SearchInput} from "./elements/search/SearchInput.ts";
 import {SearchPopup} from "./elements/search/SearchPopup.ts";
-import {FavoriteButton} from "./elements/FavoriteButton.ts";
 import {Switch} from "./elements/Switch.ts";
 import {NumberInput} from "./elements/NumberInput.ts";
 import {Loader} from "./elements/Loader.ts";
@@ -55,7 +58,6 @@ customElements.define('switch-input', Switch, {extends: 'input'})
 customElements.define('search-input', SearchInput)
 customElements.define('search-popup', SearchPopup)
 customElements.define('search-button', SearchButton)
-customElements.define('favorite-button', FavoriteButton)
 customElements.define('number-input', NumberInput, {extends: 'input'})
 customElements.define('circle-loader', Loader)
 

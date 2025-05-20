@@ -1,0 +1,33 @@
+<div class="titles" {{ attributes.defaults(stimulus_controller('appear')) }}>
+    <h1 class="recipe__name hero-title">{{ recipe.name }}</h1>
+    <h2 class="recipe__description hero-text">{{ recipe.description }}</h2>
+
+    <twig:AddToFavorite recipe="{{ recipe }}" isLiked="{{ is_liked(recipe) }}"/>
+    <button
+        type="button"
+        class="btn btn-primary-outlined mt1"
+        data-action="live#action"
+        data-live-action-param="toggleModal"
+        data-recipe="{{ recipe.id }}"
+    >
+        Ajouter à ma liste
+        <twig:ux:icon name="lucide:shopping-cart"/>
+    </button>
+
+    {% component Modal with {id: recipe ? recipe.id, isModalOpened: isModalOpened} %}
+        {% block modal_header %}
+            <h5 class="modal-title">Ajouter à une liste de courses</h5>
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                data-action="live#action"
+                data-live-action-param="toggleModal"
+            ><twig:ux:icon name="lucide:x" /></button>
+        {% endblock %}
+        {% block modal_body %}
+            <twig:AddToShoppingCartForm recipe="{{ recipe }}"/>
+        {% endblock %}
+    {% endcomponent %}
+</div>

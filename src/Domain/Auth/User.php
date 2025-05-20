@@ -3,6 +3,7 @@
 namespace App\Domain\Auth;
 
 use App\Domain\Recipe\Recipe;
+use App\Domain\ShoppingList\ShoppingList;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -51,9 +52,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinTable(name: 'favorite_recipe')]
     private Collection $favoriteRecipes;
 
+    /** @var Collection<int, ShoppingList> */
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: ShoppingList::class, cascade: ['remove', 'persist'])]
+    private Collection $shoppingLists;
+
     public function __construct()
     {
         $this->favoriteRecipes = new ArrayCollection();
+        $this->shoppingLists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -209,6 +215,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->favoriteRecipes->contains($favoriteRecipe)) {
             $this->favoriteRecipes->removeElement($favoriteRecipe);
             $favoriteRecipe->removeUserFavorite($this);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * @return Collection<int, ShoppingList>
+     */
+    public function getShoppingLists(): Collection
+    {
+        return $this->shoppingLists;
+    }
+
+    public function addShoppingList(ShoppingList $shoppingList): self
+    {
+        if (!$this->shoppingLists->contains($shoppingList)) {
+            $this->shoppingLists[] = $shoppingList;
+            $shoppingList->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeShoppingList(ShoppingList $shoppingList): self
+    {
+        if ($this->shoppingLists->contains($shoppingList)) {
+            $this->shoppingLists->removeElement($shoppingList);
+            $shoppingList->setUser(null);
         }
 
         return $this;

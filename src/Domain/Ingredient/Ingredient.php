@@ -3,6 +3,7 @@
 namespace App\Domain\Ingredient;
 
 use App\Domain\IngredientRecipe\IngredientRecipe;
+use App\Domain\ShoppingListIngredient\ShoppingListIngredient;
 use App\Domain\Unit\Unit;
 use App\Infra\Interfaces\IdentifiableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -57,11 +58,16 @@ class Ingredient implements IdentifiableInterface
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private \DateTimeImmutable $updatedAt;
 
+    /** @var Collection<int, ShoppingListIngredient> */
+    #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: ShoppingListIngredient::class)]
+    private Collection $shoppingListIngredients;
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
+        $this->shoppingListIngredients = new ArrayCollection();
     }
 
     #[\Override]
@@ -185,6 +191,32 @@ class Ingredient implements IdentifiableInterface
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): Ingredient
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /** @return Collection<int, ShoppingListIngredient> */
+    public function getShoppingListIngredient(): Collection
+    {
+        return $this->shoppingListIngredients;
+    }
+
+    public function addShoppingListIngredient(ShoppingListIngredient $shoppingListIngredient): self
+    {
+        if (!$this->shoppingListIngredients->contains($shoppingListIngredient)) {
+            $this->shoppingListIngredients[] = $shoppingListIngredient;
+            $shoppingListIngredient->setIngredient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeShoppingListIngredient(ShoppingListIngredient $shoppingListIngredient): self
+    {
+        if ($this->shoppingListIngredients->contains($shoppingListIngredient)) {
+            $this->shoppingListIngredients->removeElement($shoppingListIngredient);
+            $shoppingListIngredient->setIngredient(null);
+        }
 
         return $this;
     }

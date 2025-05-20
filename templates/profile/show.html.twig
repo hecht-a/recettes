@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de courses - {{ shoppingList.name }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <a href="{{ path('profile_index') }}" class="btn btn-secondary mb-4">← Retour à mon profil</a>
+
+        <h1>{{ shoppingList.name }}</h1>
+        <p class="text-muted">Créée le {{ shoppingList.createdAt|date('d/m/Y') }}</p>
+
+        <h2 class="mt-4">🧾 Recettes incluses</h2>
+        <div class="recipes">
+            {% for recipe in shoppingList.getRecipes() %}
+                {{ include('recipes/card.html.twig', {'recipe': recipe.recipe}) }}
+            {% else %}
+                Aucune recette liée.
+            {% endfor %}
+        </div>
+
+        <h2 class="mt-4">🛒 Ingrédients à acheter</h2>
+
+        <ul class="ingredient-list">
+            {% for ingredient in shoppingList.ingredients %}
+                <li class="ingredient-line">
+                    <label>
+                        {{ ingredient.id }}
+                        {#                            <input type="checkbox" {% if ingredient.isChecked %}checked{% endif %} disabled> #}
+                        {#                            {{ ingredient.quantity|number_format(2, '.', ' ') }} {{ ingredient.ingredient.unit.shortLabel }} #}
+                        {#                            — {{ ingredient.ingredient.name }} #}
+                    </label>
+                </li>
+            {% endfor %}
+            {% for recipe in shoppingList.getRecipes() %}
+                {% for ingredientRecipe in recipe.recipe.ingredients %}
+                    {% set ingredient = ingredientRecipe.ingredient %}
+                    <div class="flex">
+                        <p>{{ ingredientRecipe.quantity }}</p>
+                        <p>{{ ingredient.unit ? ingredient.unit.shortLabel }}</p>
+                        <p>{{ ingredient.name }}</p>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

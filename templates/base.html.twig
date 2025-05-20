@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" sizes="310x310" href="/favicons/icon-310x310.png"/>
     <meta name="application-name" content="Recettes"/>
     {% block javascripts %}
-        <script type="text/javascript" src="{{ asset('app.ts') }}"></script>
+{#        <script type="module" src="{{ asset('app.ts') }}"></script>#}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     {% endblock %}
 </head>
@@ -78,7 +78,7 @@
             </li>
             <li class="header-side__auth">
                 {% if app.user %}
-                    <a href="#">
+                    <a href="{{ path('profile_index') }}">
                         <svg>
                             <use href="/icons.svg#user"></use>
                         </svg>
